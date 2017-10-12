@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="902" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>CloudByte ElastiStor Plug-in for OpenStack Glance</h2>
+        <h3>Introduction
+			</h3>
+        <p>Glance is an OpenStack component used to store virtual machine images and snapshots. CloudByte ElastiStor, the enterprise storage can be used as extended storage. The document details the procedures to use ElastiStor as a block and object storage for your existing OpenStack setup. For example, Glance image store has to be moved to external storage CloudByte ElastiStor for expanding storage requirements.</p>
+        <h3>Setup</h3>
+        <ul>
+            <li> Mirantis Fuel is installed.</li>
+            <li> A Swift cluster with three OpenStack controllers.</li>
+            <li> Glance service is configured with Swift as backend to store OpenStack images.</li>
+            <li>OpenStack controllers run proxy and consumes storage from the local available disk.</li>
+        </ul>
+        <h3>Prerequisites</h3>
+        <ul>
+            <li>Download a QCOW2 format Image.</li>
+            <li>An OpenStack setup consuming storage from CloudByte ElastiStor.</li>
+        </ul>
+        <h3>Workflow</h3>
+        <ol>
+            <li>Create an NFS Storage Volume in ElastiStor. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/Provision storage.htm">"Provisioning storage"</MadCap:xref>.</li>
+            <li>	Add NFS Clients (OpenStack controller with Glance service) to access the NFS Volume. For details, see the section <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_nfs.htm">"Data access using NFS"</MadCap:xref>.</li>
+            <li>Mount the NFS volumes on the controllers. For details, see the section<MadCap:xref href="#Mounting">"Mounting the NFS volumes on the controllers"</MadCap:xref> .</li>
+            <li>Change the default backend storage. For details, see <MadCap:xref href="#Changing">"Changing the default backend storage "</MadCap:xref>.</li>
+            <li>Copy the QCOW2 image to the controller. For details, see <MadCap:xref href="#Copying">"Copying the QCOW2 image to the controller"</MadCap:xref></li>
+            <li>Launch an instance from the Glance image.For details, see <MadCap:xref href="#Launching">"Launching an instance from the Glance image"</MadCap:xref></li>
+        </ol>
+        <h3><a name="Mounting"></a>Mounting the NFS volumes on the controllers</h3>
+        <ol>
+            <li>Run the following command to fetch the mount point of the Storage volume: <code>showmount -e VSM_IP_address</code>. Sample output: <code>/acc1glancenfsstore</code>.</li>
+            <li>	On the Glance Server, create a directory to mount the NFS Storage Volume. Use the following command:<code> mkdir /<i>directory_name</i></code>.</li>
+            <li>Run the following command to mount the NFS Volume:<code>  mount -t <i>nfs VSM_IP_address:/storage_volume_mount_point/directory_name</i></code>. For example, <code>mount –t nfs 192.168.1.250:/acc1glancenfstsore /glancenfsstore</code>.</li>
+            <li>Run the following command to verify successful mount of Volume: <code>df –h</code>. Sample output may be as following:<br /><pre xml:space="preserve"><b>Filesystem                                        Size      Used  Avail      Use%    Mounted on</b>         
+192.168.1.250:/acc1glancenfstsore  200G    0G   200G     0%    /glancenfsstore</pre></li>
+            <li>Repeat steps 1 to 4 on all the OpenStack controllers with Glance service in progress.</li>
+        </ol>
+        <h3><a name="Changing"></a>Changing the default backend storage </h3>
+        <ol>
+            <li>Run the following command to edit the<code> glance-api.conf</code> file: <code>vi /etc/glance/glance-api.conf</code></li>
+            <li>(If not already commented) Comment the following lines in the file:</li><pre xml:space="preserve">    default_store=swift
+    swift_store_auth_version=2
+    swift_store_auth_address=http://10.1.194.66:5000/v2.0/
+    swift_store_user=services:glance&gt;
+    swift_store_key=PVpmemUO
+    swift_store_container=glance
+    swift_store_create_container_on_put=True</pre>
+            <li>Uncomment the following lines in the file:</li><pre xml:space="preserve">    default_store=file
+    filesystem_store_datadir=/glancenfsstore
+    Stores=glance.store.filesystem.store</pre>
+            <li>Run the following command to save and exit the file: <code>:wq!</code></li>
+            <li>Restart glance services using the command:<code>  for i in /etc/init.d/openstack-glance-*; do $i restart;</code>.</li>
+            <li>Repeat steps 1 to 5 on all the OpenStack controllers with Glance service in progress.</li>
+        </ol>
+        <h3><a name="Copying"></a>Copying the QCOW2 image to the Controller</h3>
+        <h4>Scenario 1: You do not have a QCOW2 format Windows image.</h4>
+        <p>In this case, you have to create an image using the ISO file. For details, see <a href="http://docs.openstack.org/image-guide/content/windows-image.html">Create QCOW2 image</a>.</p>
+        <h4>Scenario 2: You have a QCOW2 format Windows image. </h4>
+        <p>In this case, copy the image to the OpenStack controller Node. You can copy the image using either of the following procedures:</p>
+        <h4>Procedure 1</h4>
+        <p>
+            <img src="../Resources/Images/Glance_procedure_1.png" class="FitToText" />
+        </p>
+        <p>You may not have direct access to any of the OpenStack controllers. You have to copy the QCOW2 image to the Mirantis Fuel master first and then proceed to copying it to the NFS Volumes ( for example, <code>/glancenfsstore</code>) in the controllers.</p>
+        <h4> Procedure 2</h4>
+        <p>
+            <img src="../Resources/Images/Glance_procedure_2.png" class="FitToText" />
+        </p>
+        <ol>
+            <li>Log in to the OpenStack controller as root.</li>
+            <li>Run the following command to access the OpenStack services as an Admin: <code>source openrc admin</code></li>
+            <li>Run the following command to upload the QCOW2 image to glance image repository : <code>glance image-create -- name <i>image_name</i> -- disk-format qcow2 --container-format bare -- is-public true -- file “/file path/windows-server-2012-r2.qcow2”</code></li>
+            <li>Run the following command to verify that the image is created successfully:<code>for i in /etc/init.d/openstack-glance-*; do $i status;</code>.</li>
+        </ol>
+        <p>The image appears in active mode on OpenStack dashboard if created successfully.</p>
+        <h3><a name="Launching"></a>Launching an instance from the Glance image</h3>
+        <ol>
+            <li>	Go to the QCOW2 image and then click Launch.<img src="../Resources/Images/openstack_click_launch.png" class="FitToText" /><br /></li>
+            <li>Select the flavor as Large from the drop-down list.</li>
+            <li>(Optional) Associate the instance with floating IP address for remote access.</li>
+            <li>
+               	Click Launch.
+</li>
+        </ol>
+        <h3>Troubleshooting</h3>
+        <h4>Issue</h4>
+        <p>Instance launch failed.</p>
+        <h4>Solution</h4>
+        <ol>
+            <li>Run the following command to check the status of Nova services:<code> for i in /etc/init.d/openstack-nova-*; do $i status;</code>.</li>
+            <li>Ensure the following:<ul><li>Nova api and scheduler services are running on each OpenStack controllers.</li></ul><ul><li>Nova compute and network services are running on Compute Node.</li></ul></li>
+            <li>Check for error logs  in <code>  var/log/nova</code>.</li>
+        </ol>
+        <h3>Related references</h3>
+        <ul>
+            <li><a href="https://poolsidemenace.wordpress.com/2011/06/16/porting-windows-to-openstack/">https://poolsidemenace.wordpress.com/2011/06/16/porting-windows-to-openstack/</a>
+            </li>
+            <li><a href="http://docs.openstack.org/developer/glance/configuring.html#configuring-glance-storage-backends">http://docs.openstack.org/developer/glance/configuring.html#configuring-glance-storage-backends</a>
+            </li>
+        </ul>
+        <p> </p>
+    </body>
+</html>

@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Pre;VMWare;vCenter;plugin;NFS;datastore;VM’s;VM;VMs;exe;XP;R2;powerCLI;ExecutionPolicy;PowerCLI;VCenter;x86;Plugins;credstore;Datastore;Datastores;datacenter;datastores;IOPS;secureVM;unregister;datatsore;CloudStack;cvssetup;datadisk;datadisks;CVS;API;datacenters" MadCap:lastBlockDepth="8" MadCap:lastHeight="928" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>CloudByte Virtualization Service plug-in for VMware VCenter</h2>
+        <h3>Introduction</h3>
+        <p style="text-align: justify;">CloudByte Virtualization Service (CVS) plug-in is an array based backup, recovery, and cloning solution for virtual machines on CloudByte ElastiStor. The plug-in integrates CloudByte ElastiStor Storage services with VMware technologies and provides a single console to manage the virtual infrastructure. With CVS, administrators can monitor and manage storage to improve performance and availability directly from the VMware vCenter console instead of having to separately manage the storage systems.</p>
+        <p style="text-align: justify;">The plug-in can direct VMware virtual machine level backup, clone, provision, and recovery operation using snapshot, restore, clone, and QoS capabilities of CloudByte ElastiStor and thus providing an end-to-end storage monitoring and management for VMware infrastructures.</p>
+        <p>For a list of operations supported by the CVS plugin, see the section <MadCap:xref href="#Setting">"Setting up the storage"</MadCap:xref></p>
+        <h3>Prerequisites</h3>
+        <h4>Modify configuration files</h4>
+        <ol>
+            <li>SSH to the ElastiStor Node and log in as root.</li>
+            <li>Do the following with the configuration file <code>/boot/loader.conf</code><ol><li>Open the file using the command <code>vi /boot/loader.conf</code></li><li>Add the following line: <code>vfs.nfsd.enable_cvs=1</code></li><li>Save and exit using the command <code>:wq </code></li></ol></li>
+            <li>Do the following with the configuration file <code>/etc/sysctl.conf</code><ol><li>Open the file using the command <code>vi /etc/sysctl.conf</code></li><li>Add the following line in the configuration file: <code>vfs.nfsd.enable_cvs=1</code></li><li>Save and exit using the command <code>:wq </code></li></ol></li>
+            <li>Reboot the Node using the command <code>reboot</code>.</li>
+        </ol>
+        <p>The following topics explain how to set up and use the CVS plug-in.</p>
+        <h3>Setting up the plug-in</h3>
+        <p>The setup involves a Windows 2008 R2 machine with Java 6.0, vCenter Server 5.0, and CVS&#160;plug-in installed.</p>
+        <h4>On vCenter (CVS Server) </h4>
+        <ol>
+            <li>Get the installation files from CloudByte Technical Support.</li>
+            <li>Double-click the setup.exe. The CloudByte Virtualization Services wizard appears.</li>
+            <li>Follow the onscreen instruction and complete the wizard.<ul><li>(Optional) To create a desktop icon of the plug-in, check Create desktop shortcut icon option in the wizard.</li><li>(Optional) To automatically launch the plug-in after installation, check  Launch CloudByte Virtualization Service option in the wizard.</li></ul></li>
+        </ol>
+        <h3><a name="Setting"></a>Setting up the storage</h3>
+        <p>The storage can be set up either through the GUI or using CloudByte ElastiStor REST APIs.</p>
+        <h4>CVS plug-in Graphical User Interface</h4>
+        <p style="text-align: justify;font-weight: bold;"><span style="font-weight: normal;">The CVS plug-in user interface acts as a reference for consuming CloudByte Virtualization Services APIs. Administrators can refer to the UI code and implement similar functionality for their portals.</span>
+        </p>
+        <p class="note" style="font-weight: bold;"><span style="font-weight: bold;">Note:</span>This document uses the term TSM to imply Virtual Storage Machine (VSM).TSM has been renamed as VSM. However, changes are yet to take effect in the plug-in UI.</p>
+        <h5>Launching the GUI</h5>
+        <p>Launch the CVS GUI on the browser by specifying the vCenter  IP address in the format as shown in the following example: <code>endPoint=http://20.10.81.200:8000/cvsui/</code></p>
+        <h5>Configuring vCenter and CloudByte ElastiCenter</h5>
+        <p style="text-align: justify;">Prior to performing any tasks, perform the following vCenter and ElastiCenter related setups.</p>
+        <h5>vCenter setup</h5>
+        <ol>
+            <li>In the CVS plug-in user interface, click Update Setting (Setting &gt; vCenter).</li>
+            <li>Specify the details and then click Update.</li>
+            <p>
+                <img src="../Resources/Images/CVS_Configure_vCenter_1.png" class="FitToText" />
+            </p>
+        </ol>
+        <table>
+            <col style="width: 102px;" />
+            <col style="width: 548px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Parameter</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;background-color: #dcdcdc;">IP Address</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">The vCenter IP address.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;background-color: #dcdcdc;">Username</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Specify a  username.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;background-color: #dcdcdc;">Password</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Specify a password for vCenter.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>ElastiCenter setup</h5>
+        <ol>
+            <li>In the CVS user interface, click Update Setting (Settings &gt; ElastiCenter).</li>
+            <li>Specify the required details and then click Update.</li>
+            <p> <img src="../Resources/Images/CVS_Configure_ElastiCenter_1.png" class="FitToText" /></p>
+        </ol>
+        <table>
+            <col style="width: 102px;" />
+            <col style="width: 548px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Parameter</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">IP Address</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">IP&#160;address of ElastiCenter.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">API Key</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">The REST API key that is generated. For details, see <MadCap:xref href="../G.API References/using REST APIs.htm">"CloudByte ElastiStor API reference"</MadCap:xref></td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Setting up storage using GUI</h4>
+        <h5>Create a datastore</h5>
+        <ol>
+            <li>In the CVS user interface, click Datastores in the left pane.</li>
+            <li>Click Create Datastore.</li>
+            <li>Enter the Datastore details in the following page:</li>
+            <p>
+                <img src="../Resources/Images/CVS_Create_Datastore.png" class="FitToText" />
+            </p>
+            <table>
+                <col style="width: 118px;" />
+                <col style="width: 548px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Option</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Select Datacenter</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Click Get Datacenters icon and then select a Datacenter from the drop-down list.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Select Host</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Click Get Hosts icon and then select a Host from the drop-down list.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Select TSM</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Click Get TSMs icon and then select a TSM from the drop-down list.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">DataStore Name</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify a unique name for the datastore.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Size</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Size to be allocated for the datastore. Specify G for GB, and T for TB.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">IOPS</td>
+                        <td style="text-align: left;background-color: #dcdcdc;"> Specify the required IOPS.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Protocol</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Select a protocol from the drop-down.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li>Click Create.</li> <![CDATA[ ]]></ol>
+        <h5>List Datastores</h5>
+        <p>To view the list of datastores,</p>
+        <ol>
+            <li>In the CVS user interface, click Datastores in the left pane.</li>
+            <li>Click List Datastores.</li>
+        </ol>
+        <p>A page listing all the datastores appears.</p>
+        <h5>Changing Datastore IOPS</h5>
+        <ol>
+            <li>In the CVS user interface, click Datastores in the left pane.</li>
+            <li>Click List Datastores.</li>
+            <li>The datastore for which you want to modify IOPS, click Edit IOPS.</li>
+            <li>Enter a value for IOPS in the following page:</li>
+            <p>
+                <img src="../Resources/Images/CVS_Edit_datastore_IOPS.png" class="FitToText" />
+            </p>
+            <li>Click Update.</li>
+        </ol>
+        <h5>Deleting Datastores</h5>
+        <ol>
+            <li>In the CVS user interface, click Datastores in the left pane.</li>
+            <li>Click List Datastores.</li>
+            <li>For the datastore you want to delete, click the delete icon.</li>
+        </ol>
+        <h5>Creating Virtual Machine</h5>
+        <ol>
+            <li>In the CVS&#160;user interface, click Virtual Machines in the left pane.</li>
+            <li>Click Create VM.</li>
+            <li>Enter the virtual machine details in the following page:</li>
+            <p>
+                <img src="../Resources/Images/CVS_Create_VM.png" class="FitToText" />
+            </p>
+            <table>
+                <col style="width: 118px;" />
+                <col style="width: 548px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Option</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Select DataCenter</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Click the Get Datacenters icon and then select a Datacenter from the drop-down list.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Select DataStore</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Click Get DataStore icon and then select a datastore from the drop-down list.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Select Guest OS</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Select a guest OS from the drop-down list.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Name</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify a unique name for the virtual machine.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Number of CPU(s)</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Number of cores required for the virtual machine.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Memory(MB)</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">The space to be allocated for the virtual machine.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Disk Size</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify a disk size for the OS.  Specify G for GB, and T for TB.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Disk IOPS</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify the IOPS.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Block Size</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">By default, the value is set to 4 KB.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li>Click Create.</li>
+        </ol>
+        <p class="note"><b>Note:</b> When you create a VM, the default Network Adapter type is Flexible. To change the type, delete the existing one and then add a new type on vCenter.</p>
+        <h5>List virtual machines</h5>
+        <p>To view a list of virtual machines:</p>
+        <ol>
+            <li>In the CVS&#160;user interface, click Virtual Machines in the left pane.</li>
+            <li>Click List VMs. </li>
+        </ol>
+        <h5>Power ON/OFF a virtual machine</h5>
+        <p>To power ON/OFF a virtual machine</p>
+        <ol>
+            <li>In the CVS&#160;user interface, click Virtual Machines in the left pane.</li>
+            <li>Click List VMs. </li>
+            <li>For the virtual machine you want to switch ON/OFF, click the power icon.</li>
+        </ol>
+        <h5>Deleting virtual machines</h5>
+        <ol>
+            <li>In the CVS&#160;user interface, click Virtual Machines in the left pane.</li>
+            <li>Click List VMs. </li>
+            <li>Click the delete icon for the virtual machine you want to delete.</li>
+            <li>In the following page, click Delete.</li>
+        </ol>
+        <h5>Adding data disks to virtual machines</h5>
+        <ol>
+            <li>In the CVS&#160;user interface, click Virtual Machines in the left pane.</li>
+            <li>Click List VMs. </li>
+            <li>For the disk you want to provision, click View Disk Details .</li>
+            <li>In the following page, click Add New Disk.</li>
+            <li>Enter the required details and then click Create.</li>
+        </ol>
+        <table>
+            <col style="width: 118px;" />
+            <col style="width: 548px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Option</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Select Datastore</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Click the Get Datastore icon and then select a Datastore from the drop-down list.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Disk Name</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Specify a Disk name.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Disk Size</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Specify size for the Disk. Specify G for GB, and T for TB.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Disk IOPS</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Specify IOPS.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Block Size</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">By default, the value is set to 4KB.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>Editing datadisks IOPS</h5>
+        <ol>
+            <li>In the CVS&#160;user interface, click Virtual Machines in the left pane.</li>
+            <li>Click List VMs. </li>
+            <li>Click View Disk Details for the disk you want to modify IOPS.</li>
+            <li>Click Edit Disk.</li>
+            <li>Specify a new value for IOPS and then click Update.</li>
+        </ol>
+        <h5>Deleting datadisks</h5>
+        <ol>
+            <li>In the CVS&#160;user interface, click Virtual Machines in the left pane.</li>
+            <li>Click List VMs. </li>
+            <li>Click the delete icon for the datadisk you want to delete.</li>
+        </ol>
+        <h5>Create Clones</h5>
+        <ol>
+            <li>In the CVS user interface, select Rapid Cloning Utility in the left pane.</li>
+            <li>The virtual machine for which you want to create Clones, click Create Clone.</li>
+            <li>Enter the required Clone details.</li>
+            <li>Click Create.</li>
+        </ol>
+        <table>
+            <col style="width: 118px;" />
+            <col style="width: 548px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Option</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Template Name</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">By default, the template name is displayed.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">No of Clones</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"> Number of VMs to be provisioned. Specify a numeric value.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Prefix VM Name</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"> This is the prefix of the VM name. </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Start Clone Number</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">A unique number starting at 1 and incremented by 1 for each VM is appended to the end of VM name.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="NoPageBreakBefore">CVS API reference</h2>
+        <p>The CVS REST APIs provide a bundle of functions that encompasses all the features in the management console of CVS. The API provides access to the VMware infrastructure components (datacenters, datastores, virtual machines).</p>
+        <h3>Forming the API request</h3>
+        <p>Base URL : <code>http://&lt;IP address of the CVS server&gt;:8000/cvs/</code></p>
+        <table>
+            <col style="width: 87px;" />
+            <col style="width: 203px;" />
+            <col style="width: 187px;" />
+            <col style="width: 258px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Method</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Web service command</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Parameters</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>datastore/create</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Creates a VMware datastore.</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>datacenter</code>: vCenter datacenter where datastore has to be added.</li>
+                            <li><code>host</code>:IP address of ESX where datastore has to be added.</li>
+                            <li><code>tsm</code>: Name of the TSM in which the Storage Volume has to be added.</li>
+                            <li><code>datastore</code>: Name for the new datastore.</li>
+                            <li><code>size</code>: Size of the datastore.</li>
+                            <li><code>iops</code>: IOPS the user wants to set on datastore.</li>
+                            <li><code>type</code>: Type of VMware DataStore. Specify n for NFS or v for VMFS.</li>
+                            <li><code>blocksize</code>: Blocksize the user wants to set on datastore</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">GET</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>vcutils/datastore/list</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Provides a list of datastores.</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <p style="text-align: left;background-color: #dcdcdc;">This operation does not require a request body.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>datastore/delete</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Deletes a datastore.</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li style="text-align: left;background-color: #dcdcdc;"><code>datastore</code>: Datastore that must be deleted.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>datastore/edit</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Modify QoS parameters
+for datastore.</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li style="text-align: left;background-color: #dcdcdc;"><code>datastore</code>: Specify the name of the datastore to be modified.</li>
+                            <li style="text-align: left;background-color: #dcdcdc;"><code>iops</code>:The new IOPS value the user wants to set on datastore.</li>
+                            <li style="text-align: left;background-color: #dcdcdc;"><code>blocksize</code>:The new blocksize that the user wants to set on datastore.
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>create/vm</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Creates a virtual machine.</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>dc</code>: Specify the datacenter name in which the virtual machine has to be created.</li>
+                            <li><code>ds</code>:Specify the datastore name in which virtual machine has to be created.</li>
+                            <li><code>guestosid</code>:specify id of the OS in which the VM has to be created.</li>
+                            <li><code>vm</code>: Specify a name for the virtual machine to be created.</li>
+                            <li><code>cpucount</code>: Specify the number of CPUs to be added to the virtual machine.</li>
+                            <li><code>memsize</code>: Specify RAM size (only in MB) for the virtual machine to be created.</li>
+                            <li><code>disksize</code>: Size of OS disk on which the virtual machine has to be created.</li>
+                            <li><code>net</code>: specify virtual machine network name.
+							Example: VMNetwork</li>
+                            <li><code>nic</code>: Specify name of the NIC to which the TSM is attached.</li>
+                            <li><code>iops</code>: IOPS the user wants to set on OS disk.</li>
+                            <li><code>recordsize</code>: Specify record size of OS disk.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">GET</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>vcutils/vm/list?istemplate=n</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">List Virtual Machine</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">This operation does not require a request body.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>clone/delete</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;"> Delete Virtual Machine</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li style="text-align: left;background-color: #dcdcdc;"><code>template</code>:Specify the name of the virtual machine that has to be deleted.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">GET</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>disk/list?</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">List Disk</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li style="text-align: left;background-color: #dcdcdc;"><code>vm</code>: Specify the name of the virtual machine. </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>disk/create</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Create Disk</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>nfsds</code>: Parent NFS datastore name.</li>
+                            <li><code>vmdk</code>: Name of the disk.</li>
+                            <li><code>size</code>: Specify the size of the disk. Specify M for MB, G for GB, T for TB.</li>
+                            <li><code>iops</code>: IOPS user wants to set on the disk.</li>
+                            <li><code>blocksize</code>: Blocksize to be set on the disk.</li>
+                            <li><code>vm</code> : Virtual machine on which you create the disk.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>disk/delete</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Detete Disk</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>vm</code>: Specify name of the virtual machine from which to the disk has to be deleted.</li>
+                            <li><code>vmdk</code>: Name of the disk to be deleted.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>disk/edit</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Edit Disk</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>vm</code>: Specify name of the virtual machine on which the disk to be modified resides.</li>
+                            <li><code>vmdk</code>: Disk for which user wants to edit QoS.</li>
+                            <li><code>size</code>: Size of the disk.</li>
+                            <li><code>iops</code>: New IOPS the user wants to set on the disk.</li>
+                            <li><code>blocksize</code>: New blocksize to be set on the disk.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">GET</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>vcutils/vm/list?</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">List Template</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>istemplate</code>: Type <code>Y</code> for templates to be listed.</li>
+                            <li><code>ispowered</code>: Type <code>Y</code> for listing the powered on VMs.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>clone/create</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Clone Create</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>template</code>: </li>
+                            <li><code>noofclones</code>: Number of clones the user wants to create.</li>
+                            <li><code>prefixvmname</code>: Prefix to the name of the new virtual machine.</li>
+                            <li><code>startcloneno</code>:Starting clone number that will be added as postfix to the virtual machine's name.</li>
+                            <li><code>correlationid</code>: 
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">GET</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>configs/vcenter/list</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">List VCenter</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">This operation does not require a request body.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>configs/vcenter/set</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Set VCenter</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>rootContext</code>: The vCenter IP address.</li>
+                            <li><code>user</code>: Specify a username.</li>
+                            <li><code>password</code>: Specify a password for vCenter.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">GET</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>devman/list</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">List ElastiCenter</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">&#160;</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">POST</td>
+                    <td style="text-align: left;background-color: #dcdcdc;"><code>configs/devman/set</code>
+                    </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Set ElastiCenter</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">
+                        <ul>
+                            <li><code>rootContext</code>: IP address of ElastiCenter.</li>
+                            <li><code>password</code>: The REST API key that is generated in ElastiCenter. For details, see <MadCap:xref href="../G.API References/using REST APIs.htm">"CloudByte ElastiStor API reference"</MadCap:xref></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Plug-in tips</h3>
+        <h4>How will I uninstall the plug-in?</h4>
+        <ol>
+            <li> On vCenter, open the CVS folder (Start &gt; Program Files).</li>
+            <li>Double click Uninstall CloudByte Virtual Service.</li>
+        </ol>
+        <h4>How will I upgrade the plug-in?</h4>
+        <ol>
+            <li>Stop the CVS Server.</li>
+            <li>To backup the database, copy the data folder (<code>C:\Program Files (x86)\CloudByte Virtual Service\data</code> ) to a location of your choice.
+</li>
+            <li>Uninstall the plug-in.</li>
+            <li>Install the latest version of the plug-in. </li>
+            <li>If the Server is automatically started, stop the CVS Server.</li>
+            <li>Replace the data folder with the one you backed up (in step 2).</li>
+            <li>Start the CVS Server.</li>
+        </ol>
+        <p class="note"><b>Note</b>: CloudByte recommends you to backup   daily the CVS&#160;plug-in database.</p>
+        <h3>
+    
+			Limitations
+		</h3>
+        <ul>
+            <li>In the case of restoring a virtual machine backup, you should ensure that the virtual machine is powered off.</li>
+        </ul>
+        <h4>Cloning, backup, and restore issues</h4>
+        <ul>
+            <li>The following limitations apply if an iSCSI datastore has multiple virtual machines: <ul style="list-style-type: circle;"><li>When you restore a backup (snapshot) of a specific VM in a volume, instead of removing all subsequent snapshots on that VM, all subsequent snapshots of all VMs in the Volume are deleted.<br />For instance, assume that the backups: backup1 of VM1, backup2 of VM2, backup3 of VM1. If you are restoring backup1, the backups backup2 and backup3 will be lost. It is recommended to create a single virtual machine on each iSCSI datastore.</li></ul><ul style="list-style-type: circle;"><li>Cloning a virtual machine clones all the other virtual machines on the datastore. </li></ul></li>
+            <li>Rapid Clone utility functionality fails in the following scenarios:<ul style="list-style-type: circle;"><li>When there are multiple disks attached to a virtual machine.</li><li>Rapid Cloning functionality fails if a virtual machine has files from local storage, for example, a CD/DVD drive or ISO on local ESX storage is attached to the virtual machine. </li></ul></li>
+        </ul>
+    </body>
+</html>

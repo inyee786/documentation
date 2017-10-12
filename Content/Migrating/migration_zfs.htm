@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="3182" MadCap:lastWidth="658" MadCap:ignoredWords="L4J;l4j;workflow;NexentaStor">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">Migrating pools from ZFS-based storage systems</h1>
+        <p>You can migrate storage pools created in a ZFS-based storage system to CloudByte ElastiStor.</p>
+        <p>This applies to the pools created in a</p>
+        <ul>
+            <li> ZFS-based storage system, for example NexentaStor.</li>
+            <li>Another CloudByte ElastiStor storage</li>
+        </ul>
+        <h2>Prerequisites</h2>
+        <ul>
+            <li>CloudByte ElastiStor is up and running.</li>
+            <li>Any of the following clients: VMware ESX, Citrix ZenServer, or Windows 8</li>
+            <li>Disk array where you created the pools (using the ZFS-based third-party storage solution), that you want to migrate</li>
+            <li>An account created in ElastiCenter. This is to associate the TSM to which the newly added pools are migrated. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/create_account.htm">"Creating an Account".</MadCap:xref></li>
+        </ul>
+        <h2>Migration workflow</h2>
+        <p>Assume that you have set up storage on a third party ZFS-based storage system and want to make a seamless migration to CloudByte ElastiStor. The following workflow explains how to proceed:</p>
+        <ol>
+            <li>Disconnect the disk arrays (on which you have created pools and volumes) from the ZFS based Storage System you migrate from.</li>
+            <li>Connect the disk arrays to CloudByte ElastiStor.</li>
+            <li>In ElastiCenter, select Nodes in the navigation pane.</li>
+            <li>(If you have not created a Node) Create a Node.</li>
+            <li>In the Nodes page, select the Node and then click Refresh Hardware in the Tasks section of the actions pane.<p><img src="../Resources/Images/migration_refresh_hardware.png" class="FitToText" /></p> <p>The connected disk arrays are discovered, listing all the pools that are created prior to the migration.</p></li>
+            <li>Configure the disk arrays. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_disk_arr_enclosure.htm">"Configuring Disk Array enclosure"</MadCap:xref>.</li>
+            <li>After the configuration is completed, import the pools by clicking Import for each pool (Import column in the table Existing Pools highlighted in the figure in step 5).<p class="note"><b>Important:</b>Ensure that you import only the pools you want to migrate from the third-party storage system and ignore the pools (if any) created in CloudByte ElastiStor. </p><p>The following screen shows import status at the bottom.</p><p><img src="../Resources/Images/migration_pool_list.png" class="FitToText" /></p><p> After the pool is imported successfully, it lists the volumes created under that pool.</p><p><img src="../Resources/Images/migration_import_pool.png" /></p></li>
+            <li>Select the storage volumes and then click Next.</li>
+            <li>The Provision&#160;TSM&#160;page appears.<p><img src="../Resources/Images/migration_provision_tsm.png" /> </p></li>
+            <li>Fill out the details.</li>
+            <li>Click Add. The following screen shows all the volumes added as indicated by the message at the bottom.<p> <img src="../Resources/Images/migration_volume_List.png" class="FitToText" /></p></li>
+        </ol>
+    </body>
+</html>

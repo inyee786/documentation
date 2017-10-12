@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2671" MadCap:lastWidth="842">
+    <head>
+    </head>
+    <body>
+        <h3>Restore snapshots while mapping FC LUNs (on Windows Server 2008)</h3>
+        <ol>
+            <li>In ElastiCenter, create an FC Storage Volume.</li>
+            <li>In ElastiCenter, assign a Windows client as an initiator to the FC Storage Volume.</li>
+            <li>
+				Create Storage Drive to use the FC LUN.
+			</li>
+            <ol>
+                <li>
+					Launch Server Manager and then select Disk Management in the left pane.
+				</li>
+                <li>
+					Right-click the unallocated space (New Simple Volume wizard appears).
+				</li>
+                <li>Select New Simple Volume. </li>
+            </ol>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_newsimplevolume.png" class="FitToText" /> </p>
+            <li>
+			Ensure that the new Storage Volume appears as shown in the following screen:</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_newVolume.png" class="FitToText" />
+            </p>
+            <li>Copy some data to the Volume.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revvsnapshots_copydata.png" class="FitToText" />
+            </p>
+            <li>	Create a snapshot on the Storage Volume using the following procedures: </li>
+            <ol>
+                <li>In the Navigation pane Storage Volumes page, select the Storage Volume for which you want to create a local backup. </li>
+                <li>In the following page, select Create Snapshot in the Actions Icon.</li>
+                <li>	Specify a name for the snapshot and then click OK.</li>
+            </ol>
+            <li>Delete the data on the mounted Storage Volume from the Windows Client.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_deletedata.png" class="FitToText" />
+            </p>
+            <li>In ElastiCenter, click Manage Snapshots (Actions icon &gt; Local Backup) to view the list of previously captured snapshots.</li>
+            <li> Before restoring the snapshot, make the volume offline on the Windows Client (Disk Management &gt; Right-Click Disk).</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_Offline.png" class="FitToText" />
+            </p>
+            <li>From the list of snapshots, select the snapshot you want to restore and then click Restore icon to roll back the Storage Volume content to previous state.</li>
+            <li>From the Windows Client, make the Storage Volume online.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_Online.png" class="FitToText" style="width: 665px;height: 303px;" />
+            </p>
+        </ol>
+    </body>
+</html>

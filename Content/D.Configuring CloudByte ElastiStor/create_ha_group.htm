@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="8" MadCap:lastHeight="920" MadCap:lastWidth="809" MadCap:ignoredWords="IP">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Creating an HA Group </h2>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">An HA Group houses a group of Nodes. HA Group enables takeover during failures. Workload of a failed Node is assigned to another Node in the same HA Group based on availability and performance requirements. All Nodes in the HA group you create must be on the same</p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Public network: used for management of Nodes.  </li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Private network: used with VSMs for data transfer. </li>
+        </ul>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">Use the HA Groups page (ElastiCenter&gt;Navigation Pane &gt; HA Groups) to create an HA Group. Creation of HA Groups leads to the formation of High availability Clusters. For details, see <MadCap:xref href="conf_high_availability.htm" style="color: #008000;">Configuring High Availability.</MadCap:xref></p>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the HA Groups page, click Add HA Group in the Actions Icon. The Add HA Group page appears.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Specify the following options and then click Add.</li>
+        </ol>
+        <table>
+            <col style="width: 146px;" />
+            <col style="width: 533px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Field</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Site</td>
+                    <td style="background-color: #dcdcdc;text-align: justify;"> The Site to which you add the HA Group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Name	</td>
+                    <td style="background-color: #dcdcdc;text-align: justify;"> Unique name for the HA Group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Description</td>
+                    <td style="background-color: #dcdcdc;text-align: justify;"> Meaningful description for the HA Group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">IP Address Range</td>
+                    <td style="background-color: #dcdcdc;text-align: justify;">Provide a range of dedicated IP addresses in the management network. For instance, ensure that you do not specify the IP address used for Node, ElastiCenter, VSM, or client.
+Provide the first and last IP address in the range, for example <code>1.1.1.100</code> and <code>1.1.1.104</code>.
+The IP addresses you specify are used to check the heartbeat between nodes.
+<b>Note</b>: Ensure that you do not specify the IP addresses used for Node or ElastiCenter. </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 style="font-size: 16pt;color: #005db2;font-family: sans-serif;">Changing the HA Group Health Check IP address range </h3>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Bring Node1 to maintenance mode.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Bring Node2 to maintenance mode.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the HA Groups page, select the HA Group for which you want to change the Health Check IP range.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Settings in the actions icon.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the following page, click edit and then change the details.<br /></li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Save.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/11_HA_Group_changing_health_check_nw.jpg" style="width: 633px;height: 231px;" />
+        </p>
+    </body>
+</html>

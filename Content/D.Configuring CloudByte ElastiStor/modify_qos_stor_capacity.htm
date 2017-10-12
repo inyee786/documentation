@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Qos;ElastiStor’s;1’s;DNS;IOPS" MadCap:lastBlockDepth="4" MadCap:lastHeight="1891" MadCap:lastWidth="856">
+    <head>
+    </head>
+    <body>
+        <h2>Modifying QoS after provisioning VSM</h2>
+        <p>Assume that you have provisioned storage for a VSM and now you want to change the QoS settings. For example, your pool has an IOPS limit of 100. You have provisioned VSM with 50 IOPS. You can modify the values.</p>
+        <p class="note"><b>Note:</b> In the example, you can increase the value up to 100 (which means, the entire IOPS is consumed).</p>
+        <p>To modify the QoS settings,</p>
+        <ol>
+            <li>In ElastiCenter Navigation Pane select Virtual Storage Machines.</li>
+            <li>Select the VSM for which you want to modify the QoS settings.</li>
+            <li>In the QoS settings section of the actions icon, click Basic Settings. The highlighted section displays the QoS-related settings.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li>Click the Edit icon and then modify the editable fields.</li>
+            <li>Click Apply.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/48_VSM_QOS_Modify.jpg" style="width: 856px;height: 312px;" />
+        </p>
+        <h2>Modifying QoS after provisioning Storage Volume</h2>
+        <ol>
+            <li>In ElastiCenter, select Storage Volumes.</li>
+            <li>Select the Storage Volume for which you want to modify the QoS settings.</li>
+            <li>In the Storage Volume page, click Settings.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/modify_qos_storagevolume_settings.png" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click the edit icon and then modify the QoS details.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/modifying_qos_settings_page.png" style="width: 688px;height: 403px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click Save.</li>
+        </ol>
+        <h2>Modifying storage capacity</h2>
+        <ol>
+            <li>In ElastiCenter, select Storage Volumes.</li>
+            <li>Select the Storage Volume for which you want to modify the storage capacity.</li>
+            <li>In the following page, click Settings.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li>In the following page, click Edit and then modify the quota.</li>
+            <li>Click Save.</li>
+        </ol>
+        <p class="note">Note:&#160;The quota of the Storage Volume cannot exceed the VSM size.</p>
+        <p>&#160;</p>
+    </body>
+</html>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="7876" MadCap:lastWidth="918">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">Configuring high availability on virtual machines</h1>
+        <p>Note: The following procedures are for VMWare ESX.</p>
+        <p style="font-size: 16pt;">Workflow</p>
+        <p>The following figure illustrates the workflow for configuring High Availability:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM1.png" style="width: 637px;height: 492px;" />
+        </p>
+        <ul>
+            <li>(For Stand alone machine) Disable scsi reservation. For details, see Disable SCSI reservation.</li>
+            <li>Create a virtual machine (vm1) and install CloudByte ElastiStor Node and ElastiCenter. For details on creating virtual machines, see Creating virtual machines. For steps to install ElastiStor and ElastiCenter, see Installation.</li>
+            <li>Create two iSCSI LUNs on vm1 and discover them on the ESX Server. For details on creating iSCSI LUNs, see Create iSCSI Storage Volumes. For steps to discover iSCSI LUNs on the ESX Server, see ” Discover iSCSI LUNs on ESX “.</li>
+            <li>Create three virtual machines (vm2, vm3, and vm4) and install<ul><li>ElastiCenter on vm2</li><li>ElastiStor Node (ElastiStor HA Node 1) on vm3</li><li>ElastiStor Node (ElastiStor HA Node 2) on vm4</li></ul></li>
+            <li>Map the discovered iSCSI LUNs to ElastiStor HA Node1 as a raw device. For procedures, see Mapping iSCSI LUN as a raw device on ElastiStor HA Node1 .</li>
+            <li>Map the discovered iSCSI LUNs to ElastiStor HA Node 2 as virtual disk. For procedures, see Mapping iSCSI LUN as a virtual disk on ElastiStor HA Node2.</li>
+            <li>Using the storage on the discovered LUN, create a Pool using ElastiCenter installed on vm2 Create Storage Pool.</li>
+        </ul>
+        <p style="font-size: 16pt;">Disable SCSI reservation</p>
+        <p>Follow the steps to disable SCSI reservation:</p>
+        <ul>
+            <li>Make an SSH connection to the Node.</li>
+            <li>Execute the command touch /etc/disablescsi.</li>
+        </ul>
+        <p style="font-size: 16pt;">Creating virtual machines</p>
+        <ul>
+            <li>Launch vSphere vClient (Start &gt; All Programs &gt; VMware Sphere Client).</li>
+            <li>In the login page, provide the IP address of ESX host. Also provide the root user name and password that you specified during the setup of your server.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM2.png" />
+        </p>
+        <ul>
+            <li>In the following page, right-click your server IP address and choose New Virtual Machine.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM3.png" style="width: 809px;height: 329px;" />
+        </p>
+        <ul>
+            <li>In the following page, select Configuration type as Custom and then click Next.</li>
+            <li>In the following page, specify a name for the virtual machine and then click Next.</li>
+            <li>From the list of Datastores, select one and then click Next.</li>
+            <li>In the following screen, leave the default option as it is and then click Next.</li>
+            <li>Select Other for Guest Operating System and then FreeBSD (64-bit) from the drop-down list.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM4.png" />
+        </p>
+        <ul>
+            <li>Click Next.</li>
+            <li>In the following page, specify the number of CPUs required and then click Next.</li>
+            <li>Specify the required RAM size and then click Next.</li>
+            <li>Select the number of interfaces you want to connect to and then click Next.</li>
+            <li>In the following page, select the default option and then click Next.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM5.png" />
+        </p>
+        <ul>
+            <li>In the following page, select the default option and then click Next.</li>
+            <li>Specify disk size.</li>
+            <li>Do the following:<ul><li>(For vm3 and vm4) Select the option Thick Provision Eager Zeroed.</li><li>(For vm1 and vm2) Leave the default settings as it is.</li></ul></li>
+        </ul>
+        <p>
+            <img src="../Resources/Images/27_conf_ha_on_VM6.png" />
+        </p>
+        <ul>
+            <li>Click Next.</li>
+            <li>In the following page, select the default option and then click Next.</li>
+            <li>Select the option Edit the virtual machine settings before completion and then click Continue.</li>
+        </ul>
+        <p>
+            <img src="../Resources/Images/27_conf_ha_on_VM7.png" />
+        </p>
+        <ul>
+            <li>Set the SCSI Controller type to Physical and then click Finish for vm3 and vm 4. For vm1 and vm2, leave the default settings as it is.</li>
+        </ul>
+        <p style="font-size: 16pt;">Discover iSCSI LUNs on ESX</p>
+        <ul>
+            <li>Log in to ESX and then select properties (Configurations &gt; Storage Adapters).</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM8.png" style="width: 918px;height: 415px;" />
+        </p>
+        <ul>
+            <li>In the following page, select Dynamic Discovery and then click Add.</li>
+            <li>Specify the IP address of the iSCSI Server and then click OK.</li>
+            <li>Ensure that the LUNs are discovered in Static Discovery and exit.</li>
+            <li>Click Yes and close the rescan message that pops up.</li>
+            <li>The connected targets in Details section display the discovered iSCSI LUNs.</li>
+        </ul>
+        <p style="font-size: 16pt;">Mapping iSCSI LUN as a raw device on ElastiStor HA Node1</p>
+        <ul>
+            <li>Log in to ESX and then in the left pane, right-click the virtual machine name and then select Edit Settings.</li>
+            <li>In the Virtual Machine Properties page, click Add and then select Hard Disk.</li>
+            <li>In the following page, select the disk type as Raw Device Mapping and then click Next.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM9.png" />
+        </p>
+        <ul>
+            <li>From the list, select the iSCSI LUN discovered on the ESX and then click Next.</li>
+            <li>Leave the default options as they are in the following pages and complete the wizard.</li>
+        </ul>
+        <p style="font-size: 16pt;">Mapping iSCSI LUN as a virtual disk on ElastiStor HA Node2</p>
+        <ul>
+            <li>Log in to ESX and then in the left pane, right-click the virtual machine name and then select Edit Settings.</li>
+            <li>In the Virtual Machine Properties page, click Add and then select Hard Disk.</li>
+            <li>In the following page, select the disk type as Use an existing virtual disk and then click Next.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM10.png" />
+        </p>
+        <ul>
+            <li style="text-align: justify;">(In the following page) Click Browse and locate vm3 which is ElastiStor HA Node 1 in the datastore, select the disks whichare in vmdk format, and then click OK.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_conf_ha_on_VM11.png" />
+        </p>
+        <ul>
+            <li>In the following pages, leave the default settings as they are and complete the wizard.</li>
+        </ul>
+    </body>
+</html>

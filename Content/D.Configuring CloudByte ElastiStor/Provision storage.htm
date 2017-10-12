@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2680" MadCap:lastWidth="945" MadCap:ignoredWords="deduplication;NFS;CIFS;iSCSI;FC;Dataset;Deduplication;deduplicated;ReadMe;Txt;readme;txt;ElastiStor’s;1’s;DNS">
+    <head>
+    </head>
+    <body>
+        <h2 style="font-size: 18pt;color: #013364;font-family: sans-serif;">Provisioning storage</h2>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Before you provision a Storage Volume, you must create a VSM. </li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">The maximum supported size of the Storage Volume depends on the available capacity of VSM.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">There is no limit to the number of Storage Volumes that you can create. But the composite capacity of the created Storage Volumes must be less than or equal to the capacity of the VSM they belong to. For example, if the total capacity of the VSM is 1 TB, then you can create a Storage Volume with the capacity of 1 TB or multiple storage volumes where the total capacity of all volumes is less than or equal to 1 TB.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">
+                You can enable both compression and deduplication on the same Storage Volume.
+</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">File system storage (NFS and CIFS) works together on the same Storage Volume, but block level storage (iSCSI or FC) does not.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">You can back up Storage Volume by creating snapshots and then rolling back when required. For details, see <MadCap:xref href="conf_local_backup.htm" style="color: #008000;font-size: 11pt;">"Configuring local backup"</MadCap:xref></li>
+        </ul>
+        <p class="note" style="color: #000000;font-family: sans-serif;"><b>Note:</b>&#160;By default, ElastiStor Storage Volume is thin provisioned. You can expand the Storage Volume up to the size of the Pool, provided the Pool has available storage.</p>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">Use the Storage Volumes page (ElastiCenter &gt;Navigation Pane &gt; Storage Volumes) to provision storage.</p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Click Actions Icon Select Provision Storage.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/46_Provision_Storage.jpg" class="FitToText" style="width: 687px;height: 273px;" />
+        </p>
+        <p style="font-family: sans-serif;font-size: 11pt;">The Add Storage Volume page appears.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/add_volume_2.png" class="FitToText" style="width: 636px;height: 335px;" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="text-align: left;font-family: sans-serif;font-size: 11pt;">Specify the following details: </li>
+        </ul>
+        <table>
+            <col style="width: 117px;" />
+            <col style="width: 822px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Field</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Account</td>
+                    <td style="background-color: #dcdcdc;">Account for which you provision the storage.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Name</td>
+                    <td style="background-color: #dcdcdc;">Unique name for the storage.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Capacity</td>
+                    <td style="background-color: #dcdcdc;">Amount of disk space to be allocated.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Provision Mode</td>
+                    <td style="background-color: #dcdcdc;">Shared or Dedicated. For details, see the section <i>Difference between Shared and Dedicated </i> in <MadCap:xref href="../I.Troubleshooting and FAQs/qos_faqs.htm">"QoS&#160;FAQs" on page 1</MadCap:xref>.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Block Size</td>
+                    <td style="background-color: #dcdcdc;">Block size of the volume.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Average Latency</td>
+                    <td style="background-color: #dcdcdc;">Desired average latency in milliseconds per I/O. Latency is the round trip time per I/O request-response.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Control IOPS</td>
+                    <td style="background-color: #dcdcdc;"> Select the required IOPS using the slider. Qos can be enforced either throughonly IOPS or only Throughput.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Control Throughput</td>
+                    <td style="background-color: #dcdcdc;">Select the required throughput using the slider.  Qos can be enforced either throughonly IOPS or only Throughput.</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul MadCap:continue="true">
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Click Next and then select the VSM on which you want to provision the Storage Volume.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/add_volume_3.png" style="width: 729px;height: 420px;" class="FitToText" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Click Next. The screen to specify the advanced settings appears.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/add_volume_4.png" class="FitToText" style="width: 582px;height: 337px;" />
+            </p>
+        </ul>
+        <ul MadCap:continue="true">
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Specify the following details:</li>
+        </ul>
+        <table>
+            <col style="width: 130px;" />
+            <col style="width: 750px;" />
+            <tbody>
+                <tr>
+                    <td style="color: #ffffff;text-align: center;background-color: #808080;">Field</td>
+                    <td style="color: #ffffff;text-align: center;background-color: #808080;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Volume Hierarchy		
+					</td>
+                    <td style="background-color: #dcdcdc;"> The VSM on which the Storage Volume is mounted.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Record Size</td>
+                    <td style="background-color: #dcdcdc;"> The block size to which data has to be divided.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Synchronization</td>
+                    <td style="background-color: #dcdcdc;">Leave the default settings as it is.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Deduplication</td>
+                    <td style="background-color: #dcdcdc;"> If ON, new data is deduplicated.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Compression</td>
+                    <td style="background-color: #dcdcdc;"> If ON, new data is compressed.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Mount Point</td>
+                    <td style="background-color: #dcdcdc;">(Applies only for NFS and CIFS) Specify the Storage Volume mount point for the client to use the storage.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Enable NFS</td>
+                    <td style="background-color: #dcdcdc;"> Select to access the Storage Volume using NFS protocol.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Enable CIFS</td>
+                    <td style="background-color: #dcdcdc;"> Select to access the Storage Volume using CIFS protocol.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Enable iSCSI</td>
+                    <td style="background-color: #dcdcdc;"> Select to access the Storage Volume using iSCSI protocol.</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Provision.</li>
+        </ul>
+        <p class="note" style="font-family: sans-serif;"><b>Note</b>:Disconnect all associated clients  before you delete an iSCSI Storage Volume.</p>
+    </body>
+</html>

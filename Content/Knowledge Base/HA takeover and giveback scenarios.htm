@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="13" MadCap:lastHeight="1755" MadCap:lastWidth="816">
+    <head>
+    </head>
+    <body>
+        <h2>CloudByte ElastiStor High Availability takeover and giveback scenarios</h2>
+        <p>The following document explains various takeover and giveback scenarios involved in ElastiStor High Availability.</p>
+        <h3>
+		Sample Setup Assumptions</h3>
+        <ul>
+            <li>
+		Nodes in your ElastiStor Appliance ESA-A50 are called Node1 and Node2. 
+		</li>
+            <li>The Nodes are in a HA Group.  
+		</li>
+            <li>Node1 is the primary ElastiCenter and Node2 is the secondary ElastiCenter.
+		</li>
+            <li>Node1 hosts Pool1, VSM1 and Storage Volume Vol1. 
+		</li>
+            <li>Node2 hosts Pool2, VSM2 and Storage Volumes Vol2.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Appliance-Node-details-01.png" class="FitToText" style="width: 571px;height: 345px;" />
+        </p>
+        <h3>Downtime and takeover scenarios</h3>
+        <p><b>Note</b>: These are random scenarios and do not occur in sequence.</p>
+        <table>
+            <col style="width: 116px;" />
+            <col style="width: 119px;" />
+            <col style="width: 166px;" />
+            <col style="width: 194px;" />
+            <col style="width: 209px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Scenario</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Reason/Event		</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">System action</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Corrective measure	</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Result</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">
+						Node1 is down, Node2 takes over</td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">Reboot</li>
+                            <li class="table">Software crash</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">Pool1 is moved to Node2.</li>
+                            <li class="table">Node2 is promoted as Primary ElastiCenter.</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        Bring up Node1 online and move it to Available State.
+                                          </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">Pool1 is moved back to Node1.
+</li>
+                            <li class="table">Node1 acts as secondary ElastiCenter.</li>
+                            <li class="table">Node2 continues to be the primary ElastiCenter.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Node2 is down, Node1 takes over Pool2.</td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">Reboot </li>
+                            <li class="table">Software crash
+</li>
+                        </ul>
+                    </td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">Pool2 is moved to Node1.</li>
+                            <li class="table">	Node1 continues to be the primary ElastiCenter.
+</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        Bring up Node2 online and move it to Available State.
+                                           </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">Pool2 is moved back to Node2.</li>
+                            <li class="table">Node2 continues to be the secondary ElastiCenter.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Node1 is in Maintenance mode.</td>
+                    <td style="background-color: #dcdcdc;">Administrator wants to service the Node.</td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">Pool1 is moved to Node2.</li>
+                            <li class="table">Node1 continues to be Primary ElastiCenter.</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Move Node1 to Available State.</td>
+                    <td style="background-color: #dcdcdc;">
+                        <p class="table">Pool1 is moved back to Node1.
+</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Node2 is in Maintenance mode.</td>
+                    <td style="background-color: #dcdcdc;">Administrator wants to service the Node</td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">Pool2 is moved to Node1.</li>
+                            <li class="table">Node2 continues to be secondary ElastiCenter.</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Move Node2 to Available State.</td>
+                    <td style="background-color: #dcdcdc;">Pool2 is moved back to Node2.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"> Management network on Node1 failed.</td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">Switch port failed</li>
+                            <li class="table">NIC port failed </li>
+                            <li class="table">	Network cable is plugged out</li>
+                        </ul>
+                    </td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">ElastiCenter cannot be accessed.</li>
+                            <li class="table">Data sync between the primary and secondary is stopped.</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        Bring NIC of Node1 online.
+                      
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">Node1 continues to be the primary ElastiCenter. </li>
+                            <li class="table">Node2 continues to be the secondary ElastiCenter.</li>
+                            <li class="table">Data sync resumes between the primary ElastiCenter and secondary ElastiCenter.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"> Management network on Node2 failed.</td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">	Switch port failed</li>
+                            <li class="table">NIC port failed</li>
+                            <li class="table">Network cable is plugged out</li>
+                        </ul>
+                    </td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">ElastiCenter can be accessed.</li>
+                            <li class="table">Data sync between the primary and secondary is stopped.</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                       Bring NIC of Node2 online.
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">	Node1 continues to be the primary ElastiCenter. </li>
+                            <li class="table">Node2 continues to be the secondary ElastiCenter.</li>
+                            <li class="table">Data sync resumes between the primary ElastiCenter and secondary ElastiCenter.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Data network on Node1 failed.					</td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">Network switch port failed</li>
+                            <li class="table">	NIC port failed</li>
+                            <li class="table">	Cable has been plugged out</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Pool1 is moved to Node2.
+
+</td>
+                    <td style="background-color: #dcdcdc;">
+                        Bring the network of Node1 online.
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">	Node1 continues to be the primary ElastiCenter.</li>
+                            <li class="table">Node2 continues to be the secondary ElastiCenter.</li>
+                            <li class="table">	Pool1 is automatically moved back to Node1.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">  Data network on Node2 failed.</td>
+                    <td class="tablecode">
+                        <ul>
+                            <li class="table">Network switch port failed</li>
+                            <li class="table">	NIC port failed</li>
+                            <li class="table">	Cable has been plugged out</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Pool2 is moved to Node1.</td>
+                    <td style="background-color: #dcdcdc;">
+                        Bring the network of Node2 online.
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="table">	Node1 continues to be the primary ElastiCenter.</li>
+                            <li class="table">
+Node2 continues to be the secondary ElastiCenter.</li>
+                            <li class="table">	Pool2 is automatically moved back to Node2.</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

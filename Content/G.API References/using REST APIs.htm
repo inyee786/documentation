@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="5043" MadCap:lastWidth="997" MadCap:ignoredWords="API;APIs;https;elasticenteripaddress;api;listSite;apiKey;Jj6GQNj07iqido49QAngCbLjMj4th_T_OW39J4Wtpa7o1Ext_T8gfXsmVop_noQ6PXVdrp_zajPPImKFts5UVw;json;JSON">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">CloudByte ElastiStor REST APIs</h1>
+        <p>CloudByte ElastiStor REST APIs provide a bundle of functions that encompasses all the features in the CloudByte ElastiStor Administrator Console (CloudByte ElastiCenter). You do not need ElastiCenter to configure and manage CloudByte ElastiStor. Rather you can use your own portal. The CloudByte ElastiStor REST APIs provide powerful, convenient, and simple REST-based APIs which can interact with CloudByte ElastiStor.</p>
+        <p>Click one of the following links to get a complete list of CloudByte ElastiStor REST APIs and documentation relevant to your administrative privileges:</p>
+        <ul>
+            <li><a href="http://www.cloudbyte.com/elastistorapi/TOC_Root_Admin.html">Super administrator APIs</a>
+            </li>
+            <li><a href="http://www.cloudbyte.com/elastistorapi/TOC_Domain_Admin.html">Site administrator APIs</a>
+            </li>
+            <li><a href="http://www.cloudbyte.com/elastistorapi/TOC_User.html">Account super administrator APIs</a>
+            </li>
+        </ul>
+        <h2>CloudByte ElastiStor API references</h2>
+        <p>The following sections explain the implementation.</p>
+        <h3>How to use CloudByte ElastiStor REST APIs</h3>
+        <ol>
+            <li>Install CloudByte ElastiCenter. For details, see <MadCap:xref href="../B.Installing CloudByte ElastiStor/install_cb_es.htm">Installing CloudByte ElastiStor</MadCap:xref>.</li>
+            <li>Authenticate as Administrator. For details, see <MadCap:xref href="../C.Getting to know ElastiCenter/accessing_cb_ec.htm">Accessing CloudByte ElastiCenter.</MadCap:xref></li>
+            <li>Obtain the CloudByte REST API authorization token. This token is passed in each request using the API Key request parameter. For details, see <MadCap:xref href="#Obtainin">"Obtaining the REST API key" below</MadCap:xref>.</li>
+            <li>Form the request URL. For details, see <MadCap:xref href="#Forming">"Forming the API request" on page 3</MadCap:xref>.</li>
+        </ol>
+        <h3><a name="Obtainin"></a>Obtaining the REST API key</h3>
+        <ol>
+            <li>Log in to ElastiCenter as Super Admin.</li>
+            <li>In the navigation pane, select Delegated Administrator. The list of administrators appears.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li>From the list of Accounts, click the specific account for which you want to generate the API key.</li>
+            <li>In the following page, click Generate Keys.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/74_Obtaining_rest_key.jpg" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click Yes to confirm. The API key is generated and displayed as shown in the following screen:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/75_Obtained_Rest_key.jpg" class="FitToText" />
+        </p>
+        <h3><a name="Forming"></a>Forming the API request</h3>
+        <p>The following is a sample GET request:</p>
+        <p><span style="color: #4169e1;">https://&lt;ElastiCenterIPaddress&gt;/client/apicommand=listSite&amp;apiKey=Xxj48vo357IsQ5H5KOPQksMzFBGYgTJNqgItBAulgu5YeOkwT4L8DAWUb_p43Nlv23e4eBeuN3Ts8_0-m3AyQA&amp;response=json</span>
+        </p>
+        <h3>Interpreting the URL</h3>
+        <table>
+            <col style="width: 560px;" />
+            <col style="width: 431px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">URL Component</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><span style="color: #4169e1;">https://&lt;ElastiCenter IP address&gt;/client/api?</span>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Base URL which includes the IP address to access CloudByte ElastiCenter; the web service API entry point.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><span style="color: #4169e1;">command=listSite</span>
+                    </td>
+                    <td style="background-color: #dcdcdc;">The web service command you execute. For the complete list of commands, see <a href="http://elastistor.info/">ElastiStor APIs.</a></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><span style="color: #4169e1;">apiKey=UjGmN7gGwzMhFsSese3TNNOWiXHGn53eon_7sHx3aL-9_t3sHAOV_rNqVzwTnrJyCaTAg9FucSBvMp49nbnfEQ</span>
+                    </td>
+                    <td style="background-color: #dcdcdc;">The API key that you generated.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><span style="color: #4169e1;">response=json</span>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Response format. This can be XML or JSON. To get an XML response, replace json with xml in the URL.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Apart from these, the URL also has the additional parameters (required or optional) for the command.</p>
+        <h3>Sample response in JSON</h3><pre xml:space="preserve">{ “listSiteResponse” : { “count”:2 ,”site” : [  {
+</pre><pre xml:space="preserve">  “id”: “66291daa-4c40-4462-8747-926ebc488963”,
+</pre><pre xml:space="preserve">  “name”: “Bangalore”,
+  </pre><pre xml:space="preserve">“location”: “India”,</pre><pre xml:space="preserve">
+  “managedstate”: “Available”,</pre><pre xml:space="preserve">
+  “revisionnumber”: 0,
+  </pre><pre xml:space="preserve">“currentUsedSpace”: 29,
+  </pre><pre xml:space="preserve">“currentAvailableSpace”: 9943,</pre><pre xml:space="preserve">
+  “currentTotalSpace”: 9972,
+  </pre><pre xml:space="preserve">“currentThroughput”: 605,</pre><pre xml:space="preserve">
+  “currentIOPS”: 151,</pre><pre xml:space="preserve">
+  “currentLatency”: 163,</pre><pre xml:space="preserve">
+  “currentThrottle”: 20,
+  “controllers”: [</pre><pre xml:space="preserve">
+    {</pre><pre xml:space="preserve">“nodePools”: “4”,</pre><pre xml:space="preserve">“id”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“clusterid”: “88bf812b-5142-4780-8ad3-13178bbf30a1”,</pre><pre xml:space="preserve">“name”: “host1”,</pre><pre xml:space="preserve">“hostname”: “Both”,</pre><pre xml:space="preserve">“nodeTsms”: “4”,</pre><pre xml:space="preserve">“ipaddress”: “10.36.36.50”</pre><pre xml:space="preserve">}</pre><pre xml:space="preserve">],</pre><pre xml:space="preserve">“haclusters”: [</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“id”: “88bf812b-5142-4780-8ad3-13178bbf30a1”,</pre><pre xml:space="preserve">“haClusterPools”: “4”,</pre><pre xml:space="preserve">“haClusterNodes”: “1”,</pre><pre xml:space="preserve">“name”: “Cluster1”,</pre><pre xml:space="preserve">“haClusterTsms”: “4”</pre><pre xml:space="preserve">}</pre><pre xml:space="preserve">],</pre><pre xml:space="preserve">“hapools”: [</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “38e66579-bb91-3de3-815a-48c35e2c5943”,</pre><pre xml:space="preserve">“availiops”: “50”,</pre><pre xml:space="preserve">“totalthroughput”: “102400”,</pre><pre xml:space="preserve">“name”: “Pool1”,</pre><pre xml:space="preserve">“poolTsms”: “1”,</pre><pre xml:space="preserve">“availthroughput”: “51200”,</pre><pre xml:space="preserve">“totaliops”: “100”</pre><pre xml:space="preserve">},</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “226e2e02-a3e5-3609-b70d-aea8ef655f74”,</pre><pre xml:space="preserve">“availiops”: “75”,</pre><pre xml:space="preserve">“totalthroughput”: “153600”,</pre><pre xml:space="preserve">“name”: “Pool2”,</pre><pre xml:space="preserve">“poolTsms”: “1”,</pre><pre xml:space="preserve">“availthroughput”: “76800”,</pre><pre xml:space="preserve">“totaliops”: “150”</pre><pre xml:space="preserve">},</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “810f428d-9c26-3d91-8675-62cc3ca56da0”,</pre><pre xml:space="preserve">“availiops”: “100”,</pre><pre xml:space="preserve">“totalthroughput”: “153600”,</pre><pre xml:space="preserve">“name”: “pool3”,</pre><pre xml:space="preserve">“poolTsms”: “1”,</pre><pre xml:space="preserve">“availthroughput”: “102400”,</pre><pre xml:space="preserve">“totaliops”: “150”</pre><pre xml:space="preserve">},</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “11d6fd85-5782-39fe-b85d-079d73742757”,</pre><pre xml:space="preserve">“availiops”: “175”,</pre><pre xml:space="preserve">“totalthroughput”: “384000”,</pre><pre xml:space="preserve">“name”: “P4”,</pre><pre xml:space="preserve">“poolTsms”: “1”,</pre><pre xml:space="preserve">“availthroughput”: “179200”,</pre><pre xml:space="preserve">“totaliops”: “375”</pre><pre xml:space="preserve">}</pre><pre xml:space="preserve">],</pre><pre xml:space="preserve">“tsms”: [</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “1cb805fe-dd22-357e-b198-121fa08d0971”,</pre><pre xml:space="preserve">“availiops”: “25”,</pre><pre xml:space="preserve">“totalthroughput”: “51200”,</pre><pre xml:space="preserve">“name”: “T1”,</pre><pre xml:space="preserve">“ipaddress”: “10.37.37.51”,</pre><pre xml:space="preserve">“availthroughput”: “25600”,</pre><pre xml:space="preserve">“totaliops”: “50”</pre><pre xml:space="preserve">},</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “90a4e6f8-cb3c-317f-8cdf-3986e8759747”,</pre><pre xml:space="preserve">“availiops”: “50”,</pre><pre xml:space="preserve">“totalthroughput”: “76800”,</pre><pre xml:space="preserve">“name”: “T2”,</pre><pre xml:space="preserve">“ipaddress”: “10.37.37.52”,</pre><pre xml:space="preserve">“availthroughput”: “51200”,</pre><pre xml:space="preserve">“totaliops”: “75”</pre><pre xml:space="preserve">},</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “cab14af0-84b6-3761-900b-9675b32b6ba5”,</pre><pre xml:space="preserve">“availiops”: “25”,</pre><pre xml:space="preserve">“totalthroughput”: “51200”,</pre><pre xml:space="preserve">“name”: “T3”,</pre><pre xml:space="preserve">“ipaddress”: “10.37.37.53”,</pre><pre xml:space="preserve">“availthroughput”: “25600”,</pre><pre xml:space="preserve">“totaliops”: “50”</pre><pre xml:space="preserve">},</pre><pre xml:space="preserve">{</pre><pre xml:space="preserve">“controllerId”: “4c6e2246-52c1-3227-b51a-9928cf3b675a”,</pre><pre xml:space="preserve">“id”: “17b17719-137d-3f95-9f4f-468a17a45957”,</pre><pre xml:space="preserve">“availiops”: “100”,</pre><pre xml:space="preserve">“totalthroughput”: “204800”,</pre><pre xml:space="preserve">“name”: “T4”,</pre><pre xml:space="preserve">“ipaddress”: “10.37.37.54”,</pre><pre xml:space="preserve">“availthroughput”: “102400”,</pre><pre xml:space="preserve">“totaliops”: “200”</pre><pre xml:space="preserve">}</pre><pre xml:space="preserve">]</pre><pre xml:space="preserve">}, {</pre><pre xml:space="preserve">“id”: “74692191-75a9-4294-9b1e-402127c9e327”,</pre><pre xml:space="preserve">“name”: “test”,</pre><pre xml:space="preserve">“managedstate”: “Available”,</pre><pre xml:space="preserve">“revisionnumber”: 0,</pre><pre xml:space="preserve">“currentUsedSpace”: 0,</pre><pre xml:space="preserve">“currentAvailableSpace”: 0,</pre><pre xml:space="preserve">“currentTotalSpace”: 0,</pre><pre xml:space="preserve">“currentThroughput”: 0,</pre><pre xml:space="preserve">“currentIOPS”: 0,</pre><pre xml:space="preserve">“currentLatency”: 0,</pre><pre xml:space="preserve">“currentThrottle”: 0</pre><pre xml:space="preserve">} ] } }</pre>
+        <h3>Sample response in XML</h3><pre xml:space="preserve">&lt;listSiteResponse cloud-stack-version=“1.1.0.4.2013-02-06T10:19:20Z”&gt;</pre><pre xml:space="preserve">
+  &lt;count&gt;1&lt;/count&gt;
+</pre><pre xml:space="preserve">  &lt;site&gt;
+    </pre><pre xml:space="preserve">&lt;id&gt;ad63d28a-9de9-443f-8260-4309337f40c3&lt;/id&gt;
+</pre><pre xml:space="preserve">    &lt;name&gt;site&lt;/name&gt;
+    </pre><pre xml:space="preserve">&lt;managedstate&gt;Available&lt;/managedstate&gt;
+</pre><pre xml:space="preserve">    &lt;revisionnumber&gt;0&lt;/revisionnumber&gt;
+    </pre><pre xml:space="preserve">&lt;currentUsedSpace&gt;0&lt;/currentUsedSpace&gt;
+</pre><pre xml:space="preserve">    &lt;currentAvailableSpace&gt;1996&lt;/currentAvailableSpace&gt;</pre><pre xml:space="preserve">
+    &lt;currentTotalSpace&gt;1996&lt;/currentTotalSpace&gt;
+    </pre><pre xml:space="preserve">&lt;currentThroughput&gt;0&lt;/currentThroughput&gt;
+</pre><pre xml:space="preserve">    &lt;currentIOPS&gt;0&lt;/currentIOPS&gt;</pre><pre xml:space="preserve">
+    &lt;currentLatency&gt;0&lt;/currentLatency&gt;</pre><pre xml:space="preserve">
+    &lt;currentThrottle&gt;0&lt;/currentThrottle&gt;</pre><pre xml:space="preserve">
+  &lt;/site&gt;</pre><pre xml:space="preserve">
+&lt;/listSiteResponse&gt;</pre>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="3" MadCap:lastHeight="914" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">CloudStack</h1>
+        <p>
+            <h3>CloudStack</h3>
+            <h4>Create Storage Volume</h4>
+            <h5>&#160;</h5>
+            <h5>listCapabilities</h5>
+            <p>Lists the number of Storage components&#160;(Sites, HAGroups) in ElastiCenter. Also includes the version number of ElastiCenter. </p>
+            <p>Command</p><code>command=listCapabilities&amp;apikey=HeNuqB-ZzYmHt43PG2VI5Gq4oK0gOYGpY67Rzw87Ys0f75LE3_wfe9rEwNupYqYGfC6We5jhE51lekeyazxRtQ</code>
+            <p>JSON response</p><pre xml:space="preserve">{ "listcapabilitiesresponse" :  { "capability" : {
+				"sites": 1,
+				"clusters": 1,
+				"controllers": 1,
+				"pools": 1,
+				"accounts": 2,
+				"tsms": 2,
+				"storagebuckets": 2,
+				"cloudByteVersion": "1.4.0.574",
+				"enablefc": "true",
+				"enablehaadmincreation": "false",
+				"elasticenter": "false",
+				"zilmirroring": "false",
+				"enablePoolMetaVdevOption": "false",
+				"enablePoolL2ARCOption": "false",
+				"enableQoSConsoleOption": "false",
+				"allowUncontrolledIops": "false",
+				"licensetype": "trial"
+				} }  };53
+				{
+				"tsmId": "cf25b459-f91e-3791-9475-254fd30f92ce",
+				"iops": "5",
+				"clusterid": "c5f02013-3767-4de5-a5be-90df197c783c",
+				"cifs": "false",
+				"availspace": "1000",
+				"nfs": "false",
+				"type": "volume",
+				"throughput": "0",
+				"fc": "false",
+				"iscsi": "true",
+				"id": "570e1a2d-eb4f-33b3-bc80-684dbcdf1d76",
+				"parentId": "5ef6d74c-4b74-322d-bcfc-f1ad9a731b27",
+				"poolid": "ca31777d-006c-390e-b507-4f79c501d572",
+				"quota": "1G",
+				"numericquota": "1024.0",
+				"latency": "15",
+				"tsmid": "cf25b459-f91e-3791-9475-254fd30f92ce",
+				"name": "8ff042faaaa5464cb460f9730dfc6f2c",
+				"path": "Pool1/Acc1TSM1/8ff042faaaa5464cb460f9730dfc6f2c",
+				"controllerid": "1745ab4e-84de-31a0-8fdc-f8fc001a8d58",
+				"totalspace": "1024",
+				"usedspace": "24"
+				}
+				],
+				"currentUsedSpace": 24,
+				"currentAvailableSpace": 1000,
+				"currentThroughput": 0,
+				"currentIOPS": 0,
+				"currentLatency": 0,
+				"currentThrottle": 0,
+				"numericquota": 1048576.0,
+				"currentnumericquota": 3072.0,
+				"currentavailablequota": 1045504.0,
+				"revisionnumber": 0
+		} ] } };22</pre>
+        </p>
+    </body>
+</html>

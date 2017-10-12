@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="7755" MadCap:lastWidth="786" MadCap:ignoredWords="Fibre;FC;ElastiSto;vSphere;Datastore;datastore;UI;Multipath;MPIO;LUN">
+    <head>
+    </head>
+    <body>
+        <h2>Mapping FC LUN to the clients</h2>
+        <p>Note: Do not present the same LUN to multiple clients/initiators until an OS Clustering (for example, Red Hat Cluster Suite (RHCS) or Microsoft Cluster Server (MSCS)) uses the shared LUN.</p>
+        <h3>On VMware vSphere client</h3>
+        <ol>
+            <li>Ensure that you have enabled FC for the particular Storage Volume. For details, see <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_fc.htm">"Configuring Fibre Channel (FC) protocol options " on page 1</MadCap:xref>.</li>
+            <li>In the vSphere Client, go to Configuration &gt; Storage.</li>
+            <li>Click Devices and then select Rescan All.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-1.jpg" style="width: 973px;height: 372px;border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1pt;border-bottom-color: #c0c0c0;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>In the Rescan dialog box, click OK. The refreshed list of devices appears.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-2.jpg" style="width: 391px;height: 293px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click Datastore.</li>
+            <li>In the datastore list, select the datastore and then click Add Storage.</li>
+            <li style="text-align: center;">
+                <br />
+                <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-3.jpg" style="border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1pt;border-bottom-color: #c0c0c0;width: 670px;height: 273px;" class="FitToText" />
+            </li>
+        </ol>
+        <p style="text-align: center;">The Add Storage wizard appears.<br /><img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-4.jpg" class="FitToText" style="width: 625px;height: 475px;" /></p>
+        <ol MadCap:continue="true">
+            <li>Follow the instructions on the Wizard and then complete the procedures to add storage.</li>
+        </ol>
+        <h3>Mapping FC LUN on Windows Server 2008</h3>
+        <h4>Discovering the FC target</h4>
+        <p class="note"><b>Note:</b> The mapping procedures are similar for other versions of Windows Server. However, there might be minor variations owing to the differences in UI strings and navigation.</p>
+        <p class="note"><b>Note:</b> Microsoft Multipath I/O (MPIO) takes care of presenting a pseudo device.</p>
+        <ol>
+            <li>Ensure that you have enabled FC for the particular Storage Volume. For details, see <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_fc.htm">"Configuring Fibre Channel (FC) protocol options " on page 1</MadCap:xref>.</li>
+            <li>On Windows Server 2008, select Server Manager &gt; Disk Management &gt; Rescan Disks.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-5.png" style="width: 905px; height: 570px;" class="FitToText" />
+        </p>
+        <blockquote>
+            <p>After rescan, the Volumes that you have created for FC are discovered.</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-6.png" style="border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1pt;border-bottom-color: #c0c0c0;width: 638px;height: 406px;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Right-click the unallocated space and then click Online.</li>
+            <li>Once online, right-click and then select Initialize Disk.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-6.jpg" class="FitToText" />
+        </p>
+        <blockquote>
+            <p>The Initialize Disk dialog box appears.</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-7a.jpg" style="width: 343px;height: 253px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click OK.</li>
+            <li>Right-click the unallocated space and then select New Simple Volume as shown in the following screen:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-7.jpg" style="width: 619px;height: 401px;" class="FitToText" />
+        </p>
+        <blockquote>
+            <p>The New Simple Volume Wizard appears.</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-9.jpg" style="width: 573px;height: 442px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Follow the instructions and complete the wizard to create the partition.</li>
+            <li>Ensure that the created disk is added to the Disk management console (indicated by the blue ribbon).</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-10.jpg" style="width: 653px;height: 428px;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Ensure that the drive created out of FC LUN is shown (as in) the following screen:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying Fibre Channel (FC) from CloudByte ElastiStor-11.png" style="border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1pt;border-bottom-color: #c0c0c0;width: 625px;height: 223px;" />
+        </p>
+        <p>&#160;</p>
+        <h3>Mapping FC LUN as a raw disk</h3>
+        <ol>
+            <li>On the Windows Virtual Machine, right-click and then select Edit Settings.<img src="../Resources/Images/map_fc_raw_lun.png" /></li>
+            <li>In the Virtual Machine Properties page, click Add.<img src="../Resources/Images/map_fc_raw_lun_2.png" /></li>
+            <li>	Select Hard Disk as the device type and then click Next.<img src="../Resources/Images/map_fc_raw_lun_3.png" /></li>
+            <li>Select Raw device mappings and then click Next.</li>
+            <li>From the list of LUNs, select a LUN which has to be mapped as a raw device.</li>
+            <li>Follow the wizard and complete the procedures.</li>
+            <li>When the Raw mapped LUN message appears, click OK.</li>
+        </ol>
+        <h3>On Kernel-based Virtual Machine</h3>
+        <ol>
+            <li>Do either of the following:
+				<ul><li>As root, make an SSH connection to the KVM client.</li><li>On the KVM client, log in as root.</li></ul></li>
+            <li>At command prompt, do the following to map FC LUN to KVM.</li>
+            <li>Run the following command to verify the number of FC Hosts: <code>ls /sys/class/fc_host/</code><br />The following is a sample output: <pre>host0 host1 host2 ..........hostX</pre></li>
+            <p class="note"><b>Note:</b> The number that follows <code>host</code>(1, 2, or X) is the HBA number of the FC Host.</p>
+            <li>Run the following command to discover the FC LUNs:  <pre>echo "1" &gt;/sys/class/fc_host/host<i>HBA number</i>/issue_lip</pre> For example, <pre>echo "1" &gt;/sys/class/fc_host/host7/issue_lip</pre></li>
+            <li>Repeat the step 4 for all the FC Hosts.</li>
+            <li>Run the following command to fetch the WWPN of the FC Host: <pre>cat /sys/class/fc_host/host&lt;HBA number&gt;/port_name</pre> For example, <pre>cat /sys/class/fc_host/host7/port_name</pre></li>
+            <li>Run the following command to add each FC LUN as a device to the KVM client: <pre>echo "scsi add-single-device h c t l" &gt; /proc/scsi/scsi</pre></li>
+            <table>
+                <col style="width: 148px;" />
+                <col style="width: 358px;" />
+                <tbody>
+                    <tr>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Parameter</td>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">h</td>
+                        <td style="background-color: #dcdcdc;">HBA number of the Host.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">c</td>
+                        <td style="background-color: #dcdcdc;">Channel ID on the HBA.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">t</td>
+                        <td style="background-color: #dcdcdc;">SCSI target ID.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">l</td>
+                        <td style="background-color: #dcdcdc;">FC LUN ID.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li>Run the following command to to list the disks: <code>fdisk -l</code></li>
+        </ol>
+    </body>
+</html>

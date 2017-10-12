@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="2331" MadCap:lastWidth="835" MadCap:ignoredWords="CreateCreate;WANs;TSMs">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Configuring remote disaster recovery</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">The disaster recovery mechanism in CloudByte ElastiStor helps you effectively retrieve data in disaster situations. Currently, ElastiStor supports disaster recovery for a single Site. You can rebuild a primary Site using the disaster recovery copy. ElastiStor provides disaster recovery across Sites over WANs.</p>
+        <h3 style="font-weight: bold;font-family: sans-serif;font-size: 14pt;color: #005db2;">Setting up remote disaster recovery</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the ElastiCenter navigation pane, click Virtual Storage Machines.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list of VSMs, select the one for which remote disaster recovery has to be configured.</li>
+            <li style="font-size: 11pt;font-family: sans-serif;">In the actions Icon, click Create DR VSM in Remote Backup.</li>
+        </ol>
+        <p class="note"> <b>Note:</b> You have this option only if you have not created a DR&#160;VSM. If a DR&#160;VSM is created, you can modify the settings.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/56_Create_DR.jpg" class="FitToText" style="width: 708px;height: 256px;" /> </p>
+        <ol MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Add DR&#160;VSM page, <ol MadCap:continue="true"><li style="font-family: sans-serif;">Select the Site on which you want to configure the DR VSM.</li><li style="font-family: sans-serif;">Specify a name for the DR VSM.</li><li style="font-family: sans-serif;">Click Next.</li></ol></li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, select a Pool and then click Next.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">Select the Backup interface, IP Address, and specify a schedule for the DR VSM (in the format minutes/hours/days/month/year).</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Add.</li>
+        </ol>
+        <p style="font-family: sans-serif;font-size: 11pt;">A message appears to confirm that the DR VSM has been added.</p>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;">Managing remote disaster recovery</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">For a specific VSM, use the Remote Backup section in the actions pane to configure remote disaster recovery.</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the ElastiCenter navigation pane, click Virtual Storage Machines.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list, select the VSM to manage remote disaster recovery.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the actions icon, use the options in the section Remote Backup.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/57_Manage_DR.jpg" class="FitToText" style="width: 656px;height: 237px;" />
+        </p>
+        <h4 style="font-family: sans-serif;font-size: 12pt;color: #005db2;">Disaster recovery options</h4>
+        <ul style="list-style-type: square;">
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>Name</b>: Provides details of DR&#160;VSM and displays the transfer details.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>Disable Transfer</b>: Select and confirm to disable disaster recovery.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>Edit Schedule</b>: Edit the disaster recovery schedule.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>Delete DR&#160;VSM</b>: Remove a disaster recovery setup that you have configured.</li>
+        </ul>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 12pt;">Recovering data</h3>
+        <p class="note" style="font-family: sans-serif;"><b>Note</b>: The DR VSM can be activated only after the base snapshot is successfully transferred from the primary VSM. You can check the status of data transfer by clicking View Transfer Status (Actions icon &gt; Tasks).</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the ElastiCenter navigation pane, click Virtual Storage Machines.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list of VSMs, select the DR VSM that is associated with the Primary VSM where the disaster occurred.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the DR VSM page, go to actions icon and then click Tasks &gt; Activate.
+ </li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/58_Activate_DR.jpg" class="FitToText" style="width: 684px;height: 244px;" />
+            </p>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, specify the network settings of the DR VSM and then click OK.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">At confirmation prompt, click Yes.</li>
+        </ol>
+        <p style="font-family: sans-serif;font-size: 11pt;">After you activate the DR VSM, the re-mount prompt appears. Ensure that you re-mount the Storage Volumes before you proceed. For details, see <MadCap:xref href="../F.Mapping/deployment_scenarios.htm">"Connecting to ElastiStor"</MadCap:xref>.</p>
+        <h2 style="color: #005db2;font-family: sans-serif;font-size: 14pt;">Upgrading a High Availability DR setup</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">Follow the procedures to seamlessly upgrade a High Availability disaster recovery environment. Node 1 and Node 2 imply the nodes on primary cluster. Similarly, DR Node 1 and DR Node 2 imply the nodes on the secondary cluster:</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+			Upgrade ElastiCenter. For details, see <MadCap:xref href="../B.Installing CloudByte ElastiStor/Upgrade.htm">"Upgrading to CloudByte ElastiStor 1.4 Patch 3".</MadCap:xref></li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Move the Node 1 to maintenance mode.
+			For details, see <MadCap:xref href="conf_high_availability.htm">"Configuring High Availability"</MadCap:xref>.       </li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+			Upgrade Node 1. For details, see <MadCap:xref href="../B.Installing CloudByte ElastiStor/Upgrade.htm">"Upgrading to CloudByte ElastiStor 1.4 Patch 3".</MadCap:xref> <![CDATA[ ]]></li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Bring the Node 1 to Available mode.
+			For details, see <MadCap:xref href="conf_high_availability.htm">"Configuring High Availability"</MadCap:xref>.  </li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+			Move the Node 2 to Maintenance mode.            </li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Upgrade Node 2.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Bring the Node 2 to Available mode.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Move the DR Node 1 to Maintenance mode.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Upgrade DR Node 1.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Bring the DR Node 1 to Available mode.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Move the DR Node 2 to Maintenance mode.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Upgrade DR Node 2.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				Bring the DR Node 2 to Available mode.
+			</li>
+        </ol>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">        Confirm if the DR Transfer occurs after the upgrade as scheduled. In the case of any exceptions, contact CloudByte Technical Support.</p>
+    </body>
+</html>

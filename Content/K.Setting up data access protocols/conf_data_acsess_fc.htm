@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="WWPN;LUN;workflow;IQN;CIFS;Charset;Fibre;FC;POEs;IQNs;QLogic;HBA;HBAs;Emulex" MadCap:lastBlockDepth="4" MadCap:lastHeight="2826" MadCap:lastWidth="520">
+    <head>
+    </head>
+    <body>
+        <h2>Data access using FC </h2>
+        <p>Fiber Channel (FC) Protocol is the standard transport protocol for delivering serial SCSI commands over Fiber Channel interconnects. Fiber Channel Protocol is designed to operate in a highly-efficient manner using hardware for protocol offload engines (POEs). Fiber Channel is fast, reliable, and scalable data transport system. For further details, see <a href="http://en.wikipedia.org/wiki/Fibre_Channel">http://en.wikipedia.org/wiki/Fibre_Channel</a>.</p>
+        <h3>Supported Hardware for Fibre Channel</h3>
+        <ul>
+            <li>QLogic HBA is used by CloudByte as FC targets. </li>
+            <li>The client can use any available HBAs in the market (such as Emulex or Brocade).</li>
+        </ul>
+        <p>For more information, see the <a href="http://www.cloudbyte.com/support/HCL/">Hardware Compatibility List</a>.</p>
+        <h3>FC in CloudByte ElastiStor</h3>
+        <p>The following figure illustrates how you configure the FC setup in CloudByte ElastiStor:</p>
+        <p>
+            <img src="../Resources/Images/confg_fc_setupi.jpg" class="FitToText" />
+        </p>
+        <p>Access over FC protocol involves an initiator group and a target group. Initiator represents the FC client, for example a Windows client and target is the CloudByte Node. </p>
+        <h4>FC Initiator group</h4>
+        <p>An initiator group is the list of initiators who are authorized to access the FC LUN. By default, CloudByte creates a default initiator group named <i>none</i> that does not allow access to any initiator.</p>
+        <p>The initiator group is a list of WWPNs. You can create the initiator group, add initiators and ports, and then mask the LUNs to the added initiator.</p>
+        <p>You create the initiator group at the account level and assign it at the Storage Volume level.</p>
+        <h4>FC Target group</h4>
+        <p>You group the FC target ports to form a target group. This means, all the FC target ports which you have grouped are used for this particular group. The Node’s WWPNs uniquely identify each target port on the system. By default, CloudByte creates a default target group named ALL that allows access to all targets. If required, you can create a new target group and replace the default one, though CloudByte recommends using the default target group ALL.</p>
+        <p>You create the target group at the account level and assign it at the Storage Volume level.</p>
+        <h3>Creating an initiator group</h3>
+        <ol>
+            <li>In ElastiCenter, select Accounts.</li>
+            <li>In the Accounts page, select the account for which you want to specify the protocol options.</li>
+            <li>In the Action Pane, select Access Protocol Options &gt; Manage FC Initiator Group.<img src="../Resources/Images/manage_fc_initiator_groups1.png" class="FitToText" /></li>
+            <li> Refresh Hardware (Nodes &gt; select the specific Node&gt; select Refresh Hardware in the Tasks section of the task list).<p class="note"><b>Note:</b> Step 4 applies only if you have added FC&#160;ports to the Node after adding the Node to the HA Groups.</p></li>
+            <li>In the following page, click Add Initiator Group.</li>
+            <li>Specify a unique name and select the FC&#160;initiators to form the group.<img src="../Resources/Images/fc_initiator_group.png" class="FitToText" /></li>
+            <li>Click Add.</li>
+        </ol>
+        <h3>Creating a target group</h3>
+        <ol>
+            <li>In ElastiCenter, select Accounts.</li>
+            <li>In the Accounts page, select the account for which you want to specify the protocol options.</li>
+            <li>In the Action Pane, select Access Protocol Options &gt; Manage FC Target Group.</li>
+            <li> Refresh Hardware (Nodes &gt; select the specific Node&gt; select Refresh Hardware in the Tasks section of the task list).<p class="note"><b>Note:</b> Step 4 applies only if you have added FC&#160;ports to the Node after adding the Node to the HA Groups.</p></li>
+            <li>In the following page, click Add Target Group.</li>
+            <li>Specify a unique name and WWPNs to form the group.</li>
+            <li>Click Add.</li>
+        </ol>
+        <h3>Assigning Storage Volume to initiator group and target group</h3>
+        <ol>
+            <li>In the Storage Volumes page, select the Storage Volume for which you want to assign the initiator/target group.</li>
+            <li>In the Action Pane, select Tasks &gt; Manage FC Configuration.</li>
+            <li>In the FC Configuration page, click Edit and then replace the default initiator group/target group.<img src="../Resources/Images/manage_fc_configuration_editsettings_2.png" class="FitToText" /></li>
+            <li>Click Save.</li>
+        </ol>
+        <p class="note"><b>Note:</b>You can also perform the same task at the Account level (Accounts &gt; select Account &gt; Manage FC Initiator Group/Target Group).</p>
+    </body>
+</html>

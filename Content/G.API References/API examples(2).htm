@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="7" MadCap:lastHeight="909" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">REST API use cases</h1>
+        <h2>ElastiStor REST&#160;APIs use cases</h2>
+        <p style="text-align: justify;">The document lists the REST&#160;APIs available in CloudByte ElastiStor to perform Storage provisioning procedures. Sample API requests and JSON responses relative to the requests are also captured. For more details on forming the API request, see <MadCap:xref href="using REST APIs.htm">"CloudByte ElastiStor API references"</MadCap:xref>.</p>
+        <h4>Name to ID conversions</h4>
+        <ol>
+            <li>Lists the available Accounts and their detailed information using the <code>listAccount</code> API. <br />Following is a sample request:<br /><code>https://1.2.3.4/client/api?command=listAccount&amp;apiKey=Jj6GQNj07iqido49QAngCbLjMj4th_T_OW39J4Wtpa7o1Ext_T8gfXsmVop_noQ6PXVdrp_zajPPImKFts5UVw&amp;response=json</code>.</li>
+            <p style="font-weight: bold;">Sample JSON response</p><pre xml:space="preserve">{ "listAccountResponse" : { "count":1 ,"account" : [  {"id": "<b>7b791118-55be-4439-8cd4-c9ac9bc1bf24</b>",
+"name": "Acc1",
+"simpleid": 1,
+"description": "None",
+"iqnname": "iqn.2015-05.Acc1",
+"availIOPS": 1390,
+"totaliops": 1400,
+"usedIOPS": 10,
+"volumes": [
+{
+  "tsmId": "cf25b459-f91e-3791-9475-254fd30f92ce",
+   "iops": "5",
+   "clusterid": "c5f02013-3767-4de5-a5be-90df197c783c",
+   "cifs": "false",
+   "availspace": "1024",
+   "nfs": "false",
+   "type": "volume",
+   "throughput": "0",
+   "fc": "false",
+   "iscsi": "true",
+   "id": "d244db0f-a280-3030-a216-4dce890b0933",
+   "parentId": "5ef6d74c-4b74-322d-bcfc-f1ad9a731b27",
+   ...</pre><pre xml:space="preserve">   ...
+
+   "numericquota": 1048576.0,
+   "currentnumericquota": 3072.0,
+   "currentavailablequota": 1045504.0,
+   "revisionnumber": 0
+	} ] } };22</pre>
+            <li>Lists the available VSMs and their detailed information using the <code>listTsm</code> API. <br />Following is a sample request: <br /><code>https://1.2.3.4/client/api?command=listTsm&amp;response=json&amp;<b>accountid=7b791118-55be-4439-8cd4-c9ac9bc1bf24</b></code>. <br />The <code>accountid</code>can be fetched from the output of <code>listAccount</code> request.</li>
+            <p><b>Sample JSON response</b>
+            </p><pre xml:space="preserve"> { "listTsmResponse" : { "count":1 ,"listTsm" : [  {
+	"id": "cf25b459-f91e-3791-9475-254fd30f92ce",
+	"simpleid": 8,
+	"name": "TSM1",
+	"ipaddress": "172.16.30.10",
+	"accountname": "Acc1",
+	"sitename": "Site1",
+	"clustername": "HAG1",
+	"controllerName": "Node1",
+	"controlleripaddress": "172.16.30.1",
+	"clusterstatus": "Online",
+	"hapoolstatus": "ONLINE",
+	"hapoolname": "Pool1",
+	"hapoolavailiops": 0,
+	"hapoolgrace": true,
+	"hapooldeduplication": "off",
+	"hapoolavailtput": 173600,
+	"poollatency": 10,
+	"accountid": "7b791118-55be-4439-8cd4-c9ac9bc1bf24",
+	"controllerid": "1745ab4e-84de-31a0-8fdc-f8fc001a8d58",
+	"poolid": "ca31777d-006c-390e-b507-4f79c501d572",
+	"datasetid": "5ef6d74c-4b74-322d-bcfc-f1ad9a731b27",
+	"storageBuckets": [
+{
+	"clusterid": "c5f02013-3767-4de5-a5be-90df197c783c",
+	"cifs": "null",
+	"nfs": "null",
+	"type": "bucket",
+	...</pre><pre xml:space="preserve">       ...</pre><pre xml:space="preserve">       ...
+  
+
+	],
+	"qosgrouplist": [
+{
+	"id": "be9b105f-f078-35d0-9c01-c458cd51fb38",
+	"networkspeed": "0",
+	"iops": "5",
+	"latency": "15",
+	"name": "QoS_f58c23f050f84895968491f1d780faa1Acc1TSM1",
+	"memlimit": "0",
+	"throughput": "0"
+},
+   
+    ]</pre><pre xml:space="preserve">} ] } };40
+			</pre>
+        </ol>
+        <h4>Add Storage Volume</h4>
+        <ol>
+            <li>Add a QoS Group using the <code>addQosGroup</code> API.<br />Following is a sample request: <br /><code>https://1.2.3.4/client/api?latency=15&amp;graceallowed=true&amp;name=QoS_b6834f859f604afbade5b578dbda19d1&amp;iopscontrol=true&amp;memlimit=0&amp;tpcontrol=false&amp;iops=5&amp;throughput=0<br />&amp;command=addQosGroup&amp;tsmid=cf25b459-f91e-3791-9475-254fd30f92ce&amp;<br />response=json&amp;networkspeed=0</code></li> <br /><b>Sample JSON Response</b><pre>{ "addqosgroupresponse" :  { "qosgroup" : {
+	<b>"id": "693a63c0-e961-3e54-a59d-fb033df7bf7b"</b>,
+	<b>"name": "QoS_8376b84460bd4a3690256b99fb3a7980Acc1TSM1"</b>,
+	<b>"tsmid": "cf25b459-f91e-3791-9475-254fd30f92ce"</b>,
+	"controllerid": "1745ab4e-84de-31a0-8fdc-f8fc001a8d58",
+	"poolid": "ca31777d-006c-390e-b507-4f79c501d572",
+	"parentid": "5ef6d74c-4b74-322d-bcfc-f1ad9a731b27",
+	"tsmName": "TSM1",
+	"offlinenodes": "",
+	"sitename": "Site1",
+	"clustername": "HAG1",
+	"controllerName": "Node1",
+	"clusterstatus": "Online",
+	"currentThroughput": 0,
+	"currentIOPS": 0,
+	"currentLatency": 0,
+	"currentThrottle": 0,
+	"iopsvalue": "(0/5)",
+	"throughputvalue": "(0/0)",
+	"iops": "5",
+	"iopscontrol": "true",
+	"throughput": "0",
+	"tpcontrol": "false",
+	"latency": "15",
+	"graceallowed": true,
+	"type": "1",
+	"revisionnumber": 0,
+	"managedstate": "Available",
+	"configurationstate": "init",
+	"standardproviops": 0,
+	"operatingblocksize": 0,
+	"operatingcachehit": 0,
+	"operatingiops": 0,
+	"standardoperatingiops": 0
+	} }  };10</pre><li>Create a Storage Volume using the <code>createVolume</code> API. <br />Following is a sample request: <br /><code>https://1.2.3.4/client/api?qosgroup<b>id=f18ceb89-280f-36c8-add1-954d045b2af3</b>&amp;<b>nameb6834f859f604afbade5b578dbda19d1</b>&amp;deduplication=off&amp;blocklength=512B&amp;quotasize=1<br style="mc-tag-and-class: code;" />G&amp;sync=always&amp;protocoltype=ISCSI&amp;command=createVolume&amp;datasetid=5ef6d74c-4b74-322d-bcfc-f1ad9a731b27&amp;<b>tsmid=cf25b459-f91e-3791-9475-254fd30f92ce</b>&amp;response=json&amp;recordsize=16k&amp;compression=off</code></li><br /><b>JSON Response</b><pre xml:space="preserve"> { "createvolumeresponse" : {
+	<b>"jobid": "25e2fd8e-ebf1-44bc-9f08-2faba195874f"</b>
+</pre><pre xml:space="preserve">} };13</pre><li>Use the <code>queryAsyncJobResult</code> API and retrieve the current status of asynchronous job.<br />Following is a sample API request:<br /><code>https://1.2.3.4/client/api?command=queryAsyncJobResult&amp;response=json&amp;<b>jobId=25e2fd8e-ebf1-44bc-9f08-2faba195874f</b></code></li><br /><b>JSON Response</b><pre>{ "queryasyncjobresultresponse" : {
+	"accountid": "5d400e95-c5c2-4ea7-9f7c-604131f88875",
+	"userid": "c5edd12d-a5a5-451c-a238-a3c2364c4ed2",
+	"cmd": "com.cloudbyte.api.commands.CreateVolumeCmd",
+	"msg": "1",
+	"jobstatus": 0,
+	"jobprocstatus": 0,
+	"jobresultcode": 0,
+	"created": "2015-07-03 17:22:09",
+	"jobid": "25e2fd8e-ebf1-44bc-9f08-2faba195874f"
+} };35</pre><li>List all the existing file systems using the <code>listFileSystem</code> API.<br />Following is a sample request: <br /><code>https://1.2.3.4/client/api?command=listFileSystem&amp;response=json</code></li><b>Sample JSON Response</b><pre>{ "listFilesystemResponse" : { "count":3 ,"filesystem" : [  {
+	<b>"id": "d244db0f-a280-3030-a216-4dce890b0933"</b>,
+	"name": "f58c23f050f84895968491f1d780faa1",
+	"simpleid": 33362,
+	"type": "volume",
+	"revisionnumber": 1,
+	"path": "iqn.2015-05.Acc1.TSM1:Acc1f58c23f050f84895968491f1d780faa1",
+	"clusterid": "c5f02013-3767-4de5-a5be-90df197c783c",
+	"clusterstatus": "Online",
+	"Tsmid": "cf25b459-f91e-3791-9475-254fd30f92ce",
+	"tsmType": "1",
+	"tsmCifsAuth": "user",
+	"accountid": "7b791118-55be-4439-8cd4-c9ac9bc1bf24",
+	"poolid": "ca31777d-006c-390e-b507-4f79c501d572",
+	"controllerid": "1745ab4e-84de-31a0-8fdc-f8fc001a8d58",
+	"groupid": "be9b105f-f078-35d0-9c01-c458cd51fb38",
+	"parentid": "5ef6d74c-4b74-322d-bcfc-f1ad9a731b27",
+	"compression": "off",
+	"sync": "always",
+	"noofcopies": 1,
+	"recordsize": "16k",
+	"quota": "2G", "pooltakeover": "noTakeOver",
+	"blocklength": "512B",
+	"volumeaccessible": "false",
+	"minrecommendedvolblocksize": 0,
+	"localschedulecount": 0
+} ] } };47</pre><br /><li>List the iSCSI configuration details of Storage Volume using the <code>listVolumeiSCSIService</code> API.<br />Following is a sample request: <br /><code>https://1.2.3.4/client/api?command=listVolumeiSCSIService&amp;<b>storageid=d0997909-2841-32d4-b2a5-58d2d75c89ac&amp;response=json</b></code></li><br /><b>JSON Response</b><pre xml:space="preserve">{ "listVolumeiSCSIServiceResponse" : { "count":1 ,"iSCSIService" : [  {
+	"id": "c880a1b5-8dc6-3753-9f97-dd22a21bacb7",
+	"volume_id": "e297a156-6af5-350d-a60b-7e615c8ad24e",
+	"ag_id": "2e7180b6-dddf-3440-b8fb-51ec310a2b7f",
+	"ig_id": "af349cc2-6687-32c0-9350-062920d7c5c9",
+	"iqnname": "iqn.2015-05.Acc1.TSM1:Acc18376b84460bd4a3690256b99fb3a7980",
+	"authmethod": "None",
+	"status": true,
+	"usn": "e297a1566af5350da60b7e615c8ad24e",
+	"initialdigest": "Auto",
+	"queuedepth": "32",
+	"inqproduct": 0,
+	"inqrevision": 0,
+	"blocklength": "512B",
+	"workerthreads": 6
+} ] } };8
+		</pre><li>Use the <code>listiSCSIInitiator</code> API to list the iSCSI initiators.<br />Following is a sample request:<br /><code>https://1.2.3.4/client/api?command=listiSCSIInitiator&amp;response=json&amp;<b>accountid=7b791118-55be-4439-8cd4-c9ac9bc1bf24</b></code><br /></li><br /><b>JSON Response</b><pre>{ "listInitiatorsResponse" : { "count":2 ,"initiator" : [  {
+	<b>"id": "a1331f10-22f0-32ab-92c6-c93ad39b0c0a"</b>,
+	"accountid": "7b791118-55be-4439-8cd4-c9ac9bc1bf24",
+	"name": "ALL",
+	"netmask": "ALL",
+	"initiatorgroup": "ALL"
+}, {
+	"id": "af349cc2-6687-32c0-9350-062920d7c5c9",
+	"accountid": "7b791118-55be-4439-8cd4-c9ac9bc1bf24",
+	"name": "None",
+	"netmask": "None",
+	"initiatorgroup": "None"
+} ] } };4</pre><li>Update the Storage Volume iSCSI configurations using the <code>updateVolumeiSCSIService</code> API. <br />Following is a sample request: <code>https://1.2.3.4/client/api?<b>igid=a1331f10-22f0-32ab-92c6-c93ad39b0c0a</b>&amp;command=updateVolumeiSCSIService&amp;response=json&amp;<b>id=e44aa2d1-6427-3037-8084-c2a294e83e76</b></code></li><br /><b>JSON Response</b><br /><pre>{ "updatingvolumeiscsidetails" :  { "viscsioptions" : {
+	"id": "72e3a6ac-4bcf-3264-ad03-a6399088d8d0",
+	"volume_id": "bfc5a6b7-fefb-31b6-9e32-a33e405b2a59",
+	"ag_id": "2e7180b6-dddf-3440-b8fb-51ec310a2b7f",
+	"ig_id": "a1331f10-22f0-32ab-92c6-c93ad39b0c0a",
+	"iqnname": "iqn.2015-05.Acc1.TSM1:Acc114ef818d41014e0198a5c2f7ab767f57",
+	"authmethod": "None",
+	"status": true,
+	"usn": "bfc5a6b7fefb31b69e32a33e405b2a59",
+	"initialdigest": "Auto",
+	"queuedepth": "32",
+	"inqproduct": 0,
+	"inqrevision": 0,
+	"blocklength": "512B",
+	"workerthreads": 0
+} }  };184</pre></ol>
+        <h4>Delete Storage Volume </h4>
+        <p>Use the <code>deleteFileSystem</code> API to deleta a Storage Volume. <br />Following is a sample request: <code>https://1.2.3.4/client/api?command=deleteFileSystem&amp;<b>id=d0997909-2841-32d4-b2a5-58d2d75c89ac&amp;response=json</b></code></p>
+        <ol>
+            <br /><b>JSON Response</b><pre>{ "deleteFileSystemResponse" : {
+	<b>"jobid": "16b2fb95-5a80-457b-ac91-d910ead22932"</b>
+} };154</pre>
+        </ol>
+        <br />
+        <h4>Expand Storage Volume </h4>
+        <p>Use the <code>updateFileSystem</code> API tp update the file system.<br />Following is sample request: <code>https://1.2.3.4/client/api?quotasize=2G&amp;command=updateFileSystem&amp;<b>id=11fead19-57a7-3ff9-8a82-bd2eadb4c2f2&amp;response=json</b></code></p>
+        <ol>
+            <br />
+        </ol>
+        <h4>Create Snapshot</h4>
+        <ol>
+            <li>Create a snapshot using the <code>createStorageSnapshot</code> API.<br />Following is a sample request: <code>https://1.2.3.4/client/api?<b>id=1e56d057-ec5c-3c08-8d15-be6994659b1e</b>&amp;command=createStorageSnapshot&amp;response=json&amp;name=<b>snap_8f27fce8211511e583de160ef4d73eaf</b></code></li>
+            <br /><b>JSON Response</b><pre>{ "createStorageSnapshotResponse" :  { "StorageSnapshot" : {
+	<b>"id": "bce40f85-6cb0-36f1-9dc4-a08cfcadfb8f"</b>,
+	"name": "snap_cba35af9255643f6818b5422e67bbbd0",
+	"usn": "bce40f856cb036f19dc4a08cfcadfb8f",
+	"lunusn": "dbf632cc009b3c9eb4ab801330cc49b1",
+	"lunid": "dbf632cc-009b-3c9e-b4ab-801330cc49b1",
+	"scsiEnabled": false
+} }  };376</pre>
+            <li>Use the <code>listStorageSnapshots</code> API to verify the Snapshot creation. <br />Following is a sample request: <code>https://1.2.3.4/client/api?command=listStorageSnapshots&amp;<b>id=1e56d057-ec5c-3c08-8d15-be6994659b1e</b>&amp;response=json</code></li>
+            <br /><b>JSON Response</b><pre xml:space="preserve">{ "listDatasetSnapshotsResponse" : { "count":1 ,"snapshot" : [  {
+	"name": "snap_cba35af9255643f6818b5422e67bbbd0",
+	"path": "Pool1/Acc1TSM1/2f850b5879954b02b0b2aa621800fc7d
+        @snap_cba35af9255643f6818b5422e67bbbd0",
+	"availMem": "-",
+	"usedMem": "0",
+	"refer": "38K",
+	"mountpoint": "-",
+	"timestamp": "Fri Jul 3 2015 17:27",
+	"clones": 0,
+	"poolTakeOver": "noTakeOver",
+	"managedstate": "Available"
+} ] } };56</pre>
+        </ol>
+        <h4>Create Clone</h4>
+        <p>Use the following <code>cloneDatasetSnapshot</code> API to clone a Storage Volume. <br />Following is a sample request: <code>https://1.2.3.4/client/api?path=Pool1%2FAcc1TSM1%2F6a4140fa2d1a4f6e96940eb995252d24%40<b>snap_8f27fce8211511e583de160ef4d73eaf</b>&amp;<b>clonename=45ee3d7526044f1ba41424e9a912e057</b>&amp;<br />command=cloneDatasetSnapshot&amp;<b>id=1e56d057-ec5c-3c08-8d15-be6994659b1e</b>&amp;response=json
+</code><br /></p>
+        <h4>VSM details</h4>
+        <p>Use the <code>updateVolumeiSCSIService</code> API to fetch the VSM details.<br />Following is a sample request: <code>https://1.2.3.4/client/api?<b>igid=a1331f10-22f0-32ab-92c6-c93ad39b0c0a</b>&amp;command=updateVolumeiSCSIService&amp;response=json&amp;<b>id=e44aa2d1-6427-3037-8084-c2a294e83e76</b></code><br /><br /></p>
+        <ol>
+            <br />
+        </ol>
+    </body>
+</html>

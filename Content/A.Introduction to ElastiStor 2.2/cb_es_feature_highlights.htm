@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Multi;JBODs;Z1;IOPS;LUN;FC;iSCSI;CIFS;NFS;TSMs;SLA;APIs;pluggable;VCenter;plugin;www;elastistor;ElastiStor’s" MadCap:lastBlockDepth="5" MadCap:lastHeight="2052" MadCap:lastWidth="842" style="font-family: sans-serif;">
+    <head><title>ElastiStor Feature Highlights </title>
+    </head>
+    <body style="border-bottom-width: 3px;padding-bottom: 0px;">
+        <h2 style="font-size: 20pt;text-align: justify;color: #013364;font-family: sans-serif;font-weight: bold;">CloudByte ElastiStor feature highlights</h2>
+        <h3 style="font-size: 16pt;text-align: justify;color: #005db2;font-family: sans-serif;">Quality of Service (QoS) within shared storage</h3>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">CloudByte ElastiStor assures highly predictable performance using its unique QoS-centric approach to provisioning. The feature highlights include:</p>
+        <ul style="list-style-type: square;font-family: sans-serif;">
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;"><b style="font-family: Arial;">Guaranteed throughput, latency, and IOPS:</b> Easily commission storage with guaranteed throughput, latency, and IOPS (Input/Output Operations Per Second) at various levels. You can decide to configure QoS at a Pool level, VSM level, or Storage Volume level.</li>
+            <li style="text-align: justify;font-size: 11pt;font-family: sans-serif;"><b style="font-family: sans-serif;">Multi-dimensionality:</b> Configure IOPS, throughput, latency, and capacity.</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;"><b style="font-family: sans-serif;font-size: 11pt;">Grid-like service:</b> Utilize available unused storage resources efficiently.</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;"><b style="font-family: sans-serif;">On-demand modification:</b> Edit settings at a later point of time without restart.</li>
+        </ul>
+        <p><b style="color: #000000;font-size: 10pt;font-family: sans-serif;">See Also:</b>
+            <MadCap:xref href="../D.Configuring CloudByte ElastiStor/assuring_qos.htm" class="seealso" style="font-family: sans-serif;color: #008000;font-size: 10pt;">"Assuring Quality of Service"</MadCap:xref>
+        </p>
+        <h3 style="font-size: 16pt;text-align: justify;color: #005db2;font-family: sans-serif;">Multi-protocol support</h3>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">CloudByte ElastiStor provides LUN access using the following protocols:</p>
+        <ul style="list-style-type: square;">
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">NFS</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">iSCSI</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">CIFS</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Fiber Channel (FC)</li>
+        </ul>
+        <p style="text-align: justify;font-family: sans-serif;"><b style="color: #000000;font-family: sans-serif;font-size: 10pt;">See Also:</b> <MadCap:xref href="../K.Setting up data access protocols/set_up_data_access_ protocols.htm" class="seealso" style="color: #008000;font-family: sans-serif;font-size: 9pt;">"Setting up Data Access Protocols" </MadCap:xref></p>
+        <h3 style="font-size: 16pt;text-align: justify;font-family: sans-serif;color: #005db2;">Simplified storage provisioning</h3>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;color: #000000;"><span style="color: #000000;font-size: 11pt;font-family: sans-serif;">Assume that you require 20 GB storage and 10000 IOPS. With too many pools and VSMs, manually verifying the apt Pool is a cumbersome task. Instead, use the auto-provisioning feature in ElastiStor to handle this situation</span> ElastiStor provides a simplified storage provisioning where it intelligently provides a list of best-fit pools. Server disk space is divided into storage spaces based on the number of applications,  individualistic requirements, and expected performance from each application. With ElastiStor, you can enter the required SLA/QoS parameters and automate the host selection and resource allocation.</p>
+        <p style="text-align: justify;color: #000000;"><b style="font-family: sans-serif;">See Also:</b> <MadCap:xref href="../D.Configuring CloudByte ElastiStor/Provision storage.htm" class="seealso" style="color: #008000;font-family: sans-serif;font-size: 9pt;">"Provisioning Storage" </MadCap:xref></p>
+        <h3 style="text-align: justify;font-size: 16pt;font-family: sans-serif;color: #005db2;">Delegated administration</h3>
+        <p style="text-align: justify;color: #000000;font-family: sans-serif;font-size: 11pt;">Delegated administration lets you determine the actions various administrators take using administrative tools on different resources. The administration roles are mapped to  functions using security policies. You can create and maintain separate administration capabilities depending on your needs.</p>
+        <p style="text-align: justify;font-family: sans-serif;"><b style="color: #000000;font-family: sans-serif;">See Also:</b> <MadCap:xref href="../E.Managing CloudByte ElastiStor/delegated_admin.htm" class="seealso" style="color: #008000;font-family: sans-serif;font-size: 9pt;">"Delegated Administration" </MadCap:xref></p>
+        <h3 style="text-align: justify;font-size: 16pt;font-family: sans-serif;color: #005db2;">Multi-way High Availability</h3>
+        <p style="text-align: justify;color: #000000;font-family: sans-serif;font-size: 11pt;">CloudByte ElastiStor provides N-way High Availability.</p>
+        <p style="text-align: justify;"><b style="color: #000000;font-family: sans-serif;">See Also:</b> <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_high_availability.htm" class="seealso" style="color: #008000;font-family: sans-serif;font-size: 9pt;">"Configuring High Availability" </MadCap:xref></p>
+        <h3 style="text-align: justify;font-size: 16pt;color: #005db2;font-family: sans-serif;">Disaster Recovery</h3>
+        <p style="text-align: justify;color: #000000;font-family: sans-serif;font-size: 11pt;">CloudByte ElastiStor equips you to effectively recover data in the case of adversities. Use the Mirror feature for remote disaster recovery. When you mirror data, a remote snapshot, a read-only copy of the data on the primary setup, is created in the secondary storage setup. In the case of disaster, you can activate the mirror to take care of the services handled by the primary setup.</p>
+        <p style="text-align: justify;color: #008000;"><b style="color: #000000;font-family: sans-serif;">See Also:</b> <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_remote_disaster_recovery.htm" class="seealso" style="color: #008000;font-family: sans-serif;font-size: 9pt;">"Configuring remote disaster recovery" </MadCap:xref></p>
+        <h3 style="text-align: justify;font-size: 16pt;color: #005db2;font-family: sans-serif;">REST APIs for easy integration</h3>
+        <p style="color: #000000;text-align: justify;font-size: 11pt;font-family: sans-serif;">CloudByte ElastiStor REST APIs provide a bundle of functions that encompasses all the features in the CloudByte ElastiStor Administrator Console (CloudByte ElastiCenter). That is, you need not have ElastiCenter to configure and manage CloudByte ElastiStor. Rather you can use your own portal. </p>
+        <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">The feature highlights include:</li>
+        <ul>
+            <ul style="font-family: sans-serif;">
+                <li style="color: #000000;text-align: justify;font-family: sans-serif;font-size: 11pt;">APIs for all the features in ElastiCenter. The APIs function as an end-to-end translation of the Administrative Console.</li>
+                <li style="color: #000000;text-align: justify;font-size: 11pt;font-family: sans-serif;">APIs are pluggable with delegated administration preset.</li>
+                <li style="color: #000000;text-align: justify;font-size: 11pt;font-family: sans-serif;">CloudByte provides off-the-shelf plug-ins which you can install and start using. </li>
+            </ul>
+        </ul>
+        <h3 style="text-align: justify;font-family: 'Times New Roman';font-size: 16pt;color: #005db2;">Intuitive administration console CloudByte ElastiCenter</h3>
+        <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">CloudByte ElastiStor’s centralized management console CloudByte ElastiCenter makes configuration and management of storage simple even when you have thousands of applications. Comprehensively manage your entire storage cluster from a single Web-based console. Monitor, control, and audit storage resource usage down to application-level granularity.</li>
+        <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">The ElastiCenter features include:</li>
+        <ul>
+            <li style="text-align: justify;color: #000000;font-family: sans-serif;font-size: 11pt;">Wizards that walk you through the entire setup</li>
+            <li style="text-align: justify;color: #000000;font-family: sans-serif;font-size: 11pt;">Interactive graphical representations that help you monitor data</li>
+            <li style="text-align: justify;color: #000000;font-family: sans-serif;font-size: 11pt;">Highly usable action pods that let you manage tasks, with easy access and minimal navigation<br /><br /></li>
+        </ul>
+        <p style="font-size: 12pt;color: #000000;text-align: center;">
+            <img src="../Resources/Images/dashboard11.png" class="FitToText" style="width: 620px;height: 464px;" />
+        </p>
+        <p><b style="color: #000000;font-size: 9pt;font-family: sans-serif;">See Also:</b>
+            <MadCap:xref href="../C.Getting to know ElastiCenter/cb_ec_ui.htm" class="seealso" style="color: #008000;font-family: sans-serif;font-size: 9pt;">"ElastiCenter User Interface"</MadCap:xref>
+        </p>
+    </body>
+</html>

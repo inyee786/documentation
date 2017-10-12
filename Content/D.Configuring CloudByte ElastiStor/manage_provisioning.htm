@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="4" MadCap:lastHeight="1863" MadCap:lastWidth="861" MadCap:ignoredWords="deduplication;NFS;CIFS;iSCSI;FC;Dataset;Deduplication;deduplicated;ReadMe;Txt;readme;txt;QOS;IOPS;TSMs;sb;tsm;ElastiStor’s;1’s;DNS">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Choosing a Pool to provision VSM</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;">CloudByte ElastiStor follows a QOS-centric approach to provisioning. When you provision a VSM, your choice of the Pool depends on the availability of Pools that satisfy the required throughput and IOPS.</p>
+        <h3 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">Selecting the Pool</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the ElastiCenter navigation pane, click Virtual Storage Machine.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Provision VSM in Action Icon.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">After you specify the VSM details such as Name and the QoS details, click Next.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following screen, select the Pool after evaluating the IOPS.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Next to specify the Network details.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/provision_vsm_select_pool.png" class="FitToText" style="width: 646px;height: 392px;" />
+        </p>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;">Choosing a VSM to provision Storage Volume</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">When you provision storage, your choice depends on the availability of VSMs that satisfy the required throughput and IOPS.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">To provision storage,</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, click Storage Volumes in the navigation pane.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Provision Storage.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following screen, specify the basic storage details and then click Next.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select a VSM that satisfies the QoS requirements. The graphical representation helps you with the IOPS data.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Next and then proceed to complete the provisioning.</li>
+        </ol>
+        <h3 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">Auto-Provisioning </h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">ElastiStor can automate Node selection and resource allocation if you provide the required SLA/QoS parameters. Sensing the level of storage performance and capacity the application requires, ElastiStor automatically allots the right Pool.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">Auto-provisioning is particularly helpful when you have innumerable Pools/VSMs. CloudByte ElastiStor chooses the appropriate Pool/VSM for provisioning automatically.</p>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 13pt;">How to auto-provision</h4>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter Admin pane, select Global Settings.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/auto_provision_global_settings_1.png" class="FitToText" style="width: 675px;height: 268px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click the Edit icon for <code>provisioning.sb.auto</code> and <code>provisioning.tsm.auto</code>. </li>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">In the Value column, specify <code>yes </code>(instead of the default <code>no</code>which implies provisioning is manual) as shown in the following screen:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/47_Report_templates.jpg" class="FitToText" style="width: 729px;height: 256px;" />
+        </p>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 13pt;">Example</h4>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Assume that auto-provisioning is enabled and there are three Pools (<code>pool1</code>with 500 IOPS, <code>pool2</code>with 400 IOPS, and <code>pool3</code>with 300 IOPS respectively). If the administrator wants to create a VSM with 100 IOPS, <code>pool1</code>(the Pool with the highest IOPS value) is automatically selected for VSM creation.</p>
+    </body>
+</html>

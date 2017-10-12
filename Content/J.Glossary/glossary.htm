@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="8" MadCap:lastHeight="908" MadCap:lastWidth="766" MadCap:ignoredWords="Zettabyte;SLA;CIFS;http;technet;microsoft;cc939973;aspx;JBODs;SAS;SATA;SSD;DNS;FC;Fibre;HBAs;10GB;IOPS;LUN;READs;WRITEs;iSCSI;TCP;IP;Lagg;multi;NFS;TSMs;APIs;API;plugin;vCenter;LUNs;vSphere;ESXi">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">Glossary</h1>
+        <br />
+        <table style="">
+            <col style="width: 112px;" />
+            <col style="width: 631px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Terms</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Account</td>
+                    <td style="background-color: #dcdcdc;">An entity with specific storage needs. Account represents a department of an Enterprise or a customer of a Cloud Service Provider.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Alerts</td>
+                    <td style="background-color: #dcdcdc;">Notifications that demand action. Alerts can be on a range of issues such as network cable pullout or degradation
+of a Pool.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Asynchronous replication</td>
+                    <td style="background-color: #dcdcdc;">The process of writing data to local storage and then queuing it up for replication on remote storage
+at assigned intervals. If the local storage fails before the data is written in remote storage, then replication
+fails.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Auto-Provisioning</td>
+                    <td style="background-color: #dcdcdc;">ElastiStor can automate Node selection and resource allocation if you provide the required SLA/QoS parameters.
+Sensing the level of storage performance and capacity the application requires, ElastiStor automatically allots the
+right Pool.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Block Size</td>
+                    <td style="background-color: #dcdcdc;">The size of a block in data storage and file systems. Block is a sequence of bytes or bits, having a nominal size.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">CIFS</td>
+                    <td style="background-color: #dcdcdc;">For details, see http://technet.microsoft.com/en-us/library/cc939973.aspx </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">HA Group</td>
+                    <td style="background-color: #dcdcdc;">Houses a group of Nodes. HA Group enables takeover during failures. Workload of a failed Node is assigned to
+another Node in the same HA Group based on availability and performance requirements.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Dashboard</td>
+                    <td style="background-color: #dcdcdc;">
+                        A graphical representation of the key performance indicators.  It presents an overview of all the Sites in ElastiCenter in an organized manner. You can update information instantaneously.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Delegated Administration</td>
+                    <td style="background-color: #dcdcdc;">The process of distributing administrative tasks and content in the portal to dedicated administrators. Using access control lists, you determine the actions administrators  take on various resources. Delegated administration roles are mapped to administrative functions using security policies. You can create and maintain separate administration capabilities depending on your needs.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Disaster Recovery</td>
+                    <td style="background-color: #dcdcdc;">Disaster implies unplanned outage. Your storage system must be capable of effective backup and recovery so that there is no damage to the data that is handled in the case of any adversity.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Disk Array</td>
+                    <td style="background-color: #dcdcdc;">
+Popularly called JBODs, disk array is a set of disks clubbed to single disk shelf.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Disk Type</td>
+                    <td style="background-color: #dcdcdc;">The type of disk supported by CloudByte ElastiStor. The supported disk types are SAS, SATA, and SSD.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Domain Search</td>
+                    <td style="background-color: #dcdcdc;">Searching the DNS to which you want to add a controller.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Event</td>
+                    <td style="background-color: #dcdcdc;">Any storage activity. ElastiStor notifies events based on the configuration.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">FC (Fibre Channel)</td>
+                    <td style="background-color: #dcdcdc;">
+
+						A high-speed interconnect between controllers and back-end disk enclosures. FC components include HBAs, hubs, and switches. The term also refers to a high-speed, fully duplex serial communication protocol permitting data transfer up to 10GB per second.
+					</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">FTP (File Transfer Protocol)</td>
+                    <td style="background-color: #dcdcdc;">An application layer protocol used to transfer bulk-volumes of files between machines or hosts.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Global Settings</td>
+                    <td style="background-color: #dcdcdc;">Lets the administrator configure options that control ElastiStor.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Grace</td>
+                    <td style="background-color: #dcdcdc;">Provisioning of Pool's unused IOPS/Throughput to Storage Volumes based on their performance requirements.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">High-Availability</td>
+                    <td style="background-color: #dcdcdc;">
+
+
+
+
+High Availability minimizes/prevents the consequences of downtime in the storage setup. A typical High Availability environment comprises  two setups: one active while the partner remains dormant. In a downtime, the passive setup takes over the storage tasks that the active setup was performing. This effects a reversal of states each setup was in. When the downtime is over, all events are given back to the original active setup.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Host </td>
+                    <td style="background-color: #dcdcdc;">Physical machines on which you configure ElastiStor.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Initiator Group</td>
+                    <td style="background-color: #dcdcdc;">When an initiator group is associated with a LUN, only initiators from that group can access the LUN. Initiators are identified by unique addressing methods.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">IOPS (Input/Output operations per second)</td>
+                    <td style="background-color: #dcdcdc;">The number of READs or WRITEs per second. It is used to measure the performance of storage solution.
+                        <b>Total IOPS</b> is the average input/output operations per second, <b>Read IOPS</b> is the average READ operations per second, and <b>Write IOPS</b> is the average WRITE&#160;operations per second.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">iSCSI</td>
+                    <td style="background-color: #dcdcdc;">Internet Small Computer Systems Interface is a client-server protocol used to enable the transfer of SCSI packets over a TCP/IP (Ethernet) network.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Lagg Interface</td>
+                    <td style="background-color: #dcdcdc;">Allows integration of multiple network interfaces with a single virtual interface. This helps in fault-tolerance and high-speed multi-link throughput.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">LUN (Logical Unit Number)</td>
+                    <td style="background-color: #dcdcdc;">Unique address to identify a logical unit. Logical unit is the conceptual subunit of a storage disk or set of disks.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Mirrored Disks</td>
+                    <td style="background-color: #dcdcdc;">A High Availability setup where you have a different set of disks on each node. Active disks are replicated/mirrored on the partnering node.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Mirroring</td>
+                    <td style="background-color: #dcdcdc;">Storing duplicate copies of data on one or more sets of additional Storage Volumes, apart from the set of Storage Volume that stores the original  data.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Monitoring</td>
+                    <td style="background-color: #dcdcdc;">Provides an intuitive visualization of storage statistics. Monitoring foregrounds relevant back end activities in an easy user interface for the administrator.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Network Failure</td>
+                    <td style="background-color: #dcdcdc;">
+Indicates that the system is unable to reach the network. For example, due to physical port failure.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">NFS</td>
+                    <td style="background-color: #dcdcdc;">A distributed file system protocol that lets clients access files over a network in the same way they access local storage.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Physical Infrastructure</td>
+                    <td style="background-color: #dcdcdc;">Real entities pertaining to the hardware.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"> Pool</td>
+                    <td style="background-color: #dcdcdc;">Physical storage devices on which you store data.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Provisioning</td>
+                    <td style="background-color: #dcdcdc;">A set of steps to allocate storage to Hosts and applications. For example, creating Storage Volumes in Pools.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">QoS (Quality of Service)</td>
+                    <td style="background-color: #dcdcdc;">Lets you easily commission storage with guaranteed IOPS at various levels. You
+can decide to configure QoS at a Pool level, VSM level, or Storage Volume level.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Report</td>
+                    <td style="background-color: #dcdcdc;">Detailed information related to configuration. Use Configuration Reports for component configuration details.
+Dynamic Reports provide QoS statistics.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Rest APIs</td>
+                    <td style="background-color: #dcdcdc;">Every action performed at ElastiStor admin console translates into a REST based API call in the back end. This enables administrators to fully manage ElastiStor from their portals. CloudByte plugin for VMware vCenter (also
+based on REST API) enables storage management from vCenter.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Shared Disks</td>
+                    <td style="background-color: #dcdcdc;">A High Availability setup where you have a common set of disks shared between primary and secondary nodes.
+The disks can be either hard disks or iSCSI disks.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Shared Storage</td>
+                    <td style="background-color: #dcdcdc;">Storage devices that are connected to and used by two or more systems.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Site</td>
+                    <td style="background-color: #dcdcdc;">
+Represents a data center or part of a data center. Building storage infrastructure starts with the creation of Site.
+It is the fundamental infrastructure unit where your controller, storage, and network infrastructure reside.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Snapshot </td>
+                    <td style="background-color: #dcdcdc;">Copy of a Storage Volume created at specific intervals.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Storage Capacity</td>
+                    <td style="background-color: #dcdcdc;">
+
+The overall disk space (and not the free disk space).</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Striping</td>
+                    <td style="background-color: #dcdcdc;">
+Writes data across two or more disks in an array but utilizes only a part of the space on each disk. The amount of
+space used by stripe on each disk is always the same. A virtual disk may write several stripes on the same set of
+disks in the array.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Synchronous Replication</td>
+                    <td style="background-color: #dcdcdc;">The process of writing the same data to two separate volumes, stored on different physical hardware, before the
+application receives an I/O complete message. This results in both the volumes being always in sync.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Takeover</td>
+                    <td style="background-color: #dcdcdc;">The process of taking over the storage control activity from a node. Typically, when there is a downtime
+on the primary node, the secondary node takes over the control of storage.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Thin Provisioning</td>
+                    <td style="background-color: #dcdcdc;">
+
+The process of optimizing efficiency of using the available storage space. It is the allocation of disk storage space
+flexibly among multiple users, based on the minimum space each user requires at any given time.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Throughput</td>
+                    <td style="background-color: #dcdcdc;">Amount of work a system can perform at specific intervals. It is also the amount of data moved successfully from
+one place to another in a given time period.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Virtual Storage Machine(VSM )</td>
+                    <td style="background-color: #dcdcdc;">Virtual storage controller capable of hosting Storage Volumes and LUNs.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">VSM Architecture</td>
+                    <td style="background-color: #dcdcdc;">
+Unique to CloudByte ElastiStor, this is a patented architecture. In a Storage Controller, each application is fully isolated
+across all storage stack levels and unified under a Virtual Storage Machine (VSM). VSM isolation allows controller
+resources allotted to applications to be easily monitored, controlled, and provisioned.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">VMware vSphere
+client</td>
+                    <td style="background-color: #dcdcdc;">A Microsoft Windows desktop application that enables you to access VMware ESXi and VMware vCenter.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">
+ZFS (Zettabyte File System)</td>
+                    <td style="background-color: #dcdcdc;">ZFS is a 128-bit file system that provides features such as data integrity verification, disk management, snapshots,
+and transactional operations.</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

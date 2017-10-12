@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="3837" MadCap:lastWidth="791">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">Setting up LDAP authentication for Elastistor</h1>
+        <p>You can use an external LDAP server such as Microsoft Active Directory to authenticate ElastiCenter users.To do this, map the ElastiCenter administrator types with the groups created in the directory service, for example Active Directory Server groups using CloudByte ElastiStor global settings. The following illustration explains how the authentication works:</p>
+        <p style="text-align: center;">
+            <img src="Resources/Images/LDAP.png" style="width: 624px;height: 461px;" />
+        </p>
+        <p style="text-align: justify;">Setting up LDAP authentication involves procedures on both ElastiCenter and the Active Directory Server</p>
+        <p style="color: #008000;font-family: Arial;font-size: 14pt;">On Active Directory Sever</p>
+        <p style="color: #008000;font-family: Arial;font-size: 14pt;">Create Active Directory user</p>
+        <ul>
+            <li>On your Active Directory Server, select Server Manager (Start &gt; Administrative Tools).</li>
+            <li>In the Server Manager, click Tools.</li>
+            <li>In the right pane, click Active Directory Users and Groups.</li>
+            <li>In the Active Directory Users and Groups wizard, right-click your Domain name.</li>
+            <li>Select New and then select Use</li>
+            <li>In the User page, specify the relevant information of the user and then click Next.</li>
+            <li>In the following page, specify and confirm password for the user.</li>
+            <li>Click Finish.</li>
+        </ul>
+        <p>
+            <img src="Resources/Images/2NewUser.png" />
+        </p>
+        <p style="color: #008000;font-family: Arial;font-size: 14pt;">Create Active Directory Group</p>
+        <p>Note: Create an individual group for each administrator type in ElastiCenter. For details, see http://www.docs.cloudbyte.com/delegated-administration/</p>
+        <ul>
+            <li>On your Active Directory Server, select Server Manager (Start &gt; Administrative Tools).</li>
+            <li>In the Server Manager, click Tools.</li>
+            <li>In the right pane, click Active Directory Users and Groups.</li>
+            <li>In the Active Directory Users and Groups wizard, right-click your Domain name.</li>
+            <li>Select New and then select Group.</li>
+            <li>Specify a name for the group to be created.</li>
+            <li>Click OK.</li>
+        </ul>
+        <p style="color: #008000;font-size: 14pt;font-family: Arial;">Adding Users to the Groups</p>
+        <ul>
+            <li>Add users to the group that you want to map with the users in the various administrator type groups in ElastiCenter.</li>
+            <li>On your Active Directory Server, select Server Manager (Start &gt; Administrative Tools).</li>
+            <li>In the Server Manager, click Tools.</li>
+            <li>In the right pane, click Active Directory Users and Groups.</li>
+            <li>In the Active Directory Users and Groups wizard, click your Domain name.</li>
+            <li>From the list of Groups and users, right-click the User you want to add to the Group.</li>
+            <li>Click Add to a Group.</li>
+            <li>In the dialog box, specify the name of the Group to which you want to add the user.</li>
+            <li>At the prompt, click OK.</li>
+        </ul>
+        <p>
+            <img src="Resources/Images/3Group2.png" />
+        </p>
+        <p style="color: #008000;font-family: Arial;font-size: 14pt;">On ElastiCenter</p>
+        <ol>
+            <li>In the admin section of ElastiCenter, click LDAP Configuration.</li>
+            <li>In the Actions Icon, click configure LDAP.</li>
+            <li>In the Configure LDAP page, specify the configuration details.Click OK</li>
+        </ol>
+        <p style="color: #008000;font-family: Arial;font-size: 14pt;">Set Group names for administrators on ElastiCenter</p>
+        <ol>
+            <li>In the admin section of ElastiCenter, click Global Settings.</li>
+            <li>In the Global Settings page, search for LDAP.</li>
+            <li>To define the user roles, click Edit and then specify the Group name for the administrators.</li>
+            <li>Repeat step 3 for all types of administrators on ElastiCenter.</li>
+        </ol>
+        <p style="color: #008000;font-family: Arial;font-size: 14pt;">Log in to ElastiCenter using the LDAP user credentials</p>
+        <p>Once you have configured LDAP authentication for CloudByte ElastiStor, you must add users to the administrator roles in ElastiStor. For details of administrator types, see <a href="http://www.docs.cloudbyte.com/delegated-administration/">http://www.docs.cloudbyte.com/delegated-administration/</a>.</p>
+        <ul>
+            <li>Launch ElastiCenter using the URL in the following format: https://ElastiCenter_Management_IP_Address.</li>
+            <li>Specify the following login credentials of an AD user: username and password</li>
+        </ul>
+        <p>Note: You can view the login credentials using the User Properties page (User &gt; Properties &gt; Account) as shown in the following screen:</p>
+        <p>
+            <img src="Resources/Images/account_details1.png" />
+        </p>
+        <ul>
+            <li>Re-log in to ElastiCenter as super administrator.</li>
+            <li>As a super administrator, map the administrator roles to the newly added users.<ul><li>In ElastiCenter, select the Account to which the user belongs to.</li><li>In the Actions pane, select Manage Administrator.</li><li>Select Assign Administrator.</li></ul></li>
+        </ul>
+        <p>Note: If you want to map the administrator roles for Site-Admin or the View-Admin, follow the procedures in the section Create Site administrators or view administrator</p>
+    </body>
+</html>

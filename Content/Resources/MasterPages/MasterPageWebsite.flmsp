@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="9" MadCap:lastHeight="332" MadCap:lastWidth="594">
+    <head>
+        <link href="../TableStyles/SimpleDarkBackground.css" rel="stylesheet" MadCap:stylesheetType="table" />
+        <link href="../Stylesheets/styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <MadCap:breadcrumbsProxy />
+        <MadCap:bodyProxy />
+        <div class="FooterTable">
+            <table style="caption-side: top;width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('../TableStyles/SimpleDarkBackground.css');" cellspacing="0" class="TableStyle-SimpleDarkBackground">
+                <col style="width: 50%;" class="Column-Column1" />
+                <col class="Column-Column1" style="width: 50%;" />
+                <tbody>
+                    <tr class="Body-Row1">
+                        <td class="BodyB-Column1-Row1">
+                            <MadCap:dropDown>
+                                <MadCap:dropDownHead>
+                                    <MadCap:dropDownHotspot class="Footer">Follow Us</MadCap:dropDownHotspot>
+                                </MadCap:dropDownHead>
+                                <MadCap:dropDownBody>
+                                    <p style="text-align: left;margin-top: 0;"><a href="https://twitter.com/#!/MadCapDocTeam" class="Image" target="_blank"><img src="../Images/twitter.png" class="NoThumbnailHyperlinkedImage" /></a><a href="http://www.facebook.com/madcapdocteam" class="Image" target="_blank"><img src="../Images/facebook.png" class="NoThumbnailHyperlinkedImage" /></a>
+                                    </p>
+                                </MadCap:dropDownBody>
+                            </MadCap:dropDown>
+                            <MadCap:dropDown>
+                                <MadCap:dropDownHead>
+                                    <MadCap:dropDownHotspot class="Footer">PDFs and Videos</MadCap:dropDownHotspot>
+                                </MadCap:dropDownHead>
+                                <MadCap:dropDownBody>
+                                    <p class="Footer2">
+                                        <img src="../Images/pdf_icon_black_background.png" class="OnlineFooterPDFIcon">
+                                        </img>&#160;<a href="http://webhelp.madcapsoftware.com/flare9/Default.htm#PDF_Guides/PDF_Guides.htm" target="_blank" class="footermasterlarge">Flare PDF Guides</a></p>
+                                    <p class="Footer2">
+                                        <img src="../Images/movie_play_black_background.png" class="OnlineFooterPDFIcon" />&#160;<a href="http://webhelp.madcapsoftware.com/flare9/Default.htm#Videos/Videos.htm" target="_blank" class="footermasterlarge">Flare Videos</a></p>
+                                </MadCap:dropDownBody>
+                            </MadCap:dropDown>
+                            <MadCap:dropDown>
+                                <MadCap:dropDownHead>
+                                    <MadCap:dropDownHotspot class="Footer">Anything Else</MadCap:dropDownHotspot>
+                                </MadCap:dropDownHead>
+                                <MadCap:dropDownBody>
+                                    <p class="FooterTopicMaster">Add Content Here</p>
+                                </MadCap:dropDownBody>
+                            </MadCap:dropDown>
+                        </td>
+                        <td class="BodyA-Column1-Row1">
+                            <MadCap:dropDown>
+                                <MadCap:dropDownHead>
+                                    <MadCap:dropDownHotspot class="Footer">Technical Support</MadCap:dropDownHotspot>
+                                </MadCap:dropDownHead>
+                                <MadCap:dropDownBody>
+                                    <p class="FooterTopicMaster"><a href="http://madcapsoftware.com/support/" target="_blank" class="footermasterlarge">http://cloudbyte.com/support/</a>
+                                    </p>
+                                </MadCap:dropDownBody>
+                            </MadCap:dropDown>
+                            <MadCap:dropDown>
+                                <MadCap:dropDownHead>
+                                    <MadCap:dropDownHotspot class="Footer">Company Information</MadCap:dropDownHotspot>
+                                </MadCap:dropDownHead>
+                                <MadCap:dropDownBody>
+                                    <p class="FooterTopicMaster"><MadCap:variable name="Other.CompanyName" />
+                                    </p>
+                                    <p class="FooterTopicMaster"><MadCap:variable name="Other.StreetAddress" />
+                                    </p>
+                                    <p class="FooterTopicMaster"><MadCap:variable name="Other.CityStateZip" />
+                                    </p>
+                                    <p class="FooterTopicMaster"><MadCap:variable name="Other.Phone" />
+                                    </p>
+                                </MadCap:dropDownBody>
+                            </MadCap:dropDown>
+                            <MadCap:dropDown>
+                                <MadCap:dropDownHead>
+                                    <MadCap:dropDownHotspot class="Footer">Product Information</MadCap:dropDownHotspot>
+                                </MadCap:dropDownHead>
+                                <MadCap:dropDownBody>
+                                    <p class="FooterTopicMaster">Version <MadCap:variable name="VersionNumbers.VersionNumber" /></p>
+                                    <p class="FooterTopicMaster">Copyright © <MadCap:variable name="Other.Year" />&#160;<MadCap:variable name="Other.CompanyName" /></p>
+                                </MadCap:dropDownBody>
+                            </MadCap:dropDown>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

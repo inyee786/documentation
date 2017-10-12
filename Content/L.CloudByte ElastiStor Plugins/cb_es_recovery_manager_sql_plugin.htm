@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Browsable;LUN;workflow;IQN;CIFS;Charset;CP;UTF;NAS4Free;SMB;NTP;ACL;IP" MadCap:lastBlockDepth="8" MadCap:lastHeight="923" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>CloudByte ElastiStor Recovery Manager for SQL Server plug-in</h2>
+        <h3>Introduction</h3>
+        <p>CloudByte ElastiStor Recovery Manager for SQL Server plug-in lets you automate backup and restore of the SQL Server and the associated databases that reside on ElastiStor LUN.</p>
+        <p>You can create snapshot, delete, restore, and list snapshots.</p>
+        <h3>Installing the plug-in</h3>
+        <h4>Prerequisites</h4>
+        <ul>
+            <li>Install Windows Server 2008 R2 SP2 or  Windows Server 2012 as the operating system.</li>
+            <li>Enable .NET Framework 3.5.1 features. For details, see <a href="http://blogs.msdn.com/b/sqlblog/archive/2010/01/08/how-to-install-net-framework-3-5-sp1-on-windows-server-2008-r2-environments.aspx">Enabling .NET framework.</a></li>
+            <li>
+               Install .NET Framework 4.0 or higher. For details, see
+<a href="http://www.microsoft.com/en-us/download/details.aspx?id=17718">Installing .NET framework 4.0</a>.           </li>
+            <li>Install or upgrade to Windows PowerShell 3.0. For details, see <a href="http://technet.microsoft.com/en-us/library/hh847837.aspx#BKMK_InstallingOnWindowsServer2008LH">Installing Windows PowerShell 3.0 .</a></li>
+            <li>
+                Install MSSQL Server 2014 as the database.
+            </li>
+            <li>CloudByte ElastiStor  is up and running.</li>
+            <li>Mount the iSCSI Storage Volumes to the MSSQL Server. For details, see the section <i>On Windows Server 2008</i> at <a href="http://www.docs.cloudbyte.com/deploying-nfs-and-iscsi-from-cloudbyte-elastistor-on-red-hat-enterprise-linux/deploying-fibre-channel-fc-from-cloudbyte-elastistor/">Mapping iSCSI LUNs.</a></li>
+        </ul>
+        <h4>Installation procedures</h4>
+        <ol>
+            <li>Get the RMSQL plug-in installation files from CloudByte Technical Support.</li>
+            <li>Run the execution file <code>setup</code>.</li>
+            <li>Follow the onscreen instructions on the Wizard and complete the installation. <img src="../Resources/Images/install_RMSQL.png" class="FitToText" /><br /></li>
+        </ol>
+        <h4>Using the plug-in</h4>
+        <table>
+            <col style="width: 286px;" />
+            <col style="width: 894px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Function</td>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Command</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Load PowerShell SQL Module:</b> Run this command first when you invoke PowerShell. If you change the default path, ensure that you modify the command accordingly.</td>
+                    <td class="tablecode"> Import-Module 'C:\Program Files\CloudByte\RMSQL\PSSql.dll'</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Set REST server details to the registry:</b> Run this command to set the REST server details into the registry.</td>
+                    <td class="tablecode">Set-RestServer -IPAddress &lt;IP Address of t RestServer IP &gt; -RestAPIKey &lt;API Key of the RestServer&gt;</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Set Backup Properties:</b> Run this command to set the location in the registry to store backup data.</td>
+                    <td class="tablecode">Set-BackupProperties –BackupInfoPath &lt;Path where you want to save BackupInformation&gt;</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Show REST Server details:</b> Run this command to display the REST Server settings.</td>
+                    <td class="tablecode">Show-RestServer</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Show Backup properties:</b>Run this command to see the location where backup files are stored.</td>
+                    <td class="tablecode">Show-BackupProperties</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Create Snapshot:</b> Run this command to take new point in time snapshot of the databases in the SQL Server. That is, the backup of the SQL Server Components.</td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li style="background-color: #dcdcdc;"> For Windows authentication:<br /> <code>new-snapshot -inst &lt;instance name&gt; -d &lt;database name&gt; -ntauth 
+</code></li>
+                            <li style="background-color: #dcdcdc;">For SQL authentication:
+<br /><code>new-snapshot -inst &lt;instance name&gt; -d &lt;database name&gt; -usr &lt;username&gt; -pwd
+&lt;password&gt;
+</code></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Restore Snapshot of the databases in the SQL server:</b> Run this command to restore snapshot of the Databases in the SQL Server.</td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li style="background-color: #dcdcdc;">For Windows authentication:<br /> <code>restore-snapshot -Inst &lt;instance name&gt; -d &lt;database name&gt; -snapshot &lt;snapshot name&gt; -ntAuth </code><br /></li>
+                            <li style="background-color: #dcdcdc;">For SQL authentication:<br /> <code>restore-snapshot -Inst &lt;instance name&gt; -d &lt;database name&gt; -snapshot &lt;snapshot name&gt; -usr &lt;username&gt; -pwd &lt;password&gt;</code></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>List Snapshot:</b> Get details of the snapshots of databases in the SQL server. Also, determine the snapshot that you want to restore.</td>
+                    <td style="background-color: #dcdcdc;"><code>Get-Snapshots -inst &lt;instance name&gt; -d &lt;database name&gt;</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"><b>Delete Snapshot:</b> Run this command to delete the snapshots of databases in the SQL server.</td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li style="background-color: #dcdcdc;">For Windows authentication:<br /> <code>Remove-Snapshot -inst &lt;instance name&gt; -d &lt;database name&gt; -SnapshotName &lt;string&gt; - ntAuth </code><br /></li>
+                            <li style="background-color: #dcdcdc;">For SQL authentication:<br /><code>
+Remove-Snapshot -inst &lt;instance name&gt; -d &lt;database name&gt; -SnapshotName &lt;string&gt; - usr &lt;username&gt; -pwd &lt;password&gt;
+</code></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>Parameters</h5>
+        <table>
+            <col style="width: 116px;" />
+            <col style="width: 611px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Abbreviation</td>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Usage</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">-inst</td>
+                    <td style="background-color: #dcdcdc;">Instance name of SQL Server
+ </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">
+-d
+</td>
+                    <td style="background-color: #dcdcdc;"> Comma-separated list of database names.
+.</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">-ntauth</td>
+                    <td style="background-color: #dcdcdc;">Windows authentication</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">
+                        -usr
+                    </td>
+                    <td style="background-color: #dcdcdc;">Username in the case of SQL Server Authentication.</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">-pwd</td>
+                    <td style="background-color: #dcdcdc;">Password in the case of SQL Server
+Authentication.</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">
+-snapshot
+</td>
+                    <td style="background-color: #dcdcdc;">Snapshot Name to be provided as
+available in the BackupinfoPath folder(under InstanceName folder)</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">
+-norecovery
+</td>
+                    <td style="background-color: #dcdcdc;">Used when the database
+has to be left in Restoring state(to allow the user to run additional logs).
+</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">-SnapshotName</td>
+                    <td style="background-color: #dcdcdc;">Name of snapshot to be deleted (as
+fetched in get-snapshots)</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>FAQs</h3>
+        <h4>How will I uninstall the plug-in?</h4>
+        <h5>On Windows Server 2008</h5>
+        <ol>
+            <li>Go to Program Files (Start &gt; Program Files).</li>
+            <li>Select RMSQL.</li>
+            <li>Click Uninstall RMSQL.</li>
+            <li>At the prompt, click Yes.</li>
+            <li>In the following screen, select Remove RMSQL_COM.<img src="../Resources/Images/uninstall_RMSQL.png" class="FitToText" /><br /></li>
+            <li>Click Finish</li>
+            <li> Follow the onscreen instructions on the Wizard and complete the installation.</li>
+        </ol>
+        <h5>On Windows Server 2012</h5>
+        <ol>
+            <li>
+                Go to Start.</li>
+            <li>Search for Uninstall RMSQL. </li>
+            <li>At the prompt, click Yes.</li>
+            <li>In the following screen, select Remove RMSQL_COM.</li>
+            <li>Click Finish.</li>
+            <li> Follow the onscreen instructions on the Wizard and complete the installation.</li>
+        </ol>
+        <h3>Limitations
+</h3>
+        <p>
+      
+               Sector size cannot exceed 4k  while creating the volumes for 
+					</p>
+        <ul>
+            <li>SQL server installation</li>
+            <li>Database creation
+    </li>
+        </ul>
+    </body>
+</html>

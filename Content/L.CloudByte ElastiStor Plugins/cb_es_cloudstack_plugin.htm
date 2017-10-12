@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Pre;VMWare;vCenter;plugin;NFS;datastore;VM’s;VM;VMs;exe;XP;R2;powerCLI;ExecutionPolicy;PowerCLI;VCenter;x86;Plugins;credstore;Datastore;Datastores;datacenter;datastores;IOPS;secureVM;unregister;datatsore;CloudStack;UI;iSCSI;cloudbyte;js;xml;cloudstack;ui;cloudStackImageStoreProviderImpl;apache;CloudStackImageStoreProviderImpl;s3ImageStoreProviderImpl;S3ImageStoreProviderImpl;swiftImageStoreProviderImpl;SwiftImageStoreProviderImpl;solidFireDataStoreProvider;SolidfirePrimaryDataStoreProvider;elastistorDataStoreProvider;ElastistorPrimaryDataStoreProvider;esmanagementip;espoolid;esdefaultgateway;IP;essubnet;Subnet;estntinterface;NIC;dataStoreProviderManager;CloudbyteSR;Hypervisor;Quickview;elastistor;APIs;createStoragePool;deleteStoragePooll;hypervisor;xen" MadCap:lastBlockDepth="7" MadCap:lastHeight="923" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>CloudByte ElastiStor plug-in for Apache CloudStack</h2>
+        <h3>Introduction</h3>
+        <p>Apache CloudStack administrators can perform various tasks, performed using CloudByte ElastiCenter, in the CloudStack management UI.</p>
+        <p>CloudByte provides a plug-in, CloudByte ElastiStor plug-in for Apache CloudStack, to perform the following ElastiStor tasks:</p>
+        <ul style="list-style-type: square;">
+            <li>Create Account </li>
+            <li>Provision storage</li>
+            <li>Manage QoS properties for the primary storage (VSM) and Storage Volumes</li>
+            <li>Set up iSCSI and NFS&#160;primary storage</li>
+        </ul>
+        <p>The current release supports iSCSI and NFS protocols on the following Hypervisors: Xen, VMware, KVM.</p>
+        <p>The following figure illustrates how the plug-in integrates with  Apache CloudStack.</p>
+        <p>
+            <img src="../Resources/Images/image.png" class="FitToText" />
+        </p>
+        <p>The following topics explain how to install and use the ElastiStor plug-in for CloudStack.</p>
+        <p>Before you use the plug-in features, you must use ElastiCenter to configure your storage infrastructure till creating a Pool. That is, set up the first four items in the following illustration. The remaining configurations can be performed using the CloudStack user interface.</p>
+        <p>
+            <img src="../Resources/Images/HowInfrastructureAndAccountOrganized.png" />
+        </p>
+        <h3>Prerequisites</h3>
+        <ul style="list-style-type: square;">
+            <li>Install CloudStack 4.5.1. Refer <a href="http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/latest/">CloudStack Installation </a>.</li>
+            <li>CloudByte ElastiStor 1.4 is up and running. </li>
+            <li>
+                Download the <code>cloudStack.zip</code> folder from <a href="http://www.cloudbyte.com/cbftp/cloudStack.zip">ElastiStor Plug-ins</a>. The folder has the following files:
+                <ul style="list-style-type: square;"><li>system.js </li><li>docs.js</li><li>install.sh</li></ul></li>
+        </ul>
+        <ul style="list-style-type: square;">
+            <li>				You have the ElastiStor Storage set up till the Pool level.
+</li>
+        </ul>
+        <h3><a name="Move"></a>Move the JavaScript files</h3>
+        <p>Before you install the CloudByte ElastiStor Apache CloudStack plug-in, you must move the JavaScript files.  Move the following files in <code>scripts</code> folder to the location <code>/usr/share/cloudstack-management/webapps/client</code>:</p>
+        <ul>
+            <li>system.js.gz</li>
+            <li>docs.js.gz</li>
+        </ul>
+        <h3>Installing the plug-in</h3>
+        <ol>
+            <li>Log in to CloudStack management server terminal.</li>
+            <li>Edit the properties file named <code>command</code>. For details, see <MadCap:xref href="#Edit_properties_file">"Edit properties file"</MadCap:xref>.</li>
+            <li>Extract the folder <code>(cloudStack.zip)</code> you downloaded to the root directory.</li>
+            <li>In the extracted folder (cloudStack), run the following command to install the plug-in: <code>./install.sh</code></li>
+        </ol>
+        <h3><a name="Edit_properties_file"></a>Edit properties file</h3>
+        <p>Add the following to the file <code>command.properties</code> in the location <code>/usr/share/cloudstack-management/webapps/client/WEB-INF/classes</code></p><pre xml:space="preserve">	changeVolumeProperties=15
+        listElastistorPool=15
+        listElastistorVolume=15
+        listElastistorInterface=15</pre><pre xml:space="preserve">
+		</pre>
+        <h3>Connecting CloudByte ElastiCenter to Apache CloudStack</h3>
+        <ol>
+            <li>In the CloudStack interface, click Global Settings in the left pane.</li>
+            <li>In the Search tab, specify <code>CloudByte</code>.</li>
+            <li>Specify the following in the highlighted fields (in the following figure):<ul><li><code>cloudbyte.management.apikey</code> - Specify the ElastiCenter API key. For details on how to generate the API key, see <MadCap:xref href="../G.API References/using REST APIs.htm">"CloudByte ElastiStor API references"</MadCap:xref></li><li><code>cloudbyte.management.ip</code> - Specify the ElastiCenter IP address.</li></ul><p><img src="../Resources/Images/CS1.PNG" class="FitToText" style="width: 671px;height: 464px;" /></p></li>
+        </ol>
+        <h3><a name="Add_an_Account_(Domain)&#xA;"></a>Add a Domain (Account)</h3>
+        <p>A Domain in CloudStack corresponds to Account in ElastiCenter. By default, the Domain ROOT  exists in CloudStack (and a corresponding Account with the name ROOT in ElastiCenter). The new domain must be created under the default Domain ROOT.</p>
+        <ol>
+            <li>In the CloudStack user interface, click Domains in the left pane.</li>
+            <li>Click Add Domain icon (highlighted in the following screen).</li>
+            <p>
+                <img src="../Resources/Images/CloudStack_add_domain.png" class="FitToText" style="width: 633px;height: 485px;" />
+            </p>
+            <li>Specify the required details and then click OK.</li>
+        </ol>
+        <h3>Provisioning storage</h3>
+        <h4>Add a Primary Storage (VSM)</h4>
+        <p>Primary storage in CloudStack corresponds to VSM in ElastiCenter. When you add primary storage, a VSM with the same name is created in ElastiCenter and the Domain that you select  (<MadCap:xref href="#Add_an_Account_(Domain)&#xA;">Add an Account (Domain)</MadCap:xref>) is associated as an Account to this VSM.</p>
+        <p class="note"><b>Note</b>: If an Account with the same name already exists, only a VSM is created after adding the primary storage.</p>
+        <ol>
+            <li>In the CloudStack User Interface home page, click Infrastructure and then click View All in Primary Storage. </li>
+            <li>Click Add Primary Storage and then enter the required details. </li>
+            <p>
+                <img src="../Resources/Images/CS3.PNG" class="FitToText" />
+            </p>
+        </ol>
+        <table>
+            <col style="width: 102px;" />
+            <col style="width: 548px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Option</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Scope</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Only the scope <code>cluster</code> is supported.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Zone</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">The Zone where you create the primary storage.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Pod</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">The Pod where you create the primary storage.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Cluster</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">The cluster where you create the primary storage.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Name</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Name of the storage device (<i>VSM</i> in ElastiStor).</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Storage Tags</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Comma-separated list of tags for the storage device. Must be a super set of the tags on your disk offerings.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Provider</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Select CloudByte from the drop-down list.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Pool</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Select a Pool from the drop-down list.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Capacity </td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Specify capacity for primary Storage in GB.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">IOPS</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">IOPS&#160;for the primary Storage.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">VSM IP</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">IP address of the VSM.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Subnet</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Specify a valid numeric value.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">VSM Interface</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Select an active interface from the drop-down list.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Domain</td>
+                    <td style="text-align: left;background-color: #dcdcdc;">Select a from the drop-down list.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>The following figure shows how the VSM CB-PRIMARY-VSM is created on CloudStack User Interface appears in ElastiCenter.<br /></p>
+        <img src="../Resources/Images/CS4.PNG" class="FitToText" />
+        <h3>Add Disk Offering </h3>
+        <p>Add disk offering to map the Storage Volume to the primary storage.</p>
+        <ol>
+            <li>In the CloudStack User Interface, click Service Offerings.</li>
+            <li>In the following page, for Select offering, choose Disk offerings and then click Add Disk Offering. </li>
+            <p>
+                <img src="../Resources/Images/CS5.PNG" class="FitToText" style="width: 649px;height: 444px;" />
+            </p>
+            <li>In the following page, provide the required details and complete the procedure. </li>
+            <p>
+                <img src="../Resources/Images/CS6.PNG" class="FitToText" />
+            </p>
+            <table>
+                <col style="width: 118px;" />
+                <col style="width: 548px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Option</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Name</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify a name for the offering.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Description</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Short description of the offering that can be displayed to users.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Storage Type</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Type of disk for the VM. Select Shared, which is the storage accessible by way of NFS.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Custom Disk Size</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">
+                            <p class="table"><span style="font-size: 9pt;">Enable: User has the option to specify the size of disk while adding the Storage Volume.</span>
+                            </p>
+                            <p class="table"><span style="font-size: 9pt;">Disable: Select the size manually in Disk Size tab.</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Disk Size</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Appears only if custom disk size is not enabled. Define Volume size in GB. The value must correspond with the Primary storage.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">QoS Type</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Select Storage.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Custom IOPS</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">If enabled, user has the option to specify IOPS while adding the Storage Volume.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Min IOPS</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Appears only if custom IOPS is disabled. Defines minimum volume IOPS.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Max IOPS</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Appears only if custom IOPS is disabled. Defines maximum volume IOPS (should not exceed the IOPS of the corresponding primary storage)</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Hypervisor Snapshot Reserve</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Percentage of the size of the root disk.  If the root disk is 20 GB and Hypervisor Snapshot Reserve is 200%, the storage volume that backs the storage repository is sized at 60 GB (20 GB + (20 GB * 2)). </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Storage Tags</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Comma-separated list of attributes that must be associated with the primary storage for the disk. This must match the corresponding tags of the primary storage.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Public</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Disable the option. </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Domain</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Select the sub domain from the drop-down list in which the offering is available.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>After the mapping is done, a message <i>Task completed</i> is displayed.</p>
+        </ol>
+        <h4>Launch virtual machine on ElastiStor</h4>
+        <ol>
+            <li>In the CloudStack homepage, click Instances.</li>
+            <li>
+                In the Instances page, select Add Instance.<br /><img src="../Resources/Images/CS7.PNG" class="FitToText" /></li>
+            <li>
+                Select ISO Boot, and follow the steps in the wizard.
+</li>
+            <li>(In step 4 of the wizard) Select the Disk offering (CloudByte specific) for the root disk of the VM.<br /><img src="../Resources/Images/CS8.PNG" class="FitToText" /></li>
+            <li>
+               Click Submit and your VM will be created and started.
+            </li>
+        </ol>
+        <h4>Add a Volume to the instance</h4>
+        <p>Add a Storage Volume to the instance to make use of the primary storage.</p>
+        <ol>
+            <li>In the CloudStack home page, click Storage.</li>
+            <li> Click Add Volume at the top right corner of the page. </li>
+            <li>Specify the required details and then click OK.</li>
+            <p>
+                <img src="../Resources/Images/CS9.PNG" class="FitToText" />
+            </p>
+            <table>
+                <col style="width: 118px;" />
+                <col style="width: 548px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Option</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Name</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify a unique name for the volume.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Availability Zone</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify where the volume must reside.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Disk Offering</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Choose from the drop down list.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Disk Size</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify size of the Storage Volume in GB.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">IOPS</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">IOPS of the Storage Volume.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li>In the Volumes page, select the added disk, and then click Quickview.</li>
+            <li>Click Attach Disk .<br /><img src="../Resources/Images/CS10.PNG" class="FitToText" /></li>
+            <li>In the Attach Disk dialog box, select an instance (virtual machine) and then click OK. The Volume is attached to the instance.</li>
+        </ol>
+        <h4>Change Storage Volume properties</h4>
+        <p>Follow the procedures to modify the Storage Volume properties, if required.</p>
+        <ol>
+            <li>Click Storage in the left pane.</li>
+            <li>Select a Storage Volume for a specific instance.</li>
+            <li>Click the Change Volume properties icon (highlighted in the following screen).<img src="../Resources/Images/cloudstack_edit_volume_properties.png" class="FitToText" /></li>
+            <li>(In the following page) Make the required changes and then click OK.<img src="../Resources/Images/cloudstack_change_volume_properties_page.png" class="FitToText" /></li>
+        </ol>
+        <h3>What happens at the Hypervisor end</h3>
+        <p>A Storage Repository is created on the Hypervisor as shown in the following screen:</p>
+        <p>
+            <img src="../Resources/Images/CloudStack_plugin_StorageRepositoryOnHypervisor.png" class="FitToText" />
+        </p>
+        <h3>Plug-in tips</h3>
+        <ul style="list-style-type: square;">
+            <li>When you create a primary storage, ensure that the provider name is <i>CloudByte</i></li>
+        </ul>
+        <h4>How will I&#160;know if the plug-in is successfully installed?</h4>
+        <ol>
+            <li>In the management server, go to /usr/share/cloudstack-management/logs. </li>
+            <li>At command prompt, enter the following command: <code>vi catalina.out</code></li>
+            <li>In the log, search <i>storage-volume-cloudbyte</i>. If it is there, the plug-in is successfully registered.</li>
+        </ol>
+        <h4>How will I uninstall the plug-in?</h4>
+        <ol>
+            <li>Restore the JavaScript files that you have backed up (in the section <MadCap:xref href="#Move">"Move the JavaScript files"</MadCap:xref>).</li>
+            <li>Restart CloudStack.</li>
+        </ol>
+    </body>
+</html>

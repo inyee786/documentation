@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="username;dministrator;Username" MadCap:lastBlockDepth="8" MadCap:lastHeight="3553" MadCap:lastWidth="867">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Delegated administration</h2>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Administration in CloudByte can be categorized based on services. You can have administration at the Site level or at the Account level. Your Site can have multiple Site administrators.</p>
+        <p class="note" style="font-family: sans-serif;"><b>Note:</b> Currently, CloudByte ElastiStor supports only role-based administration. Future releases will have delegated administration fully implemented.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">As the root administrator, you can distribute the tasks to administrators. Delegated administration is an act of providing and restricting privileges by establishing access control based on the responsibility of each individual administrator.</p>
+        <ul style="list-style-type: square;">
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Delegated administration lets you determine the actions that each administrator can take using administrative tools on different resources.</li>
+            <li style="text-align: justify;font-size: 11pt;font-family: sans-serif;">Delegated administration roles are mapped to administrative functions using security policies. You can create and maintain separate administration capabilities, depending on your needs.</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">You establish delegated administration by creating role hierarchy.</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Role hierarchy enables you to keep a tight control on how delegation happens and who can delegate what to whom. One administrator can create sub-roles for other administrators with limited administrative privileges.</li>
+        </ul>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;">Role hierarchy</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">The following is a pictorial representation of how role-hierarchy functions in CloudByte ElastiStor administration:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/roleHierarchyFunctionsInElastiStorAdministrations---v003.png" class="FitToText" style="width: 685px;height: 527px;" />
+            <br />
+        </p>
+        <table>
+            <col style="width: 130px;" />
+            <col style="width: 424px;" />
+            <col style="width: 305px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Administrator</td>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Can</td>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Cannot</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Super administrator</td>
+                    <td style="background-color: #dcdcdc;">Perform all possible actions across Sites, Accounts, and VSMs</td>
+                    <td style="background-color: #dcdcdc;"> Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Site administrator</td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="tdbullist">Manage permissible actions within the permitted Sites</li>
+                            <li class="tdbullist">
+
+Manage more than one Site</li>
+                            <li class="tdbullist">
+
+Have only read-only access</li>
+                            <li class="tdbullist">Create/Delete/Modify Accounts (if permitted by super administrator)</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;"> Delete/Modify/Create another Site administrator</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Account super dministrator</td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="tdbullist">
+
+Manage only that Account</li>
+                            <li class="tdbullist">Do everything permissible for an Account administrator</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="tdbullist">Manage anything outside the Account</li>
+                            <li class="tdbullist">
+
+Manage anything with respect to the infrastructure</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Account administrator</td>
+                    <td style="background-color: #dcdcdc;">
+ Manage what is permitted within the Account</td>
+                    <td style="background-color: #dcdcdc;"> Manage other account admins within the Account.
+</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">View  administrator	  </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="tdbullist">	View all the permitted Sites and underlying infrastructure</li>
+                            <li class="tdbullist">Have only read-only access</li>
+                            <li class="tdbullist">View all the permitted Accounts</li>
+                            <li class="tdbullist">View Cluster administrators and Account administrators</li>
+                            <li class="tdbullist">Generate reports</li>
+                        </ul>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <ul>
+                            <li class="tdbullist">	Delete/Modify/Create another View administrator</li>
+                            <li class="tdbullist">View Site administrators</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="note" style="font-family: sans-serif;text-align: justify;"><b>Note:</b> You can only have one super administrator. Only the super administrator can change his/her password. Administrators can change their password and passwords of administrators under them.</p>
+        <h3 style="font-family: sans-serif;color: #005db2;font-size: 14pt;">Adding delegated administrators</h3>
+        <h4 style="font-family: sans-serif;font-size: 12pt;color: #005db2;">Create Site administrators or view administrators</h4>
+        <p class="note" style="font-family: sans-serif;"><b>Note:</b> You can create Site administrators or view administrators only if you are a super administrator.</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">Log in as a super administrator.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the navigation pane, select Delegated Administrator. The Delegated Administrators page appears.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/60_Delegated_administration.jpg" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Add Delegated Admin in Actions Icon. </li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Add Delegated Admin Details page, specify the following details:</li>
+            <ul>
+                <li style="font-family: sans-serif;font-size: 11pt;"><b>Email:</b> Specify a unique email address for the Site administrator or View administrator </li>
+                <li style="font-family: sans-serif;font-size: 11pt;"><b>Password:</b> Administrator password</li>
+                <li style="font-family: sans-serif;font-size: 11pt;"><b>Delegated Admin Type:</b>Select the type of Delegated Administrator from the drop-down menu
+  </li>
+            </ul>
+            <li style="font-family: sans-serif;text-align: justify;font-size: 11pt;">Click Next and then drag and drop one or more Sites for which you want to delegate administration as seen in the following screen:</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/View_Only_Delegated_Admin_Drag_Drop.png" class="FitToText" style="width: 633px;height: 342px;" />
+            </p>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Add.</li>
+        </ol>
+        <h3 style="font-family: sans-serif;color: #005db2;">Create Account administrators</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">You can create Account administrators for either existing or new accounts.</p>
+        <h4 style="font-family: sans-serif;font-size: 13pt;color: #005db2;">Create Account administrators for a new account</h4>
+        <p class="note"><b>Note:</b> The type of administrator that you can assign tasks to depends on the privileges you have.</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Accounts in the navigation pane.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, click Add Account in Actions Icon.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Account Details page, when you specify the account details, choose the type of administrator that you want to create (Account Super Admin or Account Admin).</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/delegated_admin_add_account.png" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify the credentials for the administrator and then click Add Account.</li>
+        </ol>
+        <h4 style="font-family: sans-serif;font-size: 12pt;">Create Account administrators for an existing account</h4>
+        <blockquote>
+            <p class="note" style="font-size: 11pt;"><b style="font-family: sans-serif;">Note:</b>&#160;The type of administrator that you can assign task to depends on the privileges you have.</p>
+        </blockquote>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Accounts in the navigation pane.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, select the account for which you want to add new administrators.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, click Add Administrator in the Delegated Administration section of the actions icon.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li style="font-family: sans-serif;">In the Add Account dialog box, specify the details and then click ADD.</li>
+        </ol>
+        <p style="font-family: Arial;font-size: 14pt;color: #005db2;">Global Settings</p>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Global settings let the administrator configure various options used to control CloudByte ElastiStor. For example, email configuration. To configure global settings,</p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Global Settings.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select a target category. A list of settings is provided by default.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Edit the relevant settings.<p style="color: #000000;font-family: sans-serif;"> Note: You cannot add new settings</p></li>
+        </ul>
+    </body>
+</html>

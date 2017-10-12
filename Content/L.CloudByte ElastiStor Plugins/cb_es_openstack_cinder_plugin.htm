@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Pre;VMWare;vCenter;plugin;NFS;datastore;VM’s;VM;VMs;exe;XP;R2;powerCLI;ExecutionPolicy;PowerCLI;VCenter;x86;Plugins;credstore;Datastore;Datastores;datacenter;datastores;IOPS;secureVM;unregister;datatsore" MadCap:lastBlockDepth="7" MadCap:lastHeight="881" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body style="font-size: 10pt;font-family: monospace;">
+        <h2>CloudByte ElastiStor plugin for OpenStack</h2>
+        <h3>Introduction</h3>
+        <p>OpenStack administrators can perform the following tasks, performed using CloudByte ElastiCenter, in the OpenStack dashboard. CloudByte provides a plug-in to create, configure, and manage the ElastiCenter tasks.</p>
+        <ul style="list-style-type: square;">
+            <li>Create and manage Storage Volumes</li>
+            <li>Create and manage Storage Volume Snapshots</li>
+            <li>Create and manage Storage Volume Clones</li>
+        </ul>
+        <p>The following workflow illustrates the procedures involved in storage provisioning using ElastiCenter. You must use ElastiCenter to perform the first six steps that include configuring Sites, HA Groups, Nodes, Pools, Accounts, and VSMs. The key task of setting up the Storage Volumes can be performed using the OpenStack dashboard.</p>
+        <p>
+            <img src="../Resources/Images/HowInfrastructureAndAccountOrganized.png" class="FitToText" />
+        </p>
+        <h3>Pre-requisites</h3>
+        <ul style="list-style-type: square;">
+            <li> Download the iSCSI driver for OpenStack Cinder from <a href="http://www.cloudbyte.com/cbftp/IceHouse_CloudByte_Cinder_Driver_17JUN2015.zip">ElastiStor Plug-ins</a>.</li>
+            <li>OpenStack Icehouse or higher is installed.</li>
+            <li>
+                A project is created in the OpenStack dashboard.
+            </li>
+            <li>CloudByte ElastiStor 1.4 is up and running.</li>
+            <li>An Account is created in ElastiCenter (preferably with the same name as the project on OpenStack).</li>
+        </ul>
+        <h3>Working with the Plug-in</h3>
+        <p class="note"><b>Note</b>: The following documentation is for CentOS. The procedures might be similar for other flavors of Linux.</p>
+        <h4>Installing the plug-in</h4>
+        <ol>
+            <li>Copy the folder <code>cloudbyte</code> to the following location on the machine where you have installed OpenStack: <code>/usr/lib/python2.6/site-packages/cinder/volume/drivers</code>.</li>
+            <li>Run the following command to edit the <code>cinder.conf</code> file in <code>/etc/cinder</code>: <code>vi /etc/cinder/cinder.conf</code></li>
+            <li>Add the following lines in the <code>cinder.conf</code> file: </li>
+            <br />
+            <p class="note"><b>Note</b>: Ensure that the <code>[cloudbyte]</code> tag is present in <code>cinder.conf</code> file before you specify the driver specific properties.</p><pre xml:space="preserve">[cloudbyte]
+<b>cb_initiator_group_name = ALL</b>
+volume_driver = cinder.volume.drivers.cloudbyte.cloudbyte.CloudByteISCSIDriver
+volume_backend_name = cloudbyte
+<b>san_ip = 20.10.22.50</b>
+san_password = na
+<b>tsm_name = VSM2</b>
+<b>cb_account_name = Account1</b>
+<b>cb_apikey = IaOU6Qagh-HqIVpNBh69DrT8hpej5dD_g914MHjq-rxfFUPkGOjcVvWPjovlaTT24fn_NL-d1KTK8D4tof7tUA</b>
+confirm_vol_sleep_counter = 10
+confirm_vol_sleep_interval = 5
+add_qosgroup=latency:15,graceallowed:true,iopscontrol:true,memlimit:0,tpcontrol:false,throughput:0,iops:50,
+networkspeed:0
+create_volume=compression:off,deduplication:off,blocklength:512B,sync:always,protocoltype:ISCSI,recordsize:16k
+      
+[DEFAULT]</pre><pre xml:space="preserve"><b>enabled_backends=cloudbyte</b></pre><pre xml:space="preserve"><b>iscsi_helper=tgtadm</b>
+            
+</pre>
+            <li>Modify the highlighted section in the configuration properties by specifying the following details:</li>
+            <ul>
+                <li><b>san_ip</b> : The IP address of ElastiCenter</li>
+                <li><b>tsm_name</b> : The VSM on which Storage Volume is created in ElastiCenter</li>
+                <li><b>cb_account_name</b> : The Account on which VSM is created in ElastiCenter</li>
+                <img src="http://www.docs.cloudbyte.com/wp-content/uploads/Account.png" alt="Account" style="width: 674px;height: 110px;" class="FitToText" />
+                <li><b>cb_apikey</b> : The REST API key that is generated. For details, see <a href="http://www.docs.cloudbyte.com/apis/" title="Using the REST APIs">CloudByte ElastiStor API reference</a></li>
+                <li><b>enabled_backends</b> : Specify <b>cloudbyte</b> as the value.</li>
+                <li><b>iscsi_helper</b> : Set  <b>tgtadm</b> as the value.</li>
+            </ul>
+            <li>Restart the cinder services using the following commands:<ul><li><code>service openstack-cinder-api restart</code></li><li><code>service openstack-cinder-scheduler restart</code></li><li><code>service openstack-cinder-volume restart</code></li></ul></li> <![CDATA[ ]]></ol>
+        <h3>Provisioning the Storage</h3>
+        <h4>Simple provisioning</h4>
+        <p>You can use the OpenStack dashboard or the Command Line Interface for basic storage provisioning on ElastiStor. All the storage provisioning commands are same as the standard Openstack cinder commands.</p>
+        <h4>Advanced provisioning</h4>
+        <p>To set the specified set of QoS parameters, IOPS in particular, perform the following procedures:</p>
+        <ol>
+            <li>Fetch the VSM details such as the Account ID and dataset ID by specifying the following URL: https://<i>ElastiCenter_IP_address</i>/client/apicommand=listTsm&amp;apiKey=<i>REST_API_key</i>&amp;response=json. For more details, see the section <i>Forming the API request</i> in <MadCap:xref href="../G.API References/using REST APIs.htm">"CloudByte ElastiStor API reference"</MadCap:xref>. </li>
+            <li>Run the following provisioning command in the Openstack console:
+        <p> <code>cinder create --metadata accountid=<i>Account_ID</i> tsmid=<i>VSM_ID</i> datasetid=<i>Dataset_ID </i>apiKey=<i>REST_API_Key</i> iops=<i>Volume_IOPS</i> --name <i>Volume_Name</i> <i>Volume_Size_in_GB</i></code></p><table><colgroup><col style="width: 198px;" /><col style="width: 331px;" /></colgroup><col /><tbody><tr><td style="text-align: center; background-color: #808080; color: #ffffff;">Parameter</td><td style="text-align: center; background-color: #808080; color: #ffffff;">Description</td><td style="text-align: center; background-color: #808080; color: #ffffff;">Example </td></tr><tr><td style="text-align: center; background-color: #dcdcdc;"><b>Account_ID</b></td><td style="text-align: left; background-color: #dcdcdc;">ID of the Account that manages the VSM.</td><td class="tablecode">fb7ebb49-ec5e-47d8-85f7-a0b130988bc9</td></tr><tr><td style="text-align: center; background-color: #dcdcdc;"><b>VSM_ID</b></td><td style="text-align: left; background-color: #dcdcdc;">ID of the VSM on which Storage Volume is created on ElastiCenter. </td><td class="tablecode"><span style="white-space: pre-wrap;">a53f558d-70cc-3b09-a32a-3af89310ad80</span></td></tr><tr><td style="text-align: center; background-color: #dcdcdc;"><b>Dataset_ID</b></td><td style="text-align: left; background-color: #dcdcdc;">ID of the dataset associated with the  VSM.</td><td class="tablecode"><span style="white-space: pre-wrap;">c90a6b7a-eb96-3ed4-9287-0698c49baa4d</span></td></tr><tr><td style="text-align: center; background-color: #dcdcdc;"><b>REST_API_Key</b></td><td style="text-align: left; background-color: #dcdcdc;">The REST API key of the Account that manages the VSM.</td><td class="tablecode"><span style="white-space: pre-wrap;">gY_GYJJcqN9Hl326tIXlauEnOIKiRO5eodKaYDkOtDRZUktgY5XH8kVPZxWfg4iPitK0s7TIb2jSMQLpMowcw</span></td></tr><tr><td style="text-align: center; background-color: #dcdcdc;"><b>Volume_IOPS</b></td><td style="text-align: left; background-color: #dcdcdc;">IOPS required for the Volume.</td><td style="text-align: left; background-color: #dcdcdc;"><span style="white-space: pre-wrap;">50</span></td></tr><tr><td style="text-align: center; background-color: #dcdcdc;"><b>Volume_Name</b></td><td style="text-align: left; background-color: #dcdcdc;">A unique name for the Volume.</td><td class="tablecode"><span style="white-space: pre-wrap;">Vol1ProjA</span></td></tr><tr><td style="text-align: center; background-color: #dcdcdc;"><b>Volume_Size_in_GB</b></td><td style="text-align: left; background-color: #dcdcdc;">Size of the Volume in GB.</td><td class="tablecode">5</td></tr></tbody></table></li>
+        </ol>
+        <h4>Multiple backend provisioning</h4>
+        <p>The following sample cinder.conf configuration files detail the multiple backend configuration:</p><pre xml:space="preserve">[cloudbyte-gold]
+cb_initiator_group_name = ALL
+volume_driver = cinder.volume.drivers.cloudbyte.cloudbyte.CloudByteISCSIDriver
+volume_backend_name = cloudbyte-gold
+san_ip = 172.16.51.5
+san_password = na
+tsm_name = VSM1
+cb_account_name = Acc1 
+cb_apikey = edTzOA0RUsXfPTCJcdt1PGa9HaqLMW0gtkhT7iIZ348T6iwhsQc4p7E81bqXwNOyubmUeW84nS-ICi2Xg_qR9w 
+confirm_vol_sleep_counter = 10
+confirm_vol_sleep_interval = 5
+add_qosgroup=latency:15,graceallowed:true,iopscontrol:true,memlimit:0,tpcontrol:false,
+throughput:0,iops:100,networkspeed:0
+create_volume=compression:off,deduplication:off,blocklength:512B,sync:always,
+protocoltype:ISCSI,recordsize:32k</pre><pre xml:space="preserve">&#160;</pre><pre xml:space="preserve">
+[cloudbyte-silver]
+cb_initiator_group_name = ALL
+volume_driver = cinder.volume.drivers.cloudbyte.cloudbyte.CloudByteISCSIDriver
+volume_backend_name = cloudbyte-silver
+san_ip = 172.16.51.5
+san_password = na
+tsm_name = VSM2
+cb_account_name = Acc2
+cb_apikey = edTzOA0RUsXfPTCJcdt1PGa9HaqLMW0gtkhT7iIZ348T6iwhsQc4p7E81bqXwNOyubmUeW84nS-ICi2Xg_qR9w
+confirm_vol_sleep_counter = 10
+confirm_vol_sleep_interval = 5
+add_qosgroup=latency:15,graceallowed:true,iopscontrol:true,memlimit:0,tpcontrol:false,
+throughput:0,iops:50,networkspeed:0
+create_volume=compression:off,deduplication:off,blocklength:512B,sync:always,
+protocoltype:ISCSI,recordsize:32k
+...
+...
+...
+enabled_backends = cloudbyte-silver, cloudbyte-gold</pre>
+        <p>The following sample procedures (performed on OpenStack CLI) illustrate how to connect the volume type with OpenStack:</p>
+        <ol>
+            <li>Run the following command to create a Volume type:<code>cinder --os-username admin --os-tenant-name admin type-create cb_gold</code></li>
+            <li>Run the following command to connect the Volume type with back-end:<code>cinder --os-username admin --os-tenant-name admin type-key cb_gold set volume_backend_name=cloudbyte-gold</code></li>
+            <li>Run the following command to verify the successful connection of the Volume type:<code>cinder --os-username admin --os-tenant-name admin extra-specs-list</code></li>
+            <li>Restart the following services:<ul><li><code>cinder-api</code></li><li><code>cinder-scheduler</code></li><li><code>cinder-volume services</code></li></ul></li>
+        </ol>
+        <h4>Creating Volume type</h4>
+        <ol>
+            <li>Log in to the OpenStack dashboard.</li>
+            <li>Click Volumes in the left pane.</li>
+            <li>In the Volumes page, click Volume Types.</li>
+            <li>Click Create Volume Type.<br /><img src="../Resources/Images/volume_type_1.png" class="FitToText" /></li>
+            <li>In the newly created Volume Type, click View Extra Specs.</li>
+            <li>Specify the key-value pair for the Volume Type and then click Create.<img src="../Resources/Images/volume_type_2.png" class="FitToText" /></li>
+            <li>In Volume Type page, click Create QoS Specs.</li>
+            <li>Specify Name and Consumer and then click Create.<br /><img src="../Resources/Images/volume_type_3.png" class="FitToText" /></li>
+            <li>In the newly added QoS Spec, click Manage Specs section and then specify the Key-Value pair details (that you created in step 6).<br /><img src="../Resources/Images/volume_type_4.png" class="FitToText" /></li>
+            <li>In the newly created Volume Type page, click Manage QoS Spec Association.</li>
+            <li>Select the QoS Spec that you created in step 9.<br /><img src="../Resources/Images/volume_type_5.png" class="FitToText" /></li>
+        </ol>
+        <h4>Changing the Volume Type</h4>
+        <p>You can change the Volume Type of the Volume using the <code>retype</code> command on the CLI. You can also do the same from the dashboard. The CloudByte Cinder driver updates the QoS properties of the Volume using the retype command.</p>
+        <h5>On CLI</h5>
+        <p>To change the Volume Type. do the following:</p>
+        <ol>
+            <li>Log in to the CLI of OpenStack.</li>
+            <li>Run the following command to change the Volume Type: <code>cinder retype <i>volume_name/volume_id</i> <i>volume_type_name/volume_type_id</i></code></li>
+        </ol>
+        <h5>On OpenStack dashboard</h5>
+        <ol>
+            <li>Log in to the OpenStack dashboard.</li>
+            <li>Click Volumes (Project &gt; Volumes).</li>
+            <li>Click Create Volume.<br /><img src="../Resources/Images/retype_1.PNG" class="FitToText" /></li>
+            <li>In the Create Volume page,<ol><li><code>Volume Name</code>: Specify a name for the Volume.</li><li><code>Type</code>: Select the Volume Type from the drop-down list.</li><li>Click Create Volume.<br /><img src="../Resources/Images/retype_2.PNG" class="FitToText" /></li></ol></li>
+            <p>
+      The following screen shows the newly created Volume:</p> <p><img src="../Resources/Images/retype_3.PNG" class="FitToText" /></p><p>The following screen shows how the Volume created in OpenStack appears in ElastiCenter:</p><p><img src="../Resources/Images/retype_4.PNG" class="FitToText" /></p><li>In the newly create Volume, click Edit Volume and then select Change Volume Type.<br /><br /><img src="../Resources/Images/retype_5.PNG" class="FitToText" /></li><li>In the Change Volume Type page,<ol><li> <code>Type </code>: select the Volume Type from the drop-down list.</li><li>Click Change Volume Type.<img src="../Resources/Images/retype_6.PNG" class="FitToText" /></li></ol></li></ol>
+        <p>The following screen shows that you have changed the Volume Type to <code>cb-silver</code>:</p>
+        <p>
+            <img src="../Resources/Images/retype_7.PNG" class="FitToText" />
+        </p>
+        <p>The following screen shows how the change in Volume Type appears in ElastiCenter:</p>
+        <p>
+            <img src="../Resources/Images/retype_8.PNG" class="FitToText" />
+        </p>
+        <h3>Plug-in tips</h3>
+        <h4>How will I know if the plug-in is successfully installed?</h4>
+        <ol>
+            <li>Go to <code>/var/log/cinder/scheduler.log.</code></li>
+            <li> At command prompt, enter the following command: <code>vi scheduler.log</code></li>
+            <li>In the log, search for the following line: <code>Received volume service</code> <![CDATA[ ]]></li>
+        </ol>
+        <p>If the search output has details about <code>enabled_backends</code> that you specified while installing the plug-in, it implies that the plug-in has been successfully installed.</p>
+        <h4>What should I&#160;do if I&#160;encounter an error while verifying if the installation is successful?</h4>
+        <li>Check the following Cinder logs to find the cause:</li>
+        <ul>
+            <li>api.log</li>
+            <li>volume.log</li>
+            <li>scheduler.log</li>
+        </ul>
+        <h4>Limitations</h4>
+        <p>The current release supports only iSCSI protocol. Future releases will support multiple protocols.</p>
+    </body>
+</html>

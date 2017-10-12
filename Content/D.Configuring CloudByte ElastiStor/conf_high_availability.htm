@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="4" MadCap:lastHeight="3777" MadCap:lastWidth="861" MadCap:ignoredWords="ElastiStor’s;1’s;DNS;IOPS;IP;TSMs;node1;node2">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Configuring High Availability</h2>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">CloudByte ElastiStor supports High Availability in two-way, three-way, and four-way configurations.</p>
+        <p class="note" style="color: #000000;font-family: sans-serif;"><b>Note:</b> SATA disks or any disk with SATA interface is not supported for HA and multipathing configuration.</p>
+        <h3 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">HA Prerequisites</h3>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">Ensure the following on all Nodes in the HA Group:</p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">JBOD (same capacity disks) is shared among all the Nodes in the HA Group</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">
+                Same NIC (for example, if em0 is the interface used on one Node, the same should apply for all Nodes) and same capacity
+               Disks are shared (across the Nodes)  </li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Same system hardware configuration</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Identical SAS HBA (identical firmware and driver)</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Identical FC&#160;HBA (identical firmware and driver)</li>
+        </ul>
+        <h3 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Procedures</h3>
+        <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">The following procedures explain how to configure a two-way High Availability setup:</p>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Set up your hardware. For details see <MadCap:xref href="#Hardware_setup_diagram_for_High_Availability" style="color: #008000;">Hardware setup diagram for High Availability.</MadCap:xref></li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Create a Site. For details, see <MadCap:xref href="create_site.htm" style="color: #008000;">Creating a Site</MadCap:xref>.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Create an HA Group. For details, see <MadCap:xref href="create_ha_group.htm" style="color: #008000;">Creating an HA Group</MadCap:xref>. </li>
+            <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">When you specify the IP address range while adding the HA&#160;Group, ensure that you specify a range that matches the number of nodes you add.</p>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Add a Node (Node1). For details, see <MadCap:xref href="add_node.htm" style="color: #008000;">Adding a Node</MadCap:xref>.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Label shared disks. For details, See<MadCap:xref href="conf_disk_arr_enclosure.htm" style="color: #008000;font-family: sans-serif;"> Configuring Disk Array Enclosure</MadCap:xref></li>
+            <p class="note" style="font-family: sans-serif;"><b>Note:</b> You can perform this step later, after you add all other Nodes. In that case, you have to refresh the hardware (Nodes &gt; select specific Node &gt; select Refresh Hardware in the Tasks section of the action pane) for labeling to take effect. </p>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Add Node 2. For details, see <MadCap:xref href="add_node.htm" style="color: #008000;">Adding a Node</MadCap:xref>.</li>
+        </ol>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">Now you have established a two-way HA. The following screen provides a visual representation of the configuration.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/11_configure_HA.jpg" class="FitToText" style="width: 639px;height: 244px;" />
+        </p>
+        <p style="font-family: sans-serif;font-size: 11pt;">Proceed to create Pools, VSMs, and Storage Volumes.</p>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;"><a name="Hardware_setup_diagram_for_High_Availability"></a>Hardware setup diagram for High Availability</h3>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Hardware_setup_diagram_HA.png" class="FitToText" style="width: 595px;height: 561px;" />
+        </p>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;">Bringing Node to maintenance mode</h3>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">When you want to service your Node, change its status to maintenance mode. In this mode, the Node is up and controlled by the administrator, but is not an active part of the High Availability Group.</p>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">To bring a Node to  maintenance mode,</p>
+        <ol>
+            <li style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">Select the Node that you want to bring to maintenance mode (ElastiCenter &gt; Navigation Pane &gt; Nodes).</li>
+            <li style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">In the Node Page, go to the actions Icon and then click Change State icon. The change node of dialog box appears</li>
+            <li style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">Select Maintenance as the state</li>
+            <li style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">Optionally specify a reason for changing the state and then Click OK.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/50_Node_to_maintenance.jpg" class="FitToText" style="width: 663px;height: 241px;" />
+        </p>
+        <h3 style="font-size: 15pt;color: #005db2;font-family: sans-serif;">Take Over</h3>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">When Node failure occurs, takeover happens as illustrated in the following screens:</p>
+        <ul style="list-style-type: square;">
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">The following screen depicts the Node Page that lists a two-way HA. Here, Node 2 is in maintenance mode.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/node_in_maintenance_mode.png" class="FitToText" style="width: 746px;height: 346px;" />
+        </p>
+        <ul style="list-style-type: square;">
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the following screen, Node 1 has taken over. </li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/nodea_list.png" class="FitToText" style="width: 696px;height: 275px;" />
+        </p>
+        <p class="note" style="color: #000000;font-family: sans-serif;"><b>Note:</b> In ElastiStor, every Node has a designated partner. If the Node goes down, the resources of that Node are failed over to the partner Node.</p>
+        <h3 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Making a Node available</h3>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">After a downtime, when you bring up the Node, you have to manually change the status to Available.</p>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Select the Node that you want to bring up (ElastiCenter &gt; Node).</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Node page, go to the actions Icon and then click Move to available icon.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Select Available as the state.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Optionally specify a reason for changing the state and then click OK.</li>
+        </ol>
+        <h3 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">HA Jobs</h3>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">To view the details of the past High Availability events, perform the following procedures;</p>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">(In ElastiCenter)In the HA Groups page, select an HA Group for which you want to view event details.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Actions Icon, click View Jobs.</li>
+        </ol>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">You can view the details of the past HA events and the time taken to perform these events as shown in the following screen:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/ha33.jpg" class="FitToText" style="width: 710px;height: 319px;" />
+        </p>
+        <p>&#160;</p>
+    </body>
+</html>

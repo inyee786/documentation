@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="TSM;ElastiStor’s;1’s;DNS;IOPS;IP" MadCap:lastBlockDepth="5" MadCap:lastHeight="3169" MadCap:lastWidth="848">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Configuring VSM migration</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;">The objective of VSM migration is to optimize QoS. VSM migration helps to control the QoS parameters within a Pool and to move data.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">You can migrate a VSM<ul><li style="font-family: sans-serif;">From a Pool to another within the same Node or to a different Node. </li><li style="font-family: sans-serif;">
+                Across Sites.
+            </li></ul></p>
+        <p class="note" style="font-weight: bold;"><span style="font-weight: bold;">Note:</span> <span style="font-weight: normal;font-family: sans-serif;">When you migrate a VSM across Nodes, ensure that the Node to which the migrating VSM&#160;belongs to is not down.</span></p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the VSM page, select a VSM from the list.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Actions Icon, go to Migrate and then click Schedule.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/43_VSM_Schedule_Migration.jpg" class="FitToText" style="width: 658px;height: 239px;" />
+        </p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, specify the required details:</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/migrate_vsm_schedule_1.png" class="FitToText" style="width: 577px;height: 237px;" />
+        </p>
+        <table style="margin-left: auto;margin-right: auto;">
+            <col style="width: 111px;" />
+            <col style="width: 404px;" />
+            <tbody>
+                <tr>
+                    <td style="color: #ffffff;text-align: center;background-color: #808080;">Field</td>
+                    <td style="color: #ffffff;text-align: center;background-color: #808080;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Site</td>
+                    <td style="background-color: #dcdcdc;"> Select a Site to migrate the VSM.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">IOPS</td>
+                    <td style="background-color: #dcdcdc;">The IOPS of the primary VSM is populated by default. You can modify the value to provision IOPS required for migration.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Throughput</td>
+                    <td style="background-color: #dcdcdc;"> The throughput of the primary VSM is populated by default. You cannot modify this value as it is depends on the values of IOPS and Block SIze.</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Next.</li>
+        </ul>
+        <ul MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Select the Pool to migrate VSM and then click Next.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/configuring_vsm_migration_select_pool_3.png" class="FitToText" style="width: 624px;height: 368px;" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Select the Backup interface, IP Address, and schedule of migration (in the format minutes/hours/days/month/year). </li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/configuring_tsm_migration_specify_backup_interface_4.png" class="FitToText" style="width: 609px;height: 292px;" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Add to create migrant VSM.</li> <![CDATA[ ]]></ul>
+        <h2 style="color: #013364;font-family: sans-serif;">Migrant VSM activation</h2>
+        <h3 style="font-family: sans-serif;color: #005db2;">Activation consideration</h3>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">The Migrant VSM can be activated only after the base snapshot is successfully transferred from the primary VSM. You can check the status of data transfer by clicking View Transfer Status (Actions &gt; Tasks).</li>
+            <li style="font-size: 11pt;font-family: sans-serif;">The backup interface and IP address range of the native and the migrant VSMs must be same.</li>
+        </ul>
+        <p class="note" style="font-weight: bold;font-family: sans-serif;"><span style="font-weight: bold;">Note:</span> <span style="font-weight: normal;">After activation, this backup IP address will not be active and therefore need to be removed at the Pool level.</span></p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the migrant VSM page, click Settings in the Actions Icon.
+</li>
+        </ul>
+        <p style="text-align: center;"> <img src="../Resources/Images/migrant_vsm_settings.png" class="FitToText" style="width: 635px;height: 276px;" /></p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Settings page, click Edit and then select an interface from the drop-down list.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/migrant_tsm_select_interface.png" class="FitToText" style="width: 599px;height: 280px;" />
+        </p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;"> Click Save.</li>
+        </ul>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click the VSM, the Migrant VSM, and then click Activate.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/tsm_migration_activate.png" class="FitToText" style="width: 689px;height: 299px;" />
+        </p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">At prompt, click Yes.</li>
+        </ul>
+        <p style="font-family: sans-serif;font-size: 11pt;">After the VSM migration is active,  the re-mount prompt appears. Ensure that you re-mount the Storage Volumes before you proceed.</p>
+    </body>
+</html>

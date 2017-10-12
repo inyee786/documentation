@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="3442" MadCap:lastWidth="818">
+    <head>
+    </head>
+    <body>
+        <h2>Restore snapshots while mapping iSCSI LUNs </h2>
+        <h3>On ESX Server</h3>
+        <ol>
+            <li>
+                In ElastiCenter, create a Storage Volume.</li>
+            <li>Mount the Storage Volume on ESX client:</li>
+            <ol>
+                <li>(In the following screen) Click on ESX Server and then select the configuration option.</li>
+                <li>In the iSCSI initiator properties window (Storage Adapters &gt; Properties), select Dynamic Discovery.</li>
+                <p style="text-align: center;">
+                    <img src="../Resources/Images/mount_iscsi_volume_esx.png" class="FitToText" />
+                </p>
+                <li>Select Add (Add Send Target Server window appears).	</li>
+                <li>
+                   In the iSCSI tab, specify the tenant IP Address and then click OK.
+ </li>
+                <p>
+                    <img src="../Resources/Images/mount_iscsi_volume_esx_initiator_properties_page.png" class="FitToText" />
+                </p>
+            </ol>
+            <li> Add Storage.</li>
+            <ol>
+                <li>Click Storage in the left pane. </li>
+                <li>Select Add Storage.</li>
+                <li>Mark the storage type as Disk/LUN and then click Next. </li>
+                <p>
+                    <img src="../Resources/Images/mount_iscsi_volume_esx_add_storage.png" class="FitToText" />
+                </p>
+                <li>(In the following screen) Select the listed LUN and then click Next.</li>
+                <p>
+                    <img src="../Resources/Images/mount_iscsi_volume_esx_select_LUN.png" class="FitToText" />
+                </p>
+                <li>Mark the File System Version as VMFS-5.</li>
+                <li>Specify a name for the DataStore and then click Next.</li>
+                <li>(In the following page) Mark Maximum available space option and then click next.</li>
+                <li>Click Finish. </li>
+            </ol>
+            <li>Copy data to the new Volume.</li>
+            <ol>
+                <li>	Right Click on the Datastore name and then select Browse Data.</li>
+                <p style="text-align: center;">
+                    <img src="../Resources/Images/mount_iscsi_volume_browse_data.png" class="FitToText" />
+                </p>
+                <li>Click on the upload icon to copy data as seen in the following page:</li>
+                <p>
+                    <img src="../Resources/Images/mount_iscsi_volume_click_upload_icon.png" class="FitToText" />
+                </p>
+            </ol>
+            <li>	Create a snapshot on the Storage Volume using the following procedures: </li>
+            <ol>
+                <li>In the Storage Volumes page, select the Storage Volume for which you want to create a local backup. </li>
+                <li>In the following page, select Create Snapshot in the Actions pane.</li>
+                <li>	Specify a name for the snapshot to be created and then click OK.</li>
+            </ol>
+            <li>Delete data from the DataStore on the ESX Client.</li>
+            <p>
+                <img src="../Resources/Images/mount_iscsi_volume_delete_data.png" class="FitToText" />
+            </p>
+            <li>In ElastiCenter, click Manage Snapshots (Actions pane &gt; Local Backup) to view the list of previously captured snapshots.</li>
+            <li>From the list of snapshots, select the snapshot you want to restore and then click Restore icon to roll back the Storage Volume content to previous state.</li>
+            <li>
+			On the ESX client, refresh the Storage Volume and then view the required data.</li>
+            <p>
+                <img src="../Resources/Images/mount_iscsi_volume_refresh_data.png" class="FitToText" /> </p>
+        </ol>
+    </body>
+</html>

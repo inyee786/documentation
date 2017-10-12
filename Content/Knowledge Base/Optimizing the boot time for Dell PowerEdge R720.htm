@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="4" MadCap:lastHeight="4149" MadCap:lastWidth="855">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">Optimizing the boot time for Dell PowerEdge R720/Dell PowerEdge R820</h1>
+        <p style="font-size: 16pt;">Issue</p>
+        <p>The boot time for Dell R720/R820 with multiple Disk Arrays connected is about 45 minutes. How to reduce the boot time?</p>
+        <p style="font-size: 16pt;">Solution</p>
+        <p>The default BIOS settings of Dell PowerEdge R720/Dell PowerEdge R820 perform checks on the connected peripheral devices. This increases the boot time considerably. However, if the OS is installed on the internal disks, you can safely disable the PCIe slots for boot.</p>
+        <p>The following Knowledge Base article describes the BIOS Settings to be modified to bring down the boot time of Dell PowerEdge R720/Dell PowerEdge R820 when you configure it as a CloudByte ElastiStor Node.</p>
+        <p style="font-size: 16pt;">Modifying the BIOS settings</p>
+        <p>The basic purposes of the BIOS are to initialize and test the system hardware components, and to load a bootloader or an operating system from a mass memory device.</p>
+        <p>The Slot Disablement field in the system BIOS controls the configuration of the card installed in the slot. The PCIe slots are set to Boot Driver disabled option to allow quicker boot times if the adapter is not a boot device.</p>
+        <p>On selection, the system cannot boot from the card and its pre-boot services are also not available. However, it is available to the operating system. When the boot driver is disabled, the OS driver is still available so a NIC or PERC that is not bootable could still be used from within the OS.</p>
+        <p>The BIOS settings are modified as follows:</p>
+        <ul>
+            <li>Switch on your Dell PowerEdge R720/Dell PowerEdge R820 system.</li>
+            <li>Press &lt;F2&gt; to enter System Setup at the BIOS startup screen</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge1.png" />
+        </p>
+        <ul>
+            <li>Select Device Settings from the System Setup Main Menu.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge2.png" />
+        </p>
+        <ul>
+            <li>Note the slots that have devices used in the boot process.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge3.png" />
+        </p>
+        <ul>
+            <li>Press ESC to return to the main menu.</li>
+            <li>Select System BIOS from the System Setup Main Menu.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge4.png" />
+        </p>
+        <ul>
+            <li>Use the arrow keys to select Integrated Devices.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge5.png" />
+        </p>
+        <ul>
+            <li>Ensure that the settings are as shown in the following screen:</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge6.png" />
+        </p>
+        <ul>
+            <li>Click Slot Disablement and then choose Boot Driver Disabled for the PCIe slots.</li>
+        </ul>
+        <blockquote>
+            <p>Note: Ensure that the following PCIe slots were not used in the boot process (as described in the step 4).</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge7.png" />
+        </p>
+        <ul>
+            <li>Save the changes and continue to boot. Click Finish.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/29_Dell PowerEdge8.png" />
+        </p>
+        <p>&#160;</p>
+    </body>
+</html>

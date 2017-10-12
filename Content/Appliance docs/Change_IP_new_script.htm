@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="7" MadCap:lastHeight="3327" MadCap:lastWidth="1127">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 16pt;">Moving your CloudByte ElastiStor Appliance (ESA) to a new network environment </h2>
+        <p>When you get started with ElastiStor Appliance, the initial step is to configure the network settings. You have to modify some or all of the default network configuration settings depending on your environment. </p>
+        <p>All CloudByte ElastiStor Appliance models have the following default network configurations. Go through the following default network settings so that you can change the required values.<br /><br /> For example, if your scenario might require only changing the IP&#160;addresses. In that case, you have to replace only the values 10.11.12.3 (Management IP address), 10.11.12.1 (Primary Node), and 10.11.12.2 (Secondary Node). You can leave all other values intact.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Network detail</td>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Description</td>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Default</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Management IP address</td>
+                    <td style="background-color: #dcdcdc;">The IP address used for accessing the ElastiCenter.</td>
+                    <td class="tablecode">10.11.12.3</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Primary Node IP address</td>
+                    <td style="background-color: #dcdcdc;">Host IP address of the Node where primary ElastiCenter is installed.</td>
+                    <td class="tablecode">10.11.12.1</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">
+					Secondary Node IP address</td>
+                    <td style="background-color: #dcdcdc;">Host IP address of the Node where secondary ElastiCenter is installed.</td>
+                    <td class="tablecode">10.11.12.2</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Netmask</td>
+                    <td style="background-color: #dcdcdc;">The standard IPv4 subnet mask.</td>
+                    <td class="tablecode">255.0.0.0</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Gateway </td>
+                    <td style="background-color: #dcdcdc;">The IPv4 gateway IP address.</td>
+                    <td class="tablecode">10.11.12.254</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">DNS </td>
+                    <td style="background-color: #dcdcdc;">The standard IPv4 address of the DNS Server.</td>
+                    <td class="tablecode">8.8.8.8</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Domain name</td>
+                    <td style="background-color: #dcdcdc;">Domain search, for example lab.engineering.cloudbyte.com.</td>
+                    <td class="tablecode"> cloudbyte.com</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">Health check IP range</td>
+                    <td style="background-color: #dcdcdc;">Health check IP range of the HA Group.</td>
+                    <td class="tablecode">10.11.12.11-10.11.12.12</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">IPMI address of primary Node</td>
+                    <td style="background-color: #dcdcdc;">You can remotely log in to primary Node.</td>
+                    <td class="tablecode">10.11.12.101</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;text-align: center;">IPMI address of secondary Node</td>
+                    <td style="background-color: #dcdcdc;">You can remotely log in to secondary Node.</td>
+                    <td class="tablecode">
+                        10.11.12.102
+</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>Default log in credentials:</h5>
+        <table>
+            <col style="width: 192px;" />
+            <col style="width: 156px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Component
+                    </td>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">User name</td>
+                    <td style="background-color: #808080;text-align: center;color: #ffffff;">Password</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc; text-align: center;">ElastiCenter </td>
+                    <td style="background-color: #dcdcdc; text-align: center;">admin</td>
+                    <td style="background-color: #dcdcdc; text-align: center;">password</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc; text-align: center;">IPMI </td>
+                    <td style="background-color: #dcdcdc; text-align: center;">ADMIN</td>
+                    <td style="background-color: #dcdcdc; text-align: center;">ADMIN</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc; text-align: center;">SSH </td>
+                    <td style="background-color: #dcdcdc; text-align: center;">
+                        root
+                    </td>
+                    <td style="background-color: #dcdcdc; text-align: center;">
+						test
+					</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Procedures</h3>
+        <ol>
+            <li>Bring the Nodes in the appliance (ESA-A50 and ESA-A100) to maintenance mode. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_high_availability.htm">"Configuring High Availability".</MadCap:xref></li>
+            <li>(On the secondary Node) In the <code>/usr/local/cb/bin/</code>, run the following command: <code>python Change_network_config.py</code></li>
+            <li>Perform the steps as shown in the following sample command line :</li><pre xml:space="preserve">You have logged into the secondary Node and the associated ElastiCenter.
+
+You are going to change some or all of the network configuration details that you specified at the time of installation. 
+</pre><pre xml:space="preserve"><span style="color: #4169e1;">Specify the new IP address for the secondary Node</span>
+20.10.60.50</pre><pre xml:space="preserve"><span style="color: #4169e1;">To change the Netmask, specify the details in the dotted decimal format. To bypass this step, specify No.</span> No</pre><pre xml:space="preserve"><span style="color: #4169e1;">To change the Gateway, specify the details. To bypass this step, specify No.</span> No</pre><pre xml:space="preserve"><span style="color: #4169e1;">To change the DNS, specify the details. To bypass this step, specify No.</span> No</pre><pre xml:space="preserve"><span style="color: #4169e1;">To change the Network Interface card, specify the details. To bypass this step, specify No.</span> No</pre><pre xml:space="preserve"><span style="color: #4169e1;">To change the Domain name, specify the details. To bypass this step, specify No.</span> No
+<span style="color: #4169e1;">Specify the management IP address used to access ElastiCenter</span>
+20.10.39.71
+<span style="color: #4169e1;">Specify the primary Node IP address</span>
+20.10.60.40</pre><pre xml:space="preserve">
+				
+The new network details of the secondary Node are as follows:</pre><pre xml:space="preserve"><span style="color: #4169e1;">IP address</span>: 20.10.60.50
+<span style="color: #4169e1;">Netmask </span>: 255.0.0.0
+<span style="color: #4169e1;">Gateway</span>: 20.10.1.1<span style="color: #4169e1;">
+DNS:</span> 8.8.8.8
+<span style="color: #4169e1;">Network Interface Card</span>: re0
+<span style="color: #4169e1;">Domain Name:</span>  cloudbyte.com
+<span style="color: #4169e1;">Management IP address:</span> 20.10.39.71
+<span style="color: #4169e1;">Primary node IP address:</span>20.10.60.40
+
+Review the details and confirm by specifying Yes. Specify No to exit and cancel the changes. To change the details later, rerun the <code>Change_network_config</code> script.
+</pre><pre xml:space="preserve">
+Network configuration details changed successfully.
+Reboot the Node.
+			</pre>
+            <li> Reboot the secondary  Node using the following command:<code>reboot</code>.</li>
+            <li> (On the primary Node) In the <code>/usr/local/cb/bin/</code>, run the following command: <code>python Change_network_config.py</code></li>
+            <li>Perform the steps as shown in the following command line :</li><pre xml:space="preserve">You have logged into the primary Node and the associated ElastiCenter.
+
+You are going to change some or all of the network configuration details that you specified at the time of installation. 
+	</pre><pre xml:space="preserve"><span style="color: #4169e1;">Specify the new IP address for the secondary Node</span>
+20.10.60.50</pre><pre xml:space="preserve"><span style="color: #4169e1;">To change the Netmask, specify the details in the dotted decimal format. To bypass this step, specify No.</span>  No</pre><pre xml:space="preserve"><span style="color: #4169e1;">To change the Gateway, specify the details. To bypass this step, specify No.</span> No
+<span style="color: #4169e1;">To change the DNS, specify the details. To bypass this step, specify No.</span> No
+<span style="color: #4169e1;">To change the Network Interface card, specify the details. To bypass this step, specify No.</span> No
+<span style="color: #4169e1;">To change the Domain name, specify the details. To bypass this step, specify No.</span> No
+<span style="color: #4169e1;">Specify the management IP address used to access ElastiCenter</span>
+20.10.39.71 </pre> <br /><br />The new network details of the primary Node are as follows:<pre xml:space="preserve"><span style="color: #4169e1;">IP address</span>: 20.10.60.50
+<span style="color: #4169e1;">Netmask </span>: 255.0.0.0
+<span style="color: #4169e1;">Gateway</span>: 20.10.1.1<span style="color: #4169e1;">
+DNS:</span> 8.8.8.8
+<span style="color: #4169e1;">Network Interface Card</span>: re0
+<span style="color: #4169e1;">Domain Name:</span>  cloudbyte.com
+<span style="color: #4169e1;">Management IP address:</span> 20.10.39.71
+
+Review the details and confirm by specifying Yes. Specify No to exit and cancel the changes. To change the details later, rerun the <code>Change_network_config</code> script.
+			</pre><pre xml:space="preserve"><span style="color: #4169e1;">Specify the following network configuration details of the secondary Node:
+IP address:</span> 20.10.60.50<span style="color: #4169e1;">
+Netmask:</span> 255.0.0.0<span style="color: #4169e1;">
+Gateway :</span> 20.10.1.1<span style="color: #4169e1;">
+DNS:</span> 8.8.8.8<span style="color: #4169e1;">
+Network Interface Card:</span> re0<span style="color: #4169e1;">Domain name:</span> cloudbyte.com
+
+The network details of the secondary Node are as follows:
+<span style="color: #4169e1;">IP address:</span> 20.10.60.50<span style="color: #4169e1;">
+Netmask:</span> 255.0.0.0<span style="color: #4169e1;">Gateway:</span> 20.10.1.1<span style="color: #4169e1;">DNS:</span> 8.8.8.8
+<span style="color: #4169e1;">Network Interface Card:</span> re0
+<span style="color: #4169e1;">Domain Name:</span> cloudbyte.com
+<span style="color: #4169e1;">IP address used to access the Management Console:</span> 20.10.39.71
+Review the details and confirm by specifying Yes.Specify No to exit and cancel the changes. <br />To change the details later, rerun the <code>Change_network_config</code> script.
+Network configuration details changed successfully.</pre><pre xml:space="preserve">Reboot the Node.</pre><li> Reboot the primary Node using the following command:<code>reboot</code>.</li><li>After the system is rebooted,launch ElastiCenter using the following steps:
+				<ol><li>Launch a Web browser and specify URL in the following format: <pre>https://<i>New IP Address to access the management console</i></pre></li><p style="text-align: center;"><img src="http://www.docs.cloudbyte.com/wp-content/uploads/welcome_cloudbyte_elasticenter_login_page.png" alt="welcome_cloudbyte_elasticenter_login_page" width="671" height="373" class="alignnone size-full wp-image-2878" /></p><li>Specify the following default credentials:</li></ol><table><colgroup><col style="width: 119px;" /><col style="width: 156px;" /></colgroup><tbody><tr><td style="background-color: #808080; text-align: center;">Credentials</td><td style="background-color: #808080; text-align: center;">Value</td></tr><tr><td style="background-color: #dcdcdc; text-align: center;">User name</td><td style="background-color: #dcdcdc; text-align: center;">admin</td></tr><tr><td style="background-color: #dcdcdc; text-align: center;">Password</td><td style="background-color: #dcdcdc; text-align: center;">password</td></tr></tbody></table></li><li>In ElastiCenter, change the IP&#160;address of the HA&#160;group. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/create_ha_group.htm">"Creating an HA Group "</MadCap:xref></li><li>Bring the secondary Node to Available mode. for details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_high_availability.htm">"Configuring High Availability".</MadCap:xref></li><li>Bring the primary Node to Available mode. for details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_high_availability.htm">"Configuring High Availability".</MadCap:xref></li><li>In the ElastiCenter admin pane, select ElastiCenter HA. </li><img src="../Resources/Images/Change IP in appliance_1.PNG" /><p>Ensure that both the Nodes are in sync with each other as shown in the following screen:</p><img src="../Resources/Images/Change IP in appliance_2.PNG" class="FitToText" style="width: 721px;height: 325px;" /></ol>
+    </body>
+</html>

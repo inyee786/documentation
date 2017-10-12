@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="9" MadCap:lastHeight="1248" MadCap:lastWidth="1006" MadCap:ignoredWords="LUN;workflow;IQN;CIFS;Charset;Fibre;FC;POEs;IQNs;NFS;IP">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Data access using NFS</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;">Network File System (NFS) allows a server to share directories and files with clients over a network</p>
+        <p class="note" style="font-family: sans-serif;"><b>Note:</b> This release does not support access control when using NFS.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">The following section details the setup:</p>
+        <h3 style="font-family: sans-serif;color: #005db2;">VSM NFS options</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the VSM Page, click Manage NFS Configuration (Actions Icon &gt; Tasks).</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">(In the following page) Click Edit, change the Number of NFS Worker Threads, and then save the settings.</li>
+        </ol>
+        <h3 style="font-family: sans-serif;color: #005db2;">File system NFS options</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the navigation pane, select Storage Volumes.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Storage Volume page, select the Storage Volume for which you want to specify the NFS options.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, select Manage NFS Configuration in the Tasks section of the actions Icon</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/40_manage_nfs_configuration.jpg" class="FitToText" style="width: 654px;height: 316px;" />
+        </p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Authorized NFS clients page, click Add NFS Clients.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/41_add_nfs_clients.jpg" class="FitToText" style="width: 655px;height: 233px;" />
+        </p>
+        <ul>
+            <li>Specify the following NFS details:</li>
+        </ul>
+        <ol MadCap:continue="true">
+            <table>
+                <col style="width: 121px;" />
+                <col style="width: 879px;" />
+                <tbody>
+                    <tr>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Option</td>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Network/IP addresses</td>
+                        <td style="background-color: #dcdcdc;"> Single Network ID with subnet mask (for example,<code>10.10.1.100/8</code>). You can also provide a comma-separated list of IP addresses for which access has to be provided (for example,<code>10.20.10.120, 10.20.10.121</code>) instead.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">All Directories</td>
+                        <td style="background-color: #dcdcdc;"> <code>Yes </code>the client can mount any sub directory within the Path.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Map as Root Users</td>
+                        <td style="background-color: #dcdcdc;">
+                            <ul>
+                                <li style="background-color: #dcdcdc;"> <code>Yes</code>restricts all users to root. </li>
+                                <li style="background-color: #dcdcdc;"><code>No</code> restricts write or delete accesses to other users' files.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Read-only	</td>
+                        <td style="background-color: #dcdcdc;"> <code>Yes </code>prohibits writing to the share.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ol>
+        <ul>
+            <li style="text-align: justify;">Click Add.</li>
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="10" MadCap:lastHeight="935" MadCap:lastWidth="783">
+    <head>
+    </head>
+    <body>
+        <h2>Enabling Check_Mk agent in ElastiStor</h2>
+        <p>Check_Mk agent can be used in ElastiStor for monitoring various services effectively. This document explains how to download, install, and enable the Check_Mk agent.</p>
+        <h3>Prerequisites</h3>
+        <p>Prior to installing the Check_Mk agent, install the following dependent ports that help the agent output all the network device data. Perform the installation using the following commands in the SSH session of ElastiStor node:</p>
+        <ol>
+            <li><code>cd /cbdir/packages
+			</code> <![CDATA[ ]]></li>
+            <li><code>pkg_add muse-0.2.tbz
+			</code> <![CDATA[ ]]></li>
+            <li><code>pkg_add libstatgrab-0.17.tbz</code> <![CDATA[ ]]></li>
+            <li><code>pkg_add ipmitool-1.8.12_3.tbz</code> <![CDATA[ ]]></li>
+            <li><code>pkg_add openssl-1.0.1_8.tbz
+			</code> <![CDATA[ ]]></li>
+        </ol>
+        <h3>Procedures</h3>
+        <ol>
+            <li>To enable the internet daemon<code>inetd </code>in the<code>/etc/rc.conf</code>file, do the following:<ol><li>Run<code>vi /etc/rc.conf</code></li><li>Add the following lines in the rc.conf file:<br /><pre>inetd_enable=yes <br />inetd_flags=-wW</pre></li></ol></li>
+            <li>Download the FreeBSD agent<code>check_mk_agent</code>from the following URL: <a href="http://cloudbyte.com/downloads/check_mk_agent.freebsd.tar.gz">http://cloudbyte.com/downloads/check_mk_agent.freebsd.tar.gz</a></li>
+            <li>Untar the check_mk_agent.freebsd.tar.gz.</li>
+            <li>Run the following commands to install the agent in<code>/usr/local/bin/</code>: <code>mv check_mk_agent.freebsd /usr/local/bin/check_mk_agent</code></li>
+            <li>To create an entry for the agent port in <code>/etc/services</code>, do the following:<ol><li>Run<code>vi /etc/services</code></li><li>Add the following line in the agent port: <br /><code>check_mk 6556/tcp #check_mk agent</code></li></ol></li>
+            <li>To make the agent available through TCP at port 6556, do the following:<ol><li>Run<code>vi /etc/inetd.conf </code></li><li>Add the following line:<code>check_mk stream tcp nowait root /usr/local/bin/check_mk_agent check_mk_agent</code></li></ol></li>
+            <li>(Optional)Set up minimum security in /etc/hosts.allow so that only the IP address of the monitoring segments (180.179.103.0/255.255.255.128) has access.</li>
+            <li>Run<code>vi /etc/hosts.allow</code> and add the following:
+			<pre>Allow nagios server to access us
+check_mk_agent: 180.179.103.0/255.255.255.128: allow
+check_mk_agent: ALL: deny</pre></li>
+            <li>Restart the inetd service using the following command:<code>/etc/rc.d/inetd start</code></li>
+            <li>Confirm that Check_Mk agent is enabled using the following command: <code>telnet ElastiStor_Node_IP_address 6556</code></li>
+			The output of this command should be similar to the sample output. To see the sample output, click the following link: 
+		<a href="http://docs.cloudbyte.com/doc_support/check_mk_telnet_output.txt">http://docs.cloudbyte.com/doc_support/check_mk_telnet_output.txt</a></ol>
+    </body>
+</html>

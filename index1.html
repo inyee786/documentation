@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 3</title>
+    <title>ElastiStor | Documentation</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,22 +22,23 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <a href="http://www.cloudbyte.com/"><img src="logo-new.png" height="40px" width="auto"></a>
+                <a href="http://www.cloudbyte.com/"><img src="blue-logo.png" height="40px" width="auto"></a>
                 <h3>Elastistor Documentation</h3>
             </div>
 
             <ul class="list-unstyled components">
                 <p>Select ElastiStor Version</p>
-                <select style="background:black;text-align:center;width:80%;text-align:center;">
-                    <option value="volvo">1.4X</option>
-                    <option value="saab">2.0x</option>
-                    <option value="mercedes">2.2X</option>
+                <center>
+                    <select style="text-align:center;width:80%;text-align:center;">
+                    <option value="v14">1.4X</option>
+                    <option value="v20">2.0x</option>
+                    <option value="v22">2.2X</option>
                 </select>
-
+                </center>
                 <li>
                     <a href="#g-Started" data-toggle="collapse" aria-expanded="false">Getting Started</a>
                     <ul class="collapse list-unstyled" id="g-Started">
-                        <li class="active"><a href="#">CloudByte ElastiStor overview</a></li>
+                        <li><a href="#">CloudByte ElastiStor overview</a></li>
                         <li><a href="#">CloudByte ElastiStor feature highlights</a></li>
                         <li><a href="#">Physical storage infrastructure</a></li>
                         <li><a href="#">Simple hardware configuration of ElastiStor</a></li>
@@ -58,6 +59,51 @@
                         <li><a href="#">Installing Both ElastiCenter and Node</a></li>
                         <li><a href="#">Installation on CloudByte ElastiStor Appliance</a></li>
                         <li><a href="#">Upgrading CloudByte ElastiStor</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#Configure" data-toggle="collapse" aria-expanded="false">Configure</a>
+                    <ul class="collapse list-unstyled" id="Configure">
+                        <li class="active"><a href="#">ElastiCenter, ElastiStor’s management console</a></li>
+                        <li><a href="#">Launching CloudByte ElastiCenter</a></li>
+                        <li><a href="#">ElastiCenter User Interface</a></li>
+                        <li><a href="#">Network configuration details</a></li>
+                        <li>
+                            <a href="#ccelasti" data-toggle="collapse" aria-expanded="false">Configuring CloudByte ElastiStor</a>
+                            <ul class="collapse list-unstyled" id="ccelasti">
+                                <li class="active"><a href="#">Setting up your storage</a></li>
+                                <li><a href="#">Creating a Site</a></li>
+                                <li><a href="#">Creating an HA Group</a></li>
+                                <li><a href="#">Adding a Node</a></li>
+                                <li><a href="#">Configuring Disk Array Enclosure</a></li>
+                                <li><a href="#">Configuring High Availability</a></li>
+                                <li><a href="#">Configuring interfaces</a></li>
+                                <li><a href="#">Creating a Pool</a></li>
+                                <li><a href="#">Configuring grace</a></li>
+                                <li><a href="#">Creating an Account</a></li>
+                                <li><a href="#">Provisioning a VSM</a></li>
+                                <li><a href="#">Assigning Real IP Spaces</a></li>
+                                <li><a href="#">Provisioning storage</a></li>
+                                <li>
+                                    <a href="#sudaprotocol" data-toggle="collapse" aria-expanded="false">Setting up data access protocols</a>
+                                    <ul class="collapse list-unstyled" id="sudaprotocol">
+                                        <li style="padding-left: 20px"><a href="#">Data access using iSCSI</a></li>
+                                        <li style="padding-left: 20px"><a href="#">Data access using CIFS</a></li>
+                                        <li style="padding-left: 20px"><a href="#">Data access using FC</a></li>
+                                        <li style="padding-left: 20px"><a href="#">Data access using NFS</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Configuring VSM migration</a></li>
+                                <li><a href="#">Choosing a Pool to provision VSM</a></li>
+                                <li><a href="#">Modifying QoS after provisioning VSM</a></li>
+                                <li><a href="#">Configuring local backup</a></li>
+                                <li><a href="#">Configuring remote disaster recovery</a></li>
+                                <li><a href="#">Assuring Quality of Service</a></li>
+                                <li><a href="#">Promoting secondary ElastiCenter and backing up configurations</a></li>
+                                <li><a href="#">Enabling Space Reclamation</a></li>
+                                <li><a href="#">Backing Up Interfaces</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -100,8 +146,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Plug-ins</a>
-                    <a href="#plug-ins" data-toggle="collapse" aria-expanded="false">CloudByte ElastiStor plug-ins</a>
+                    <a href="#plug-ins" data-toggle="collapse" aria-expanded="false">Plug-ins</a>
                     <ul class="collapse list-unstyled" id="plug-ins">
                         <li><a href="#">CloudByte ElastiStor plug-in for Apache CloudStack</a></li>
                         <li><a href="#">CloudByte ElastiStor Recovery Manager for SQL Server (RMSQL) plug-in</a></li>
@@ -193,6 +238,13 @@
             </p>
         </div>
     </div>
+
+
+
+
+
+
+
 
 
 

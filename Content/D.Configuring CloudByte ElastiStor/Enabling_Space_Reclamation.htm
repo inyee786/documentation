@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="4" MadCap:lastHeight="729" MadCap:lastWidth="861">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 " style="color: #013364;font-family: sans-serif;font-size: 17.8pt;">Enabling Space Reclamation</h1>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">On deletion of files on the Client filesystems (ext4/NTFS), you can reclaim space on the thin provisioned iSCSI LUNs. This is achieved by supporting the SCSI UNMAP CDB.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">Enabling the space reclamation feature using ElastiCenter</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Storage Volumes page, click the iSCSI Volume for which you want to enable the space reclamation feature.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Actions pane, click Manage iSCSI configuration.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Edit.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Enable UNMAP by selecting Enable from the drop-down list.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Save.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/73_Enable_Space_reclamation.jpg" style="width: 656px;height: 347px;" />
+        </p>
+        <p style="font-family: sans-serif;">Note: CloudByte recommends you to select the option Optimize drives in the disk defragmenter utility on Windows 2012 Clients, to reclaim dead space on the thin-provisioned Volumes.</p>
+    </body>
+</html>

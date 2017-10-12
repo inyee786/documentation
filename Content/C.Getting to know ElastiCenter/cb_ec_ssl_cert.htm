@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="4" MadCap:lastHeight="525" MadCap:lastWidth="861">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;">Replacing default SSL Certificate</h2>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">The connection between ElastiCenter and browser is secured using SSL. If required, you can replace the default certificate using the following procedures.</p>
+        <p class="note"><b>Note:</b>The utility used to perform the following tasks is keytool. You can use a utility of your preference.</p>
+        <ol>
+            <li>In the ElastiCenter console, run the command as shown in the following example: <code> keytool -genkey -alias primarycb -keyalg RSA -keystore mysprimary.keystore -keysize 2048</code>. At prompt, provide password and the domain details. </li>
+            <li>In the ElastiCenter console, generate Certificate Signing Request (CSR) by executing the command as shown in the following example:<code>keytool -certreq -keyalg RSA -alias primarycb -file mycertreq.csr -keystore myprimary.keystore</code>.
+				You are then prompted to specify a password for keystore.</li>
+            <li>Get the CSR signed by the trusted CA. (for example, VeriSign or Thawte).</li>
+            <li>(Optional) Append the certificate with intermediate CA and trusted root CA.</li>
+            <li>Import the CA's certificate into your keystore as a trusted certificate using the following command:</li><code>keytool -importcert -file verisign.cer -keystore myprimary.keystore -alias primarycb</code>
+            <li>Copy the keystore to the directory <code>/usr/local/apache-tomcat-6.0.33/conf</code>.</li>
+            <li>Edit the following lines in the file <code>server.xml</code> in the directory <code>/usr/local/apache-tomcat-6.0.33/conf/</code></li><pre>keystoreFile=<b>"conf/myprimary.keystore"</b>
+keystorePass=<b>"cloudbyte"</b></pre>
+            <li>Run the following command to shut down Tomcat:<code>/usr/local/apache-tomcat-6.0.33/bin/shutdown.sh</code></li>
+            <li>Kill Java processes using the following command:<code> pkill java</code></li>
+            <li>Execute the following command to ensure that no Java process is running:<code>pgrep java</code></li>
+            <li>Start Tomcat using the command <code>/usr/local/apache-tomcat-6.0.33/bin/startup.sh</code></li>
+        </ol>
+    </body>
+</html>

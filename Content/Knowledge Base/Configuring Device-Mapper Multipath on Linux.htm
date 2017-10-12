@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="10" MadCap:lastHeight="2920" MadCap:lastWidth="777">
+    <head>
+    </head>
+    <body>
+        <p style="font-size: 20pt;">Configuring Device-Mapper Multipath on Linux</p>
+        <p>Configuring multipath involves the following procedures:</p>
+        <p>Note: The following documentation is for (RHEL 6.X). The procedures might be similar for other flavors of Linux.</p>
+        <ul>
+            <li>Configure Multipath on ElastiCenter. For details, see section <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_iscsi.htm">"Data access using iSCSI"</MadCap:xref>.</li>
+            <li>On your Linux machine, log in as root.</li>
+            <li>Discover and log in to iSCSI targets on Linux client. For details, see Discover and login to iSCSI targets.</li>
+            <li>Run the following command to display the current partitions on the LUN: fdisk –l.</li>
+            <li>Configure multipath on Linux client. For details, see Configuring multipath on Linux client.</li>
+        </ul>
+        <p>The following CLI screen shows partitions on the LUN:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/21_multipath_linux_1.jpg" />
+        </p>
+        <p><span style="font-size: 16pt;">Discover and login to iSCSI targets</span>
+        </p>
+        <p>Run the following command to discover the iSCSI LUN using the VSM IP address:  iscsiadm –m discovery –t st –p VSM_IP_address:3260</p>
+        <p>Note: You can use either the primary VSM IP address or secondary VSM IP address.</p>
+        <p>Run the following command to log in to the iSCSI LUN from the Linux device using the primary VSM IP address:</p>
+        <p> iscsiadm –m node –T complete Target Name	–p primary_VSM_IP_address:3260 –l</p>
+        <p>Run the following command to log in to the iSCSI LUN from the Linux device using the secondary VSM IP address:</p>
+        <li> iscsiadm –m node –T complete Target Name	–p primary_VSM_IP_address:3260 –l</li>
+        <p style="font-size: 18pt;">Configure multipath on Linux client</p>
+        <ul>
+            <li>Run the following command to install the device-mapper-multipath RPM: rpm –ivh rpm package.</li>
+            <li>Run the following command to verify that the rpm packages are successfully installed: rpm –qa |grep device-manager.</li>
+        </ul>
+        <p>The following screen shows the list of RPM packages installed on Linux machine:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/22_multipath_linux_2.jpg" style="width: 741px;height: 414px;" />
+        </p>
+        <ul>
+            <li style="text-align: justify;">Run the following command to configure the multipath daemon multipathd (to start on system boot):  chkconfig multipathd on</li>
+            <li style="text-align: justify;">Run the following command to set up multipath with the mpathconf utility:mpathconf –enable. This also creates the multipath configuration file /etc/multipath.conf with default attributes.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/23_multipath_linux_3.jpg" />
+        </p>
+        <ul>
+            <li>Run the following command to start the multipathd service using the command: service multipathd start.</li>
+        </ul>
+        <p>Note: If you are editing the /etc/multipath.conf file, the multipathd service has to be reloaded using the command:service multipathd reload</p>
+        <ul>
+            <li>Run the following command to observe the multipath device and scsi device names for the attached LUNs:  fdisk –l</li>
+        </ul>
+        <p>The following screen lists the multipath device along with the associated scsi devices.</p>
+        <p>Note: There is a single pseudo-device name/multipath label for 2 SCSI devices.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/24_multipath_linux_4.jpg.png" style="width: 670px;height: 402px;" />
+        </p>
+        <ul>
+            <li>Run the following command to list the persistent multipath name mpathn for the scsi devices and to observe the default attributes: multipath –ll.</li>
+        </ul>
+        <p>The following screen shows the default attributes for an ElastiStor LUN:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/25_multipath_linux_5.jpg" />
+        </p>
+        <p>Note: The default settings for device-mapper-multipath are compiled in to the system. You need not explicitly set the settings in the /etc/multipath.conf file. With the user_friendly_name set to yes, the multipath devices are created as /dev/mapper/mpathn</p>
+        <p>Note: Multipath (path_selector) policy is by default set to round -robin, where the service loops through every path group, sending the same amount of I/O to each. There are other multipath configuration parameters which can be set as per client requirements (on a per LUN basis, if needed). For details, go to	the following URL: <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/DM_Multipath/config_file_defaults.html">https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/DM_Multipath/config_file_defaults.html</a></p>
+    </body>
+</html>

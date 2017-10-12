@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="3087" MadCap:lastWidth="842">
+    <head>
+    </head>
+    <body>
+        <h2 style="font-family: sans-serif;font-size: 18pt;">Restore snapshots while mapping FC LUNs </h2>
+        <h3>On ESX Server</h3>
+        <ol>
+            <li>
+                In ElastiCenter, create an FC Storage Volume.</li>
+            <li style="font-family: sans-serif;">In ElastiCenter assign an ESX rSever as initiator to the FC Storage Volume.</li>
+            <li>(In the following screen) Click on ESX Server and then select the configuration option.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/restore_snapshots_fc_esx_configuration.png" class="FitToText" style="width: 709px;height: 367px;" />
+            </p>
+            <li>Add Storage:</li>
+            <ol>
+                <li>Click Storage in the left pane.</li>
+                <li>Mark the storage type as Disk/LUN and then click Next. <img src="../Resources/Images/mount_iscsi_volume_esx_add_storage.png" class="FitToText" /></li>
+                <li>(In the following screen) Select the listed LUN and then click Next.</li>
+                <p>
+                    <img src="../Resources/Images/mount_iscsi_volume_esx_select_LUN.png" class="FitToText" />
+                </p>
+                <li>Mark the File System Version as VMFS-5.</li>
+                <li>Specify a name for the DataStore and then click Next.</li>
+                <li>(In the following page) Mark Maximum available space option and then click next.</li>
+                <li>Click Finish. </li>
+            </ol>
+            <li>Copy data. </li>
+            <ol>
+                <li>	Right Click on the Datastore name and then select Browse Datastore.</li>
+                <p>
+                    <img src="../Resources/Images/mount_iscsi_volume_browse_data.png" class="FitToText" />
+                </p>
+                <li>Click on the upload icon to copy data as seen in the following page:</li>
+                <p style="text-align: center;">
+                    <img src="../Resources/Images/mount_iscsi_volume_click_upload_icon.png" class="FitToText" />
+                </p>
+            </ol>
+            <li>	Create a snapshot on the Storage Volume using the following procedures: </li>
+            <ol>
+                <li>In the Notification Storage Volumes page, select the Storage Volume for which you want to create a local backup. </li>
+                <li>In the following page, select Create Snapshot in the Actions Icon.</li>
+                <li>	Specify a name for the snapshot to be created and then click OK.</li>
+            </ol>
+            <li>Delete data from the DataStore on the ESX Client.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/mount_iscsi_volume_delete_data.png" class="FitToText" />
+            </p>
+            <li>In ElastiCenter, click Manage Snapshots (Actions Icon &gt; Local Backup) to view the list of previously captured snapshots.</li>
+            <li>From the list of snapshots, select the snapshot you want to restore and then click Restore icon to roll back the Storage Volume content to previous state.</li>
+            <li>
+			On the ESX client, refresh the Storage Volume and then view the required data.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/mount_iscsi_volume_refresh_data.png" class="FitToText" /> </p>
+        </ol>
+    </body>
+</html>

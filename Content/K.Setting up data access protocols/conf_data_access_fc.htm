@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="WWPN;LUN;workflow;IQN;CIFS;Charset;Fibre;FC;POEs;IQNs;QLogic;HBA;HBAs;Emulex" MadCap:lastBlockDepth="5" MadCap:lastHeight="2973" MadCap:lastWidth="775">
+    <head>
+    </head>
+    <body>
+        <h2 style="font-size: 18pt;font-family: sans-serif;color: #013364;">Data access using FC </h2>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Fiber Channel (FC) Protocol is the standard transport protocol for delivering serial SCSI commands over Fiber Channel interconnects. Fiber Channel Protocol is designed to operate in a highly-efficient manner using hardware for protocol offload engines (POEs). Fiber Channel is fast, reliable, and scalable data transport system. For further details, see <a href="http://en.wikipedia.org/wiki/Fibre_Channel">http://en.wikipedia.org/wiki/Fibre_Channel</a>.</p>
+        <h3 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">Supported Hardware for Fibre Channel</h3>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">QLogic HBA is used by CloudByte as FC targets. </li>
+            <li style="font-size: 11pt;font-family: sans-serif;">The client can use any available HBAs in the market (such as Emulex or Brocade).</li>
+        </ul>
+        <p style="font-size: 11pt;font-family: sans-serif;">For more information, see the <a href="http://www.cloudbyte.com/support/HCL/">Hardware Compatibility List</a>.</p>
+        <h3 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">FC in CloudByte ElastiStor</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">The following figure illustrates how you configure the FC setup in CloudByte ElastiStor:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/confg_fc_setupi.jpg" class="FitToText" style="width: 612px;height: 381px;" />
+        </p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">Access over FC protocol involves an initiator group and a target group. Initiator represents the FC client, for example a Windows client and target is the CloudByte Node. </p>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">The Storage Volumes can be accessed by both the initiator group and the target group.</p>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 13pt;">FC Initiator group</h4>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">An initiator group is the list of initiators who are authorized to access the FC LUN. By default, CloudByte creates a default initiator group named <i>none</i> that does not allow access to any initiator.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">The initiator group is a list of WWPNs. You can create the initiator group, add initiators and ports, and then mask the LUNs to the added initiator.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">You create the initiator group at the account level and assign it at the Storage Volume level.</p>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 12pt;">FC Target group</h4>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">You group the FC target ports to form a target group. This means, all the FC target ports which you have grouped are used for this particular group. The Node’s WWPNs uniquely identify each target port on the system. By default, CloudByte creates a default target group named ALL that allows access to all targets. If required, you can create a new target group and replace the default one, though CloudByte recommends using the default target group ALL.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">You create the target group at the account level and assign it at the Storage Volume level.</p>
+        <h3 style="font-family: sans-serif;color: #005db2;">Creating an initiator group</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Accounts(Navigation Pane &gt; Accounts).</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, select the account for which you want to specify the protocol options.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Action Icon, select Access Protocol Options &gt; Manage FC Initiator Group.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/33_Account_FC_options.jpg" class="FitToText" style="width: 720px;height: 266px;" />
+        </p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;"> Refresh Hardware (Nodes &gt; select the specific Node&gt; click Refresh Hardware in the Tasks section).<p class="note" style="font-family: sans-serif;"><b>Note:</b> Step 4 applies only if you have added FC&#160;ports to the Node after adding the Node to the HA Groups.</p></li>
+        </ul>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, click Add Initiator Group.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">Specify a unique name and select the appropriate WWPNs of the FC&#160;initiators to form the group. And then click ADD</li>
+        </ul>
+        <ol>
+            <li style="text-align: center;">
+                <img src="../Resources/Images/fc_initiator_group.png" class="FitToText" />
+            </li>
+        </ol>
+        <h3 style="font-family: sans-serif;color: #005db2;">Creating a target group</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Accounts.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, select the account for which you want to specify the protocol options.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Action Icon, select Access Protocol Options &gt; Manage FC Target Group.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;"> Refresh Hardware (Nodes &gt; select the specific Node&gt; select Refresh Hardware in the Tasks section of the task list).<p class="note" style="font-family: sans-serif;"><b>Note:</b> Step 4 applies only if you have added FC&#160;ports to the Node after adding the Node to the HA Groups.</p></li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, click Add Target Group.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify a unique name and WWPNs to form the group.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Add.</li>
+        </ol>
+        <h3 style="font-family: sans-serif;color: #005db2;">Assigning Storage Volume to initiator group and target group</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Storage Volumes page, select the Storage Volume for which you want to assign the initiator/target group.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Action Icon, select Tasks &gt; Manage FC Configuration.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the FC Configuration page, click Edit and then replace the default initiator group/target group.</li>
+            <li style="font-family: sans-serif; font-size: 11pt;">Click Save.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/manage_fc_configuration_editsettings_2.png" class="FitToText" />
+        </p>
+        <blockquote>
+            <p class="note" style="text-align: justify;font-family: sans-serif;"><b>Note:</b>You can also perform the same task at the Account level (Accounts &gt; select Account &gt; Manage FC Initiator Group/Target Group).</p>
+        </blockquote>
+    </body>
+</html>

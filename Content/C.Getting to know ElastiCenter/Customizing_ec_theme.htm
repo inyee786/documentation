@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="920" MadCap:lastWidth="766" MadCap:ignoredWords="screenshot;CSS;css;cloudbyte;px;header_wrap;E7E8E7;4px;ed1652;nav;ul;li;fff;bcdf5a;tcl;12px;15px;3px;BCDF5A;PNG">
+    <head>
+    </head>
+    <body>
+        <h2>Customizing the CloudByte ElastiCenter theme</h2>
+        <p>This section will help you customize CloudByte ElastiCenter with minimal modifications in CSS files. </p>
+        <h3>	Edit the theme.css file to make customizations</h3>
+        <ol>
+            <li>The company logo above the navigation pane (left pane) can be changed by replacing the image in the folder <code>images/cloudbyte</code>. Name your image as <b>company-logo</b>. To avoid distortion in the image, ensure that the image does not exceed the following dimensions: 215 px width, 67 px length.</li>
+            <li>The company logo on the left corner of the notification menu can be changed  by replacing the image in the folder <code> images/cloudbyte</code>. Name your image as <b>edit-logo</b>. Ensure that your image is in PNG format. To avoid distortion in the image, also ensure that the image does not exceed the following dimensions: 166 px width, 24 px length. </li>
+            <li>To change the header border in ElastiCenter, edit the highlighted line in the following section:</li>
+            <li><pre xml:space="preserve">#dashboard-header_wrap{ </pre><pre xml:space="preserve">background: #E7E8E7;</pre><pre xml:space="preserve">position:relative;</pre><pre xml:space="preserve">z-index:3;</pre><pre xml:space="preserve"><b>border-top:4px, solid #ed1652;</b></pre><pre xml:space="preserve">}</pre>  To change icons on the notification menu, replace the following images (referred to in the screenshot) in the<code>images</code> folder. Ensure that all your images are in PNG format.</li>
+            <table>
+                <col style="width: 165px;" />
+                <col style="width: 211px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Image to be replaced</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Name the image as</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">A	</td>
+                        <td style="background-color: #dcdcdc;text-align: center;">home</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">	B</td>
+                        <td style="background-color: #dcdcdc;text-align: center;">alert</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">	C</td>
+                        <td style="background-color: #dcdcdc;text-align: center;">events</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">D</td>
+                        <td style="background-color: #dcdcdc;text-align: center;">reports</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li> To change the active tab top border, edit the highlighted line in the following section:</li><pre xml:space="preserve">.nav ul li:hover,.active-nav{</pre><pre xml:space="preserve">background:#fff;</pre><pre xml:space="preserve"><b>border-top:4px solid #bcdf5a!important;</b></pre><pre xml:space="preserve">}</pre>
+            <li> To change the widget top border, edit the highlighted line in the following section:</li><pre xml:space="preserve">.tcl-graph{</pre><pre xml:space="preserve">margin:0 12px 15px 3px;</pre><pre xml:space="preserve"><b>border-top:4px solid #BCDF5A;</b></pre><pre xml:space="preserve">}</pre>
+        </ol>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../Resources/Images/customTheming-Guide.png" class="FitToText" />
+        </p>
+        <h3>Modify the index.jsp file to include theme.css file</h3>
+        <p>For the CSS changes to take effect, include the <code>theme.css</code> file in <code>index.jsp</code> file located in the following path: <code>/usr/local/apache-tomcat-6.0.33/webapps/client/</code>.</p>
+        <p>Add the highlighted section as shown in the following sample snippet:</p><pre xml:space="preserve">&lt;head&gt;</pre><pre xml:space="preserve">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;</pre><pre xml:space="preserve">&lt;title&gt;CloudByte ElastiCenter 1.3&lt;/title&gt;</pre><pre xml:space="preserve" style="font-weight: bold;">&lt;link type="text/css" rel="stylesheet" href="css/theme.css" /&gt;</pre><pre xml:space="preserve" style="font-weight: bold;">&lt;link type="text/css" rel="stylesheet" href="css/&lt;filename&gt;.css" /&gt;</pre><pre xml:space="preserve">&lt;script src="lib/jquery.js" type="text/javascript"&gt;</pre><pre xml:space="preserve">&lt;/script&gt;</pre><pre xml:space="preserve">&lt;script src="lib/jquery-ui/js/jquery-ui.js" type="text/javascript"&gt;</pre><pre xml:space="preserve">&lt;/script&gt;</pre><pre xml:space="preserve">&lt;/head&gt;</pre>
+    </body>
+</html>

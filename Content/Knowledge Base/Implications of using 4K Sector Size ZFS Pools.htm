@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="3" MadCap:lastHeight="3055" MadCap:lastWidth="874">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">Implications of using 4K Sector Size ZFS Pools</h1>
+        <p style="font-size: 16pt;">What is a sector size?</p>
+        <p>Sector size is the single unit of data written or read from the physical disk. Sector size is synonymous with 512 bytes. Most file systems including ZFS still set 512 bytes as the default sector size. The default sector is called a shift.</p>
+        <p>In the past decade, the disks manufactures have been moving toward a larger sector size of 4k bytes which provides better performance and error correction. The new applications and operating systems are being designed to make use of the benefits of 4k bytes sector size. However to comply with older applications, some of the disks still report their sector size as 512 bytes.</p>
+        <p>For further reading, see <a href="http://www.seagate.com/in/en/tech-insights/advanced-format-4k-sector-hard-drives-master-ti/">http://www.seagate.com/in/en/tech-insights/advanced-format-4k-sector-hard-drives-master-ti/.</a></p>
+        <p>CloudByte ElastiStor (read ZFS) is also at the forefront in utilizing the 4k bytes sector size disks. When creating a Pool, the administrator is provided with the option of specifying the underlying sector size of the disk. This allows the administrator to create a Pool with 512 bytes sector size for SAS or NLSAS disks and 4k bytes sector size for SSD Pools.</p>
+        <p>For more details, see <a href="https://wiki.illumos.org/display/illumos/ZFS+and+Advanced+Format+disks">http://wiki.illumos.org/display/illumos/ZFS+and+Advanced+Format+disks.</a></p>
+        <p style="font-size: 14pt;">What are the benefits of choosing 4k bytes sector size for SSD Pools?</p>
+        <p>We use the advanced capabilities provided by the disks for error corrections. In addition, it reduces the load on the disks by up to 20% and also resulting in better READ/WRITE performance.</p>
+        <p>All is not well! What is the catch with using 4k sector size on ZFS Pools?</p>
+        <p style="font-size: 12pt;font-weight: bold;">SPACE.</p>
+        <p>Since 4k bytes is the minimum block of data that can be written or read, data blocks smaller than 4k will also be padded to form the 4k. This can hurt the most, when parity blocks have to be created for small chunks of data.</p>
+        <p style="font-size: 14pt;">What is the space overhead with parity blocks?</p>
+        <p>Let us take a simple example and compare the space overhead caused by writing 16k bytes of data on RAIDZ Pool of 4+1 disks.</p>
+        <p>To understand how the data and parity blocks are generated for RAIDZ, see http://blog.delphix.com/matt/2014/06/06/zfs-stripe-width/.</p>
+        <p>Example 1: With 512 bytes sector size and assuming the ZFS record size of 4k bytes, the data will be laid out as follows:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/33_sector_size_1.png" />
+        </p>
+        <p>By now you already know the cool thing about ZFS is that the parity is distributed as opposed to dedicating disks. Since the ZFS record size is 4k, the 16k block will be divided into 4 records of 4k each (represented with the prefix of R1, R2, R3, and R4).</p>
+        <p>To write a single record of 4k, on 512 bytes sector, you need 8 sectors. So each 4k record now spans two rows and requires two parity blocks (R1P1, R1P2, etc).</p>
+        <p>So to store 16k of data, you are using around 20K.</p>
+        <p>8 x 4 x 512 (16K data) + 8 x 1 x 512 (4K parity).</p>
+        <p>When a RAIDZ Pool is created with 4+1 disks, 20% or (1/5) is reserved for parity and hence there is no space over head with 512 byte sector size.</p>
+        <p>Example 2: Let us now use the same example of 16k data being written on a 4+1 RAIDZ Pool, with 4k bytes sector size. It will look as follows:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/33_sector_size_2.png" />
+        </p>
+        <p>Surprised to see parity on two disks in the same row?</p>
+        <p>Like before, with ZFS record size of 4k, the 16k block will be divided into 4 records of 4k each (represented with the prefix of R1, R2, R3, and R4).</p>
+        <p>To write a single record of 4k, on 4k bytes sector, we will need only 1 sector. Even if we are writing a single sector, we have to write the parity which will occupy another sector of 4K.</p>
+        <p>So to store 16k bytes of data, we are using around 32k bytes.</p>
+        <p>4 x 1 x 4096 (16K data) + 4 x 1 x 4096 (16K parity)</p>
+        <p>When a RAIDZ Pool is created with 4+1 disks, 20% or (1/5) is reserved for parity. So in this case only 8k is accounted for. And we have an overhead of 8k for extra parity blocks.</p>
+        <p>Example 3: Similarly if we had 20K data written, it would be as follows:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/33_sector_size_3.png" />
+        </p>
+        <p>5 X 1 X 4096 (20K data) + 5 X 1 X 4096 (20k parity)</p>
+        <p>8k is expected parity for two rows, and 12K is additional parity (12k/20K is 60% overhead).</p>
+        <p style="font-size: 14pt;">Gosh! That’s almost 60% extra space! Do I fall back to 512 byte sector size?</p>
+        <p>No. Instead you can design the Pools and ZFS record size in such a way that a given row contains only one parity block.</p>
+        <p>Example 4: For a RAIDZ1 (4+1) with sector size of 4k, set the ZFS record size as 16k bytes. This will result in the following layout:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/33_sector_size_4.png" />
+        </p>
+        <p>So as a thumb-rule the ZFS record size should be multiple of number of data disks in the RAIDZ x Sector Size.</p>
+        <p>For example for 4+1, the record size should be 16K (4 x 4096) and for 2+1 it should be 8K (2 x 4096).</p>
+        <p>But be cautious about the actual work load pattern in the applications. ZFS record size defines the maximum size of the record being written. The incoming data will be divided by the record size and is appended with the parity block. However, if the incoming size is less than record size, it is sent down to WRITE and too many such small incoming data can again result in requiring additional parity blocks.</p>
+        <p style="font-size: 14pt;">What if my work load is always going to be in small sizes (say less than 16k)?</p>
+        <p>Configuring a RAID10 Pool is your best bet. For smaller IO block sizes, RAID10 also minimizes the block alignment issues since every block will be aligned. Are there any other space over-heads other than the parity blocks?</p>
+        <p>Yes. Like any file system, ZFS also would have some meta-data information about the data blocks that is stored. However this meta-data overhead doesn’t exude as much overhead as parity blocks.</p>
+        <p style="font-size: 14pt;">What is the recommended sector size for a Pool?</p>
+        <p>CloudByte recommends 32K as the sector size for least space overhead.</p>
+    </body>
+</html>

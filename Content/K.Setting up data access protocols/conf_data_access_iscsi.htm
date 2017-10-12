@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="9273" MadCap:lastWidth="1004" MadCap:ignoredWords="Username;username;Intiator;Time2Wait;TSMs;iSCSI;IP;http;wikipedia;ISCSI;IQNs;LUN;workflow;IQN;Auth;NOPIN;NOP;R2T;R2Ts;MaxOutstandingR2T;MaxBurstLength;logout;Workflow">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Data access using iSCSI</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">iSCSI is Internet SCSI (Small Computer System Interface), an Internet Protocol (IP)-based storage networking standard for linking data storage connections. By offering SCSI commands over IP networks, iSCSI is used to transmit data over intranets. For further details, see<a href="http://en.wikipedia.org/wiki/ISCSI"> http://en.wikipedia.org/wiki/ISCSI.</a></p>
+        <h3 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">iSCSI concepts</h3>
+        <p style="text-align: justify;"><b style="font-family: sans-serif;font-size: 11pt;">Authentication Group</b>: A grouping of multiple iSCSI users. Use this option if you use CHAP or mutual CHAP. You can configure Authentication group at both VSM and Storage Volume levels.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;"><b>CHAP</b>: An authentication method which uses a user/secret or IQNs for outgoing authentication. The Storage Volumes on CloudByte ElastiStor authenticate the initiator.</p>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;"><b>Mutual CHAP</b>: A super set of CHAP which uses peer user/peer secret for outgoing/incoming authentication between Storage Volumes and initiator.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;"><b>Initiator group</b>: Defines who can initiate the LUN. </p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">It is a combination of multiple IQNs. By default, CloudByte ElastiStor creates two initiator groups (<i>all</i> where everyone can initiate the LUN and <i>none</i> where no one can). After you create the Storage Volume, when you manage the iSCSI options, you are prompted to choose an initiator group. You can either select the default one or the ones that you create. You configure initiator group in the Storage Volume.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Configuring Data Access using iSCSI_1.png" style="width: 488px;height: 402px;" />
+        </p>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;"><a name="iSCSI"></a>iSCSI configuration workflow</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">You configure iSCSI at the following levels:</p>
+        <ul style="list-style-type: square;">
+            <li style="font-family: sans-serif;font-size: 11pt;">Account</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">VSM</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Storage Volume</li>
+        </ul>
+        <p style="font-family: sans-serif;font-size: 11pt;">The following figure illustrates the work flow for configuring the iSCSI protocol options:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/ConfiguringiSCSIprotocolOptions.png" class="FitToText" />
+        </p>
+        <h4 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">Account iSCSI options</h4>
+        <p style="font-family: sans-serif;font-size: 11pt;">Configuring iSCSI at account level involves the following tasks:</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, Navigation Pane select Accounts.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, select the account for which you want to specify the protocol options.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the actions Icon, select the protocol option and then specify the details.</li>
+        </ol>
+        <ol>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/25_Account_iscsi_options.jpg" class="FitToText" style="width: 701px;height: 283px;" />
+            </p>
+        </ol>
+        <h6 style="font-family: sans-serif;font-size: 11.75pt;font-weight: normal;color: #005db2;">Manage iSCSI Authentication Groups</h6>
+        <p style="font-family: sans-serif;font-size: 11pt;">In the Add Authentication Group dialog box, specify the following details:</p>
+        <table>
+            <col style="width: 178px;" />
+            <col style="width: 783px;" />
+            <tbody>
+                <tr>
+                    <td style="color: #ffffff;background-color: #808080;">Field </td>
+                    <td style="color: #ffffff;background-color: #808080;">Description </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Name</td>
+                    <td style="background-color: #dcdcdc;"> A unique name for the authentication group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Description </td>
+                    <td style="background-color: #dcdcdc;"> A meaningful description for the authentication group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">CHAP Username  </td>
+                    <td style="background-color: #dcdcdc;"> Username for CHAP authentication. For uniqueness, specify the initiator IQN name as username.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">CHAP Secret  </td>
+                    <td style="background-color: #dcdcdc;"> Password for CHAP authentication in alpha-numeric format. The password must have 12 to 16 characters.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Mutual CHAP Username</td>
+                    <td style="background-color: #dcdcdc;"> Username for mutual CHAP authentication. For uniqueness, specify the initiator IQN name as username. The value must be same as that of the CHAP user.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Mutual CHAP Secret  </td>
+                    <td style="background-color: #dcdcdc;"> Password for mutual CHAP authentication (should be different from CHAP secret). The password must have 12 to 16 characters.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h6>&#160;</h6>
+        <h6 style="font-family: sans-serif;font-size: 11.75pt;color: #005db2;text-align: justify;font-weight: normal;">Initiator Groups</h6>
+        <p style="font-family: sans-serif;font-size: 11pt;">In the Add Intiator Group dialog box, specify the following details:</p>
+        <table>
+            <col style="width: 164px;" />
+            <col style="width: 472px;" />
+            <tbody>
+                <tr>
+                    <td style="color: #ffffff;background-color: #808080;text-align: center;">Field </td>
+                    <td style="color: #ffffff;background-color: #808080;text-align: center;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Name</td>
+                    <td style="background-color: #dcdcdc;"> Unique name of the initiator group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Allowed Intiator</td>
+                    <td style="background-color: #dcdcdc;"> List of allowed initiators, separated by comma.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Authorized Networks </td>
+                    <td style="background-color: #dcdcdc;"> List of allowed networks followed by subnet mask in the format <code> 10.0.0.0/8</code>, separated by comma.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">VSM iSCSI Options</h4>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">This is the set of iSCSI options specific to a VSM. By default, CloudByte ElastiStor creates a default VSM iSCSI options group <code>default</code>which contains industry standard options. After you create the VSM, when you manage the iSCSI options, you are prompted to choose the VSM iSCSI options group. You can either select the default one or the ones that you create.</p>
+        <table>
+            <col style="width: 132px;" />
+            <col style="width: 866px;" />
+            <tbody>
+                <tr>
+                    <td style="color: #ffffff;text-align: center;background-color: #808080;">Field</td>
+                    <td style="color: #ffffff;text-align: center;background-color: #808080;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">IQN Name</td>
+                    <td style="background-color: #dcdcdc;">Specify a unique IQN.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Number of worker threads </td>
+                    <td style="background-color: #dcdcdc;">Select the number of worker threads.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Discovery Auth  Method </td>
+                    <td style="background-color: #dcdcdc;">Specify the authentication method.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Discovery Auth  Group</td>
+                    <td style="background-color: #dcdcdc;">Specify the authentication group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Timeout</td>
+                    <td style="background-color: #dcdcdc;">Sets the limit on how long an I/O can be outstanding before an error occurs. Values range from 0 to 300. The default value is 30.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">NOPIN Interval</td>
+                    <td style="background-color: #dcdcdc;">The frequency of sending a NOP-IN packet in seconds. The values range from 0 to 300. The default value is 20.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">MAX R2T</td>
+                    <td style="background-color: #dcdcdc;">Specify a value between 1 and 255. The default value is 32.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Max Sessions</td>
+                    <td style="background-color: #dcdcdc;">Specify a value between 1 and 64. The default value is 8.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Max Connections</td>
+                    <td style="background-color: #dcdcdc;">Specify a value between 1 and 64. The default value is 16.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">First Burst Length</td>
+                    <td style="background-color: #dcdcdc;">Maximum data in bytes that an iSCSI initiator may send to the target during the execution of a single iSCSI command unsolicited. Values range from 1 to 2^32 with a default of 65,536.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Max Burst Length</td>
+                    <td style="background-color: #dcdcdc;">Maximum WRITE size in bytes the target is willing to receive between R2Ts. Values range from 1-2^32. The default value is 262,144.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Max Receive Data Segment length</td>
+                    <td style="background-color: #dcdcdc;">In bytes. Values range from 1 to 2^32. The default value is 262,144.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Max Outstanding R2T</td>
+                    <td style="background-color: #dcdcdc;">Maximum number of ready to receive packets (R2Ts) the target can have as outstanding. This is for a single iSCSI command,where larger values should yield performance increases until MaxOutstandingR2T exceeds the size of the largest Write I/O divided by MaxBurstLength. Values range from 1 to 255. The default value is 16.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Default time to wait</td>
+                    <td style="background-color: #dcdcdc;">Minimum time in seconds to wait before attempting a logout or an active task reassignment after an unexpected connection termination/reset. Values range from 1 to 300. The default value is 2.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Default time to retain	</td>
+                    <td style="background-color: #dcdcdc;">Maximum time in seconds after Time2Wait before which an active task reassignment is still possible after an unexpected connection termination/reset. Values range from 1 to 300. The default value is 60.
+					</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 13pt;">Volume iSCSI Options</h4>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">This is the set of iSCSI options specific to a Storage Volume. By default, CloudByte ElastiStor creates a default Volume iSCSI options group <code>default </code>which contains industry standard options. After you create the VSM, when you manage the iSCSI options, you are prompted to choose the Volume iSCSI options group. You can either select the default one or the ones that you create.</p>
+        <table>
+            <col style="width: 121px;" />
+            <col style="width: 646px;" />
+            <tbody>
+                <tr>
+                    <td style="color: #ffffff;background-color: #808080;text-align: center;">Field </td>
+                    <td style="color: #ffffff;background-color: #808080;text-align: center;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Status </td>
+                    <td style="background-color: #dcdcdc;">Select either Enabled or Disabled.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">IQN Name</td>
+                    <td style="background-color: #dcdcdc;">Specify the unique IQN.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Authentication Method </td>
+                    <td style="background-color: #dcdcdc;">Specify the authentication method.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Authentication Group</td>
+                    <td style="background-color: #dcdcdc;">Specify the authentication group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Initiator Group</td>
+                    <td style="background-color: #dcdcdc;">Specify the initiator group.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Initial Digest </td>
+                    <td style="background-color: #dcdcdc;">Select one of the advanced data integrity options.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">iSCSI Block Length</td>
+                    <td style="background-color: #dcdcdc;">Select the block length.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Queue Depth </td>
+                    <td style="background-color: #dcdcdc;">Pending I/O requests for the Volume. The values range from 0-255. 0 implies that the status disabled. The default value is 32.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">Configuration scenarios</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">The following scenarios explain iSCSI configuration in detail:</p>
+        <h4 style="font-family: sans-serif;font-size: 12pt;color: #005db2;">Scenario 1: Assigning the same iSCSI initiator groups to two Storage Volumes under a VSM</h4>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/iSCSIConfigurations-I.png" class="FitToText" />
+        </p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">iSCSI initiator groups can be configured for only Storage Volumes based on initiator groups in the account. For example, Storage Volumes under the VSM can have different iSCSI initiator groups.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">For procedures, see <MadCap:xref href="#Configuring_initiator_group_and_restricting_access" style="color: #008000;">"Configuring initiator group and restricting access"</MadCap:xref></p>
+        <h4 style="font-family: sans-serif;font-size: 12pt;color: #005db2;">Scenario 2: Assigning different authentication groups to multiple Storage Volumes under a VSM</h4>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/iSCSIConfigurations.png" />
+        </p>
+        <p style="font-family: sans-serif;font-size: 11pt;">You can have different authentication groups for VSMs and Storage Volumes.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">For procedures, see <MadCap:xref href="#iSCSI_authentication_workflow" style="color: #008000;">"iSCSI access control workflow"</MadCap:xref></p>
+        <h3 style="color: #005db2;font-family: sans-serif;"><a name="iSCSI_access_control_workflow"></a>iSCSI access control workflow</h3>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">An initiator group&#160;defines who can initiate the LUN. After you create the Storage Volume, when you manage the iSCSI options, you are prompted to choose an initiator group. Data access to the iSCSI Storage Volume can be restricted to either a single machine or to multiple machines in a Subnet. </p>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;font-weight: normal;"><a name="Configuring_initiator_group_and_restricting_access"></a>Configuring initiator group and restricting access</h3>
+        <ol start="1">
+            <li style="font-family: sans-serif;font-size: 11pt;">In the ElastiCenter Navigation Pane select Accounts.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, select the account for which you want to specify the protocol options.</li>
+        </ol>
+        <ol start="3">
+            <li style="text-align: left;font-family: sans-serif;font-size: 11pt;">Select Manage iSCSI Initiator Groups in the Actions Icon.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/25_Account_iscsi_initiator.jpg" class="FitToText" style="width: 708px;height: 287px;" />
+        </p>
+        <ol start="4">
+            <li>
+			Select Add Initiator Group in the Tasks menu.</li>
+        </ol>
+        <ol start="5">
+            <li>Provide the required details.</li>
+        </ol>
+        <ol start="5">
+            <table>
+                <col style="width: 102px;" />
+                <col style="width: 614px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Field</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Name</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Unique name of the initiator group.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Allowed Intiator</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">List of IQNs, separated by comma for restricting the access to iSCSI Storage Volume from multiple machines in a Subnet.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Authorized Networks</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">List of allowed networks, followed by subnet mask in the format <code>10.0.0.0/8</code>, separated by comma.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ol>
+        <ol start="6">
+            <li>Click OK.</li>
+        </ol>
+        <ol start="7">
+            <li>In the Storage Volumes page, select the Storage Volume to which you want to assign the initiator. </li>
+        </ol>
+        <ol start="8">
+            <li>Select Manage iSCSI Configuration (Actions icon &gt; Tasks). </li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/27_manage_iscsi_config.jpg" class="FitToText" style="width: 688px;height: 277px;" />
+        </p>
+        <ol start="9">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Edit, enter the required details, and then save the changes.</li>
+        </ol>
+        <ol start="10">
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Confirmation dialog box, click Modify.</li>
+        </ol>
+        <h3 style="font-family: sans-serif;color: #005db2;font-size: 14pt;"><a name="iSCSI_authentication_workflow"></a>iSCSI authentication workflow</h3>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">An iSCSI Authentication Group is a grouping of multiple iSCSI users. You can select the users who can access the iSCSI target. After you create users, you can group them as iSCSI users for authentication.</p>
+        <ol start="1">
+            <li style="font-family: sans-serif;font-size: 11pt;">In the ElastiCenter, Navigation Pane select Accounts.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, select the account for which you want to specify the protocol options.</li>
+        </ol>
+        <ol start="3">
+            <li style="font-family: sans-serif;font-size: 11pt;">Select Manage iSCSI Authentication Groups in the Actions icon.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Following Screen click Add iSCSI Authentication Group in Actions Icon</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/30_add_iscsi_authentication_group.jpg" class="FitToText" style="width: 674px;height: 268px;" />
+        </p>
+        <ol start="5">
+            <li style="font-family: sans-serif;font-size: 11pt;">Enter the required details and then click OK.</li>
+            <table>
+                <col style="width: 114px;" />
+                <col style="width: 614px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Field</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Name</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">	A unique name for the authentication group.  </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Description	</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">	A meaningful description for the authentication group.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">	CHAP Username</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">	Username for CHAP authentication. For uniqueness, specify the initiator IQN name as username. CHAP&#160;is an authentication method which uses a user/secret or IQNs for outgoing authentication. The Storage Volumes on CloudByte ElastiStor authenticate the initiator.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">	CHAP Secret</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">	Password for CHAP authentication in alpha-numeric format.The password must have 12 to 16 characters.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">	Mutual CHAP Username</td>
+                        <td style="text-align: left;background-color: #dcdcdc;"> 	Username for mutual CHAP authentication. For uniqueness, specify the initiator IQN name as username. The value must be same as that of the CHAP user. Mutual CHAP is a super set of CHAP which uses peer user/peer secret for outgoing/incoming authentication between Storage Volumes and initiator.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">	Mutual CHAP Secret</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">	Password for mutual CHAP authentication (should be different from CHAP secret).</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Description</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">The password must have 12 to 16 characters.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ol>
+        <ol start="6">
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">In the Navigation Pane Select Storage Volumes page, select the Storage Volume for which you want to assign the authentication group.</li>
+        </ol>
+        <ol start="7">
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">Select Manage iSCSI Configuration (Actions Icon &gt; Tasks).</li>
+        </ol>
+        <p style="text-align: center;"> <img src="../Resources/Images/31_manage_iscsi_config.jpg" class="FitToText" style="width: 703px;height: 253px;" /></p>
+        <ol start="8">
+            <li style="text-align: left;font-family: sans-serif;font-size: 11pt;">Click Edit, enter the required details, and then click Save. In the following screen, you have selected CHAP&#160;as the authentication method.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/32_iscsi_config_details_Authentication.jpg" class="FitToText" style="width: 625px;height: 316px;" />
+        </p>
+        <ol start="9" class="ol_1">
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Confirmation dialog box, click Modify.</li>
+        </ol>
+        <h4 style="font-family: sans-serif;font-size: 13pt;color: #005db2;">Restricting access to iSCSI VSM by managing Authentication Groups</h4>
+        <p style="font-size: 11pt;font-family: sans-serif;text-align: justify;">The procedures are same as in the section  <i>Restricting access to iSCSI Storage Volume by managing Authentication Groups </i>except that, instead of Storage Volume, you have to select VSM from step 7 onward.</p>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 16pt;">Installing MPIO on Windows Server</h2>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Multipath I/O (MPIO) is a Microsoft-provided framework that allows storage providers to develop Multipath solutions that contain hardware-specific information required to optimize connectivity with storage arrays.
+ 			MPIO provides an alternate data path between storage devices and Windows operating system. 
+			MPIO is protocol-independent and can be used with Fibre Channel (FC), Internet SCSI (iSCSI) and Serial Attached SCSI (SAS) interfaces.
+</p>
+        <p style="font-size: 11pt;font-family: sans-serif;"> Installing MPIO functionality involves the following procedures: </p>
+        <blockquote>
+            <p class="note" style="font-family: sans-serif;font-size: 11pt;text-align: justify;"><b>Note:</b> The following documentation is for Windows Server 2008. The procedures are similar for other versions of Windows Server. However, there might be minor variations owing to the differences in UI strings and navigation.</p>
+        </blockquote>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">On Windows Server, select Multipath I/O and then click Install (Server Manager Console &gt; Add Features Wizard).
+			 <p class="note" style="font-family: sans-serif;"><b>Note:</b> This step can be skipped if Multipath I/O is already installed.</p><p style="text-align: center;"><img src="../Resources/Images/mpio_multipath_1.png" class="FitToText" style="width: 714px;height: 503px;" /></p></li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Restart the Windows Server after you complete the installation.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">After reboot, configure Multipath as follows:<ol><li style="font-family: sans-serif;">Open MPIO application (Start &gt; Administrative Tools &gt; MPIO). </li><li style="font-family: sans-serif;">Click Discover Multipaths tab. </li><li style="font-family: sans-serif;">Enable Add support for iSCSI devices. </li><li style="font-family: sans-serif;">Click Add.</li><p style="text-align: center;"><img src="../Resources/Images/mpio_configure_4 (2).png" class="FitToText" /></p></ol></li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+                In the Reboot required dialog box click Yes.</li>
+            <p style="font-family: sans-serif;font-size: 11pt;">After reboot, a new device called "MSFT2005IBusType 0x9" (or similar ID) appears in the MPIO Properties.</p>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/mpio_mpio_properties_6.png" class="FitToText" />
+            </p>
+        </ol>
+        <h2> </h2>
+    </body>
+</html>

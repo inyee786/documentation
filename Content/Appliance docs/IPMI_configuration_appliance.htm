@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="545" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>Configuring IPMI settings</h2>
+        <h3>Set up IPMI configuration</h3>
+        <ol>
+            <li>Switch on one of the Nodes in your CloudByte ElastiStor Appliance.<img src="../Resources/Images/A50-IPMI1.png" class="FitToText" /></li>
+            <li>Press DEL to enter the Supermicro BIOS&#160;setup.<img src="../Resources/Images/A50-IPMI2 (2).png" /></li>
+            <li>In the following screen, use the right arrow key and navigate to IPMI tab.</li>
+            <li>Use the down arrow key and navigate to BMC Network Configuration and then press enter.<img src="../Resources/Images/A50-IPMI_6.png" class="FitToText" /></li>
+            <li>Press enter at Update IPMI LAN Configuration option and set it to YES.<img src="../Resources/Images/ipmi_lan_configuration_yes.png" class="FitToText" /></li>
+            <li>At the prompt, select Static (press enter) as the Configuration Address Source.<img src="../Resources/Images/configuration_address_source_yes.png" class="FitToText" /></li>
+            <li>Press enter and specify the Station IP address (IP address of the IPMI management console).<img src="../Resources/Images/station_ip_address.png" class="FitToText" style="width: 696px;height: 546px;" /></li>
+            <li>Press enter and specify the Subnet Mask (the standard IPv4 subnet mask, for example 255.255.255.0). <img src="../Resources/Images/specify_subnet_mask.png" class="FitToText" style="width: 695px;height: 536px;" /></li>
+            <li>Press enter and specify the Gateway IP address (the IPv4 gateway IP address, for example 10.0.0.1). <img src="../Resources/Images/specify_gateway.png" class="FitToText" /></li>
+            <li>Press F4 to save the configurations and exit the BIOS setup.<img src="../Resources/Images/save_configurations_exit.png" class="FitToText" /></li>
+            <li>To access ElastiCenter,
+			<ul><li>Launch Mozilla Firefox Web browser.</li><li>Specify the URL in the following format: <code>https://<i>ManagementConsole_IP_Address</i>/page/login.html</code></li></ul></li>
+            <li>Specify the following default credentials:</li>
+            <table>
+                <colgroup>
+                    <col style="width: 119px;" /> <col style="width: 156px;" /></colgroup>
+                <tbody>
+                    <tr>
+                        <td style="background-color: #808080; text-align: center;">Credentials</td>
+                        <td style="background-color: #808080; text-align: center;">Value</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc; text-align: center;">Username</td>
+                        <td style="background-color: #dcdcdc; text-align: center;">admin</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc; text-align: center;">Password</td>
+                        <td style="background-color: #dcdcdc; text-align: center;">password</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ol>
+    </body>
+</html>

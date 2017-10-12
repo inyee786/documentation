@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="2325" MadCap:lastWidth="829">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">Customizing disk timeout values for HA Settings on Various Operating Systems</h1>
+        <p style="font-size: 16pt;">Issue</p>
+        <p>The default disk timeout values on the client platform might cause I/O to timeout while operations, such as ElastiStor HA takeover and giveback, resulting in unavailability of data.</p>
+        <p style="font-size: 16pt;">Solution</p>
+        <p>Revise the default disk timeout values on the client OS that you use to facilitate smooth ElastiStor HA operations (before the timeout). Read the following Knowledge Base article that explains how to revise disk timeout values on various client platforms.</p>
+        <p style="font-size: 14pt;">For Windows XP, Windows 7, Windows 8, Windows Server 2008, and Windows Server 2012</p>
+        <p>If you increase the timeout value, it increases the time before which the SCSI timeout occurs on the Windows machine you use.</p>
+        <ul>
+            <li>On Windows, click Start &gt; Run and in the text box, enter regedit.</li>
+            <li>Click OK. The Registry Editor opens.</li>
+            <li>Go to the following location: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Disk.</li>
+            <li>disk_timeout</li>
+        </ul>
+        <p>
+            <img src="../Resources/Images/28_disk_timeout.jpg" style="width: 725px;height: 440px;" />
+        </p>
+        <ul>
+            <li>Double-click TimeOutValue.</li>
+            <li>Change the key TimeOutValue in the Edit dialog box.</li>
+            <li>Restart the system to make the changes effective.</li>
+        </ul>
+        <p style="font-size: 16pt;">For Open SUSE 11, Ubuntu 12.10, CentOS 6, and RHEL 6 (64 bit)</p>
+        <p>By default, the timeout is set to 30 seconds. To revise,</p>
+        <ul>
+            <li>Check the current timeout for every generic SCSI device in Linux Sysfs using the following command:find /sys/class/scsi_generic/*/device/timeout -exec grep -H . '{}' \;</li>
+            <li>To modify the timeout value for an individual disk, use the Sysfs interface as shown in the following example: echo 180 &gt; /sys/block/sda/device/timeout</li>
+        </ul>
+        <blockquote>
+            <p>Note: This change does not persist across reboots.</p>
+        </blockquote>
+        <p style="font-size: 16pt;">VMware ESX 5.X</p>
+        <p>The procedures involve modifying the disk timeout values for</p>
+        <ul>
+            <li>The VM (that you use). For details, see For Windows virtual machine/For Linux virtual machine.</li>
+            <li>VMware ESX/VMware vSphere ESXi . For details, see For VMware ESX/VMware vSphere ESXi</li>
+        </ul>
+        <p style="font-size: 16pt;">For Windows virtual machine</p>
+        <ul>
+            <li>On Windows VM, click Start &gt; Run.</li>
+            <li>In the Run text box, type regedit in and then click OK. The Registry Editor opens.</li>
+            <li>Navigate to the following registry key: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet</li>
+            <li>Select CurrentControlSet and then click Edit menu and then select Find.</li>
+            <li>In the Find dialog box, type MaxRequestHoldTime and then click Find.</li>
+            <li>Double-click MaxRequestHoldTime registry value and then modify the default value.</li>
+            <li>Exit the registry editor.</li>
+            <li>Restart the server for the update to take effect.</li>
+        </ul>
+        <p style="font-size: 16pt;">For Linux virtual machine</p>
+        <p>By default, the timeout is set to 30 seconds. To revise,</p>
+        <ul>
+            <li>Check the current timeout for every generic SCSI device in Linux Sysfs using the following command: find /sys/class/scsi_generic/*/device/timeout -exec grep -H . '{}' \;</li>
+            <li>To modify the timeout value for an individual disk, use the Sysfs interface as shown in the following example: echo 180 &gt; /sys/block/sda/device/timeout</li>
+        </ul>
+        <blockquote>
+            <p>Note: This change does not persist across reboots.</p>
+        </blockquote>
+        <p style="font-size: 16pt;">For VMware ESX/VMware vSphere ESXi</p>
+        <ul>
+            <li>Log in to your ESXi/ESX host with root privileges using the console or an SSH session.<p>Note: If you are unable to connect to an ESX host using Secure Shell (SSH), check for network and services issues.</p></li>
+            <li>Go to the following location: /etc/opt/vmware/vpxa/vpxa.cfg. If you are using ESXi 5.0, the path is /etc/vmware/vpxa/vpxa.cfg</li>
+            <li>Back up the vpxa.cfg elsewhere.</li>
+            <li>In /vpxa, open the vpxa.cfg file in a text editor.</li>
+            <li>Add the following code inside the &lt;task&gt; and&lt;/task&gt; tags. &lt;timeout&gt;10800&lt;/timeout&gt;</li>
+            <li>Add the following code inside the &lt;vmomi&gt; and &lt;/vmomi&gt; tags: &lt;soapStubAdapter&gt; &lt;blockingTimeoutSeconds&gt;10800&lt;/blockingTimeoutSeconds&gt; &lt;/soapStubAdapter&gt;</li>
+            <li>Restart the management services on your ESXi/ESX host.</li>
+        </ul>
+        <p style="font-size: 16pt;">For VMWare ESX 5.0 (for iSCSI only)</p>
+        <ul>
+            <li>Go to Storage Adapters &gt; iSCSI Software Adapter &gt; Properties.</li>
+            <li>Select Advanced and scroll down to LoginTimeout.</li>
+            <li>To adjust the iSCSI login timeout in ESXi 5.x, run the following command from the command line: esxcli iscsi adapter param set -A adapter_name -k LoginTimeout -v value_in_sec. For example: esxcli iscsi adapter param set -A vmhba33 -k LoginTimeout -v 60</li>
+        </ul>
+        <p style="font-size: 16pt;">Disk Timeout settings for Oracle Solaris 10</p>
+        <ul>
+            <li>Edit /etc/system and either add or modify (if not present) the sd setting as follows: set sd:sd_io_time = 0x3c (which is 60 in hexadecimal)</li>
+        </ul>
+    </body>
+</html>

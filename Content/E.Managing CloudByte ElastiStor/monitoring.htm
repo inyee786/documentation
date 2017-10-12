@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="2528" MadCap:lastWidth="762" MadCap:ignoredWords="IP;SMTP">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Monitoring</h2>
+        <p style="font-family: sans-serif;text-align: justify;font-size: 11pt;">Monitoring provides an intuitive visualization of storage statistics. Monitoring foregrounds relevant back end activities in an easy user interface for administrators. It provides a generic outlook of the components such as storage, input/output, throughput, latest data, status, alerts, and system configuration.</p>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Various dashboards dynamically represent disk utilization, storage utilization, throughput, input/output, and status of network interface cards attached to the system. Alerts and Events feature keeps a regular check on what is happening with the product. All events - even adding an additional IP address or modifying an existing one - get registered and monitored.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;"> The feature also provides a notification system where the administrator is informed through email/text messages when an alert is generated in the system.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">Continuous monitoring of your network</p>
+        <ul style="list-style-type: square;">
+            <li style="font-family: sans-serif;font-size: 11pt;">Helps you discover problems long before they become critical</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Enables you to take proactive measures</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Ensures that performance is always at expected levels</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Ensures that resources are effectively utilized</li>
+        </ul>
+        <h3 style="font-family: sans-serif;color: #005db2;">Monitoring in CloudByte ElastiStor</h3>
+        <p style="font-size: 11pt;font-family: sans-serif;">Monitoring in CloudByte ElastiStor can be classified as follows:</p>
+        <ul style="list-style-type: square;">
+            <li style="font-size: 11pt;font-family: sans-serif;"><b>Node level alerts:</b> The alert information specific to the Node.</li>
+            <li style="font-size: 11pt;font-family: sans-serif;"><b>Dashboard alerts:</b> Graphical representation of monitoring statistics at granular levels.</li>
+            <li style="font-size: 11pt;font-family: sans-serif;"><b>Events:</b> A snapshot of all ElastiCenter-specific events.</li>
+        </ul>
+        <h4 style="font-family: sans-serif;font-size: 13pt;color: #005db2;">Node level alerts</h4>
+        <p style="font-size: 11pt;font-family: sans-serif;">Node level alerts provide a list of alerts specific to the Nodes.</p>
+        <ol>
+            <li style="font-size: 11pt;font-family: sans-serif;">In ElastiCenter, click Alerts. All alerts associated with the Node are displayed.</li>
+            <li style="font-size: 11pt;font-family: sans-serif;">Click the Acknowledge icon to acknowledge the alert and it disappears from the list. To acknowledge all the alerts, click Bulk Acknowledge in the Actions Icon.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/65_Acknowledge_alerts.jpg" class="FitToText" style="width: 640px;height: 244px;" />
+            </p>
+        </ol>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 13pt;">Emailing alerts</h4>
+        <p style="font-family: sans-serif;font-size: 11pt;">The following settings in Global Settings let you email alerts:</p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">By default , alerts are not emailed. To receive alerts over email, set <code>alert.email.enable</code> to <code>true </code>. The alerts are mailed to the email that you specified when you updated your profile. For details, see <MadCap:xref href="../C.Getting to know ElastiCenter/accessing_cb_ec.htm#Reset">"Reset password and configure auto-alert options"</MadCap:xref>. To add multiple users, add the email IDs separated by comma in <code>alert.email.addresses</code>.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;"> You can set a filter to the alerts mailed based on severity using the option <code>alert.email.severity</code>. By default, all alerts are mailed (as the value set is <code>4</code>). </li>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">To specify the sender email ID, use the option <code>alert.email.sender</code>. If you do not specify an ID, the ElastiCenter domain name is displayed along with IP address of ElastiCenter.
+			</li>
+        </ul>
+        <h4 style="font-family: sans-serif;font-size: 13pt;color: #005db2;">Events</h4>
+        <p style="font-family: sans-serif;font-size: 11pt;">To get a list of ElastiCenter events,</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, click Events.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select Events in the Select View. All events are listed.</li>
+        </ol>
+        <p style="font-family: sans-serif;font-size: 11pt;">To get a list of specific events, go to the component page and then click Events. For example, for events related to only Storage Volumes:</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Storage Volumes page, select a Storage Volume for which you want to generate events.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, click Events in the actions icon.</li>
+        </ol>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 13pt;">Dashboard Alerts</h4>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Dashboard provides a visual representation of monitoring statistics such as performance, usage, capacity, and availability. To see the details, select the component and then make a specific selection.</p>
+        <p style="font-size: 11pt;font-family: sans-serif;">	The following figure is a dashboard representation of the alerts</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/66_Dashboard_alerts.jpg" class="FitToText" />
+        </p>
+        <h3 style="color: #005db2;font-family: sans-serif;">Advanced debugging options</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">The Troubleshooting option provided in the Node page, Pool page, and VSM page provides a set of information that help you with advanced debugging.			The options provide information such as the following:
+		</p>
+        <ul>
+            <li style="font-family: sans-serif;font-size: 11pt;"> <b>For Pools:</b> Pool I/O Status and Pool Properties</li>
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>For VSMs:</b> NIC and Netstat information</li>
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>For Nodes:</b> I/O Status of various disks, GMultipath status, and Camcontrol device list for all available disks </li>
+        </ul>
+        <p style="font-family: sans-serif;font-size: 11pt;">When you select an option, details are provided in a tabular format.
+			To access the Troubleshooting option,
+		</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+				In the Node/Pool/VSM page, click a specific Node/Pool/VSM.
+			</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">
+			In the Actions Icon, click Troubleshooting under Tasks.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select the action and then click Update.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/67_Node_troubleshooting.jpg" class="FitToText" style="width: 666px;height: 382px;" />
+            </p>
+        </ol>
+    </body>
+</html>

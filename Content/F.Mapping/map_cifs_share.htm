@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2589" MadCap:lastWidth="804">
+    <head>
+    </head>
+    <body>
+        <h2>Mapping CIFS share to the clients</h2>
+        <h3>On Windows Server 2008/Windows Server 2012</h3>
+        <p>The following procedures explain how to map CIFS share from CloudByte ElastiStor on Windows Server 2008/Windows Server 2012.</p>
+        <h3>On Windows Server 2008</h3>
+        <p class="note"><b>Note:</b> The mapping procedures are similar for other versions of Windows Server. However, there might be minor variations owing to the differences in UI strings and navigation.</p>
+        <ol>
+            <li>Ensure that you have enabled CIFS. For details, see <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_cifs.htm">"Configuring CIFS protocol options"</MadCap:xref>.</li>
+            <li>On Windows Server, launch Map Network Drive dialog box (Computer &gt; Map Network Drive).</li>
+            <li> Specify IP address of VSM and its access path in the following format:<code>\\&lt;VSM IP Address&gt;\&lt;Access Path&gt;</code>.</li>
+            <li>Click Finish.</li>
+            <li>(If you are using the VSM for the first time) At prompt, specify the credentials in the Enter Network Password dialog box. This is the username and password that you have created for the account user in ElastiCenter.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying CIFS and iSCSI from CloudByte ElastiStor on Windows Server 2008-6.png" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click OK. </li>
+            <li>(If again prompted) Specify the credentials in the Enter Network Password dialog box. </li>
+            <li>Ensure that CIFS share is connected, as shown in the following screen:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying CIFS and iSCSI from CloudByte ElastiStor on Windows Server 2008-7.png" style="border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #c0c0c0;width: 510px;height: 223px;" />
+        </p>
+        <h3>	On Windows Server 2012</h3>
+        <p>The following procedures explain how to map CIFS share from CloudByte ElastiStor on Windows Server 2012.</p>
+        <h4>Discovering the CIFS share</h4>
+        <p class="note"><b>Note:</b> The mapping procedures are similar for other versions of Windows Server. However, there might be minor variations owing to the differences in UI strings and navigation.</p>
+        <ol>
+            <li>Ensure that you have enabled CIFS. For details, see <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_cifs.htm">"Configuring CIFS protocol options" on page 1</MadCap:xref>.</li>
+            <li>On Windows Server 2012, launch Map Network Drive dialog box (Computer/Shortcut on Desktop to Computer &gt; Map Network Drive). <p style="text-align: center;"><img src="../Resources/Images/2012_1.png" /></p><p>The Map Network dialog box appears.</p></li>
+            <li>(If you are using the VSM for the first time) At prompt, specify the credentials in the Enter Network Password dialog box. This is the username and password that you have created for the account user in ElastiCenter.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/CIFS Mapping_Windows 2012.png" />
+            </p>
+        </ol>
+        <ol MadCap:continue="true">
+            <li>Click Finish. </li>
+            <li>(If again prompted) Specify the credentials in the Enter Network Password dialog box. </li>
+            <li>Ensure that CIFS share is connected, as shown in the following screen:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying CIFS and iSCSI from CloudByte ElastiStor on Windows Server 2008-7.png" class="FitToText" style="width: 515px;height: 224px;" />
+        </p>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="2452" MadCap:lastWidth="835">
+    <head>
+    </head>
+    <body>
+        <h1 style="font-size: 20pt;color: #013364;font-family: sans-serif;" MadCap:autonum="CHAPTER 1 ">Assigning Real IP spaces</h1>
+        <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Multiple client virtual machines can access ElastiStor VSMs on same IP addresses. The feature helps in scenarios where multiple customers need the same network range.You are not mandated to specify IP address while creating a VSM. Later, you can let the delegated administrator (say, your client administrator) specify the IP address. Even if different client administrators specify the same IP address, it will not result in a conflict.</p>
+        <p style="color: #005db2;font-size: 15pt;font-family: sans-serif;">Scenario</p>
+        <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Two customers need the same network range. You can provide the same VSM IP address for both. The feature takes away the need of IP address conversion.</p>
+        <p style="color: #005db2;font-family: sans-serif;font-size: 15pt;">Illustration</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/IP spaces (2).png" style="width: 612px;height: 451px;" />
+        </p>
+        <p style="color: #005db2;font-family: sans-serif;font-size: 17pt;">Workflow</p>
+        <p style="font-size: 13pt;color: #005db2;font-family: sans-serif;">Assign VLAN to Account</p>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Create an Account in ElastiCenter.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Add VLAN Interface. For details, see VLAN interface.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Assign the VLAN interface to Account (created in step 1).<ol><li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Account dashboard, select the Account.</li><li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Actions Icon, select Manage Shared NICs.</li><li style="color: #000000;font-size: 11pt;font-family: sans-serif;">From the list, select the VLAN interfaces that you want to assign to the Account.</li><li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Apply.</li></ol></li>
+        </ol>
+        <p style="font-size: 13pt;font-family: sans-serif;color: #005db2;">Provision VSM</p>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Create VSM on the VLAN.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">When you provision a VSM, in the networking details section of the Provision VSM Wizard, specify the VLAN interface you created. The list contains VLANs both assigned and unassigned VLANs .</li>
+        </ol>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">When provisioning a VSM on ElastiCenter, you can choose not to specify an IP address for the VSM.</p>
+        <p style="color: #000000;font-family: Arial;font-size: 11pt;text-align: center;">
+            <img src="../Resources/Images/IP_address_optional.png" style="width: 639px;height: 352px;" />
+        </p>
+        <p style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">When you have provisioned a VSM without assigning an IP address, the following page appears</p>
+        <p style="color: #000000;font-family: Arial;font-size: 11pt;text-align: center;">
+            <img src="../Resources/Images/IP_address_unassigned.png" style="width: 629px;height: 230px;" />
+        </p>
+        <p style="font-size: 13pt;font-family: sans-serif;color: #005db2;">Assign IP address after creating a VSM</p>
+        <ul>
+            <li style="text-align: justify;color: #000000;font-family: Arial;font-size: 11pt;">In the VSMs page, click Advanced Settings.</li>
+            <li style="text-align: justify;color: #000000;font-family: Arial;font-size: 11pt;">In the Primary IP Address tab, specify an IP address for the VSM.</li>
+            <li style="text-align: justify; color: #000000; font-family: Arial; font-size: 11pt;">Click Save.</li>
+            <li style="text-align: justify; color: #000000; font-family: Arial; font-size: 11pt;">Proceed to provisioning Storage Volumes.</li>
+        </ul>
+        <p style="color: #000000;font-family: Arial;font-size: 11pt;text-align: center;">
+            <img src="../Resources/Images/specify_primary_IP_address.png" style="width: 619px;height: 266px;" />
+        </p>
+        <p style="font-size: 16pt;color: #013364;font-family: sans-serif;">Limitations</p>
+        <ul>
+            <li style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">You cannot assign real IP spaces if you have configured VLAN on a LAGG.</li>
+            <li style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">VSM migration fails if the VSMs are assigned same IP address.</li>
+            <li style="text-align: justify;color: #000000;font-size: 11pt;font-family: sans-serif;">There might be a delay in the deletion of VSMs.</li>
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="8015" MadCap:lastWidth="829">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">active_directory_integration</h1>
+        <p><span style="font-size: 14pt;">Prerequisite</span>
+        </p>
+        <ul>
+            <li>Change the time and the time zone of the Active Directory Server to the VSM time and time zone.</li>
+        </ul>
+        <h2>Enabling Active Directory at VSM level</h2>
+        <ol>
+            <li>	In the Virtual Storage Machine page, select the VSM for which you want to enable Active Directory feature.</li>
+            <li>	In the Actions Icon, select Manage CIFS configuration.</li>
+            <li>	Click Edit.</li>
+            <li>	For Authentication Model, select Active Directory from the drop-down list.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/35_manage_cifs_authentication_group.jpg" class="FitToText" style="width: 658px;height: 232px;" />
+            </p>
+            <li>Click Save.</li>
+            <li>At the confirmation prompt, click Modify.</li>
+        </ol>
+        <p class="note"><b>Note:</b> Prior to configuring Active Directory feature, ensure the following:</p>
+        <ol>
+            <li>	VSM should be able to ping the AD Server IP address.</li>
+            <li>	VSM should be able to ping Active Directory Server IP address.</li>
+        </ol>
+        <h2>Configuring Active Directory at VSM level</h2>
+        <p>After Enabling the Active Directory feature for the VSM, AD configuration tab is enabled.</p>
+        <ol>
+            <li>In the Manage CIFS configuration page of the VSM, click AD Configuration and provide the required details.<img src="../Resources/Images/Active_directory_integration_with_cloudByte_ElastiStor_2.bmp" class="FitToText" /></li>
+            <table>
+                <col style="width: 102px;" />
+                <col style="width: 548px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Field</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">AD Server IP</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">IP address of active directory server.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">AD Server FQDN</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Fully qualified domain name of the Active Directory in UPPERCASE.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Domain</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">The Active Directory domain to which you want to connect in UPPERCASE. If the Domain name is different from the NETBIOS name, specify the NETBIOS name in the domain field.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Realm	</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">The realm to which the domain belongs in UPPERCASE. The value should be same as AD Server FQDN.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Admin Username</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">An Administrator that you have created in Active Directory.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Password	</td>
+                        <td style="text-align: left;background-color: #dcdcdc;"> The password you have specified for the administrator in Active Directory.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Confirm Password</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Retype the password.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li>Click Save.</li>
+            <p>The following dialog box appears:</p>
+            <p>
+                <img src="../Resources/Images/Active_directory_integration_with_cloudByte_ElastiStor_3.bmp" class="FitToText" />
+            </p>
+            <li>Click OK.</li>
+        </ol>
+        <h2>Assigning Groups and Users to the CIFS share</h2>
+        <ol>
+            <li>	In the Storage Volumes page, select the Storage Volume for which you want to assign groups/users.</li>
+            <li>	In the Actions Icon, select Manage CIFS configuration.</li>
+            <li>	Click CIFS share.</li>
+            <li>	(Optional) From the drop-down list select Groups if you want only the list of Groups in the Active Directory and the same for Users.</li>
+            <li>	From the Active Directory Groups and Users list, select the Groups and Users that you want to assign to the CIFS share.<img src="../Resources/Images/Active_directory_integration_with_cloudByte_ElastiStor_4.bmp" class="FitToText" /></li>
+            <li>Click Save</li>
+            <li>At the confirmation prompt, click Yes.</li>
+        </ol>
+        <p class="note"><b>Note</b>:  If you are accessing the Client through a remote desktop, you might have to add the Active Directory users to remote desktop users.</p>
+        <p>Follow the procedures to add the active directory users to remote desktop users:</p>
+        <ol>
+            <li>Launch the System page (Computer &gt; Properties).</li>
+            <li>In the left pane, click Remote Settings.</li>
+            <li>In the System Properties dialog box, select Allow remote connections to this computer and then click Select Users.</li>
+            <li>In the Remote Desktop Users dialog box, select the users that you want to add to the remote desktop users.</li>
+        </ol>
+        <h2>Mapping CIFS share to the Windows Client</h2>
+        <ol>
+            <li>Log in to the Windows Client with username (in the format Domain name\username) and password. For example, <code>CBQA\user1</code>.</li>
+            <li>Launch Map Network Drive page (right-click Computer &gt; Map Network Drive).</li>
+            <li>For Folder, specify the TSM IP address followed by the CIFS mount point in the format: <code>\\TSM_IP\CIFS_mount_point</code>.</li>
+        </ol>
+        <p>
+            <img src="../Resources/Images/cifs share map.png" class="FitToText" />
+        </p>
+        <p>Click Finish.</p>
+        <h2>Configuring Active Directory on Windows Server 2012</h2>
+        <p>The following article describes procedures to configure Active Directory and its related services such as DNS.</p>
+        <ol>
+            <li>	(Optional)Change the default computer name to a more desirable Computer Name.</li>
+            <ol>
+                <li>	In the Server Manager, click Dashboard.</li>
+                <li>	Click Local Server.</li>
+                <li>	Click the computer name hyperlink.</li>
+                <p>
+                    <img src="../Resources/Images/win_2012_computer_name.png" class="FitToText" />
+                </p>
+                <li>In the System Properties page, click Change.</li>
+                <li>In the following dialog box, specify the new Computer name.</li>
+                <li>Click OK.</li>
+            </ol>
+            <p>You will be prompted to restart your computer to apply the changes.  Click OK and then Click Restart now.</p>
+            <li>	(After your computer has restarted) In the Server Manager page, click Dashboard.</li>
+            <li>	Click Add roles and features.</li>
+            <li>	In the Before you begin page, click Next.</li>
+            <li>	Select installation type as Role-based or feature-based installation and click Next.</li>
+            <li>	In the following page, select the option Select a server from the server Pool and click Next.</li>
+            <li>	In the Server Roles page, select Active Directory Domain Services.</li>
+            <li>	At the confirmation prompt, click Add Features.</li>
+            <li>	In the Features page, click Next.</li>
+            <li>	In the Active Directory Domain Service page, click Next.</li>
+            <li>In the Confirmation installation selections page, click Install.</li>
+            <li>Upon completion of installation, click Close.</li>
+            <p>In Server Manager, you will notice that AD DS have been added to the left navigation tree.</p>
+            <img src="../Resources/Images/win_2012_AD_DS.png" class="FitToText" style="width: 716px;height: 199px;" />
+            <li>Click AD DS and then click More in the right navigation pane.</li>
+            <li>Under Action, click Promote this server to a domain controller.</li>
+            <li>In the Deployment Configuration page, select Add a new forest.</li>
+            <li>Specify the root domain name and then click Next.</li>
+            <li>In the Domain Controller Options page, specify and confirm the password of the Domain Controller.</li>
+            <li>Click Next.</li>
+            <li>Ignore the message in the following screen and then click Next.</li>
+            <p>The NetBIOS domain name is then displayed automatically.  In the event of a conflict, it will suggest an alternative by appending the original name with a 0.</p>
+            <li>In the Additional Options page, click Next.</li>
+            <li>Confirm or change the locations of your database folder and then click Next.</li>
+            <li>Review your selections in the Review Options page and then Click Next.</li>
+            <li>In the prerequisites check page, click Next.<img src="../Resources/Images/win_2012_install.png" class="FitToText" /></li>
+            <p>Your computer will restart upon after the completion of installation.</p>
+            <li>(After your computer has restarted) In the Server Manager, click Tools.</li>
+            <li>Click Active Directory Administrative Center.</li>
+            <li>In the left pane, click your Domain name.</li>
+        </ol>
+        <h2>Create Active Directory Users and Groups</h2>
+        <h3>Create Active Directory user</h3>
+        <ol>
+            <li>	In the Server Manager, click Tools.</li>
+            <li>	In the right pane, click Active Directory Users and Groups.</li>
+            <li>	In the Active Directory Users and Groups wizard, right-click your Domain name.</li>
+            <li>Select New and then select User.</li>
+            <p>
+                <img src="../Resources/Images/2NewUser.png" class="FitToText" />
+            </p>
+            <li>	In the User page, specify the relevant information of the user and then click Next.</li>
+            <li>	In the following page, specify and confirm password for the user.</li>
+            <li>	Click Finish.</li>
+        </ol>
+        <h3>Create Active Directory Group</h3>
+        <ol>
+            <li>In the Server Manager, click Tools.</li>
+            <li>	In the right pane, click Active Directory Users and Groups.</li>
+            <li>In the Active Directory Users and Groups wizard, right-click your Domain name.</li>
+            <li>Select New and then select Group.</li>
+            <li>Specify a name for the group to be created.</li>
+            <li>Click OK.</li>
+        </ol>
+        <h3>Adding Users to the Groups</h3>
+        <ol>
+            <li>In the Server Manager, click Tools.</li>
+            <li>In the right pane, click Active Directory Users and Groups.</li>
+            <li>In the Active Directory Users and Groups wizard, click your Domain name.</li>
+            <li>From the list of Groups and users, right-click the User you want to add to the Group.</li>
+            <li>Click Add to a Group.</li>
+            <p>
+                <img src="../Resources/Images/3Group.png" class="FitToText" />
+            </p>
+            <li>In the dialog box, specify the name of the Group to which you want to add the user.</li>
+            <li>At the prompt, click OK.</li>
+        </ol>
+        <h3>Adding a Client to the Domain</h3>
+        <ol>
+            <li>On your Client machine, go to Network and Sharing center.</li>
+            <li>Select the Network interface and then select properties.</li>
+            <li>Select Internet Protocol Version 4(TCP/IPv4).</li>
+            <li>In the Preferred DNS Server tab, specify the IP address of the Active Directory Domain Server that you to join the Client to.<img src="../Resources/Images/1IPv4.png" class="FitToText" style="width: 400px; height: 484px;" /></li>
+            <li>Click OK.</li>
+            <li>In the Server Manager, click Dashboard.</li>
+            <li>Click Local Server.</li>
+            <li>Click the computer name hyperlink.</li>
+            <li>In the System Properties page, click Change.</li>
+            <li>	Select Domain and then specify the Domain name of the Active Directory.</li>
+            <li>	Click OK.</li>
+            <li>	In the Windows Security dialog box, specify the login credentials of the Active Directory Domain Server.</li>
+            <li>	At the success prompt, click OK.</li>
+            <li>	You will be prompted to restart your computer to apply the changes.  Click OK.</li>
+            <li>	Click Close and then click Restart now.</li>
+        </ol>
+    </body>
+</html>

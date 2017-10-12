@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="529" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>LSI SAS switch configuration for ElastiStor</h2>
+        <p>This document explains how to manually configure a Serial Attached SCSI (SAS) switch. Also, the document explains how to use the SAS Domain Manager to create storage configurations in the SAS domain.</p>
+        <h3>Log in to the SAS switch</h3>
+        <p>The following table provides the default values that you have to specify when you log in to the LSI SAS Domain Manager.</p>
+        <table style="width: 60%;">
+            <col style="width: 221px;" />
+            <col style="width: 223px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Option</td>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Value</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">IP address</td>
+                    <td class="tablecode">192.168.1.100</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Username/Password </td>
+                    <td class="tablecode"> admin/admin</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Activation zone password</td>
+                    <td class="tablecode">lynx</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>&#160;</h3>
+        <h3>Configure the SAS switch</h3>
+        <ol>
+            <li>In a browser of your choice, specify the following URL: <code>http://192.168.1.100</code><p class="note"><b>Note</b>: If you have already configured your SAS switch, specify the new IP address instead of the default one.</p></li>
+            <li>In the management GUI, click Devices.<br /></li>
+            <p class="note"><b>Note</b>:All the devices connected to the SAS switch are listed. If the devices are connected in a daisy chain fashion, the devices are listed in a tree structure.<br /></p>
+            <img src="../Resources/Images/SAS_conf_1.bmp" class="FitToText" style="width: 710px;height: 438px;" />
+            <li> Create Aliases.<ol><li>Click the SAS device in the tree (in the left pane) for which you want to create an alias.</li><li>Specify an alias of up to 24 characters in the Enter alias field.</li><li>Click Apply.<br /><img src="../Resources/Images/SAS_conf_2.bmp" class="FitToText" /></li><br /></ol></li>
+            <li>Create Zone Groups. <br /></li>
+            <p class="note"><b>Note</b>: &#160;CloudByte recommends you to create a dedicated Zone Group for each initiator/target connected to the SAS switch.</p>
+            <ol>
+                <li> Click Create Zone Group in the left pane.</li>
+                <li>Specify a name in the Zone Group Name field.</li>
+                <li>Select members for the Zone Group from the drop-down list.</li>
+                <img src="../Resources/Images/sas_switch_conf_3.jpg" class="FitToText" style="width: 677px;height: 348px;" />
+            </ol>
+            <li>Create Zone Set to map the zone groups which need to communicate with each other.<br />The following screen shows JBOD104106GRP configured to communicate with <ul><li>Node N104GRP</li><li>Node N106GRP<br /><img src="../Resources/Images/sas_switch_conf_4.jpg" class="FitToText" /></li></ul></li>
+            <li>Activate zone set for the configurations to take effect.<ol><li>Click Activate/Deactive Zone Set in the left pane.</li><li>Select Activate a Zone Set option.</li><li>Select a Zone Set from the drop-down list.</li><li>Specify the default zone manager password: <code>lynx</code><br /> <img src="../Resources/Images/sas_switch_conf_5.jpg" class="FitToText" /></li></ol></li>
+        </ol>
+    </body>
+</html>

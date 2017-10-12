@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Pre;VMWare;vCenter;plugin;NFS;datastore;VM’s;VM;VMs;exe;XP;R2;powerCLI;ExecutionPolicy;PowerCLI;VCenter;x86;Plugins;credstore;Datastore;Datastores;datacenter;datastores;IOPS;secureVM;unregister;datatsore" MadCap:lastBlockDepth="5" MadCap:lastHeight="10310" MadCap:lastWidth="671">
+    <head>
+    </head>
+    <body>
+        <h1 MadCap:autonum="CHAPTER 1 ">CloudByte ElastiStor plugins</h1>
+        <h2>CloudByte ElastiStor plugin for VMWare vCenter</h2>
+        <h3>Introduction</h3>
+        <p>VMware vCenter administrators can perform the following tasks, performed using CloudByte ElastiCenter, in the vCenter console. CloudByte provides a plugin to create, configure, and manage all ElastiCenter tasks.</p>
+        <ul style="list-style-type: square;">
+            <li>Mount an NFS datastore created in ElastiCenter and then create VMs under the datastore.</li>
+            <li>Manage QoS properties for each VM.</li>
+        </ul>
+        <li>CloudByte lets you manage your VMs based on two major features Shared QoS and Dedicated QoS. For details, see <MadCap:xref href="../I.Troubleshooting and FAQs/qos_faqs.htm">"QoS&#160;FAQs" on page 1</MadCap:xref>.</li>
+        <p>The following topics explain how to install and use the ElastiStor plugin for vCenter.</p>
+        <h3>Pre-requisites</h3>
+        <ul style="list-style-type: square;">
+            <li>CloudByte-plugin.exe (the client-side CloudByte installer)</li>
+            <li>vCenter client (installed on your desktop)</li>
+            <li>.NET Framework 4.0</li>
+            <li>Windows operating system ( Windows 7 Professional, Windows XP, or Windows 2008 R2)</li>
+        </ul>
+        <h3>Installing CloudByte vCenter plugin</h3>
+        <ol>
+            <li>Insert the CloudByte plugin installation disk into your computer's DVD or CD drive.</li>
+            <li>Right-click the CloudByte-plugin.exe and then select Run as administrator.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/1.png" class="FitToText" style="border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #c0c0c0;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Select the default installation path and then click Yes.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-2.png" />
+        </p>
+        <blockquote>
+            <p>The following message appears on successful installation:</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-3.png" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>In the powerCLI command prompt, run the following command: <code>Set-ExecutionPolicy Unrestricted</code>.</li>
+            <li>Run the following command to verify if the execution policy is set to unrestricted mode:<code> Get-ExecutionPolicy</code>.</li>
+            <li>On your desktop, double-click the CloudByte plugin icon. </li>
+            <p>This installs PowerCLI (if not already installed) and displays the shortcuts on the desktop and the CloudByte registration form appears.</p>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-4.png" style="width: 453px;height: 324px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Specify the VCenter server credentials.</li>
+            <li>Click OK to confirm.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-5.png" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Log in to vCenter server and then select Plug-ins &gt; Manage Plug-ins.</li>
+            <li>In the Plug-in Manager, see if ElastiStor plugin is listed.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-6.png" style="width: 876px; height: 492px;" class="FitToText" />
+        </p>
+        <h2>Plug-in tips</h2>
+        <p>Ensure the following:</p>
+        <ul style="list-style-type: square;">
+            <li>A bin folder is created under C:\Program Files (Program Files (x86) for 64-bit)\VMware\Infrastructure\Virtual Infrastructure Client\Plugins\bin.</li>
+            <li>You have specified the VCenter credentials correctly; else the plugin fails.</li>
+            <li>When you modify the VCenter credentials, ensure that you register the credentials (as explained in Step 1). The credentials are created in the folder C:\Documents and Settings\Administrator\Application Data\VMware\credstore.</li>
+        </ul>
+        <h3>Configuring CloudByte vCenter plugin</h3>
+        <ol>
+            <li>In the vCenter home page, click CloudByte Administration icon to register the CloudByte Control Station.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-7.png" style="width: 819px;height: 460px;border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1px;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: #c0c0c0;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>In the following screen, Click Add and then specify the CloudByte Management Station account details.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-8.png" style="width: 860px;height: 483px;border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1pt;border-bottom-color: #c0c0c0;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>In the vCenter home page, select Datastore Clusters (Inventory &gt; Datastores and Datastore Clusters).</li>
+            <li>Right-click the datacenter and then select New CloudByte Datastore.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-9.png" style="width: 912px; height: 512px;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>In the following page, select the datacenter/Node and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-10.png" style="width: 509px;height: 361px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Enter the Datastore Name and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-11.png" style="width: 515px;height: 353px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Select CloudByte Management Station, Account, and TSM and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-12.png" style="width: 563px;height: 315px;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Select a storage bucket from the list and then click Next to see the summary page.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-13.png" style="width: 580px;height: 402px;" />
+        </p>
+        <blockquote>
+            <p>The Summary page appears as follows:</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-14.png" style="width: 504px;height: 348px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click Finish to create a New Datastore.</li>
+        </ol>
+        <h3>Creating a secure Virtual Machine</h3>
+        <ol>
+            <li>In the vCenter home page, go to Datastores and Datastore Clusters (Home &gt; Inventory).</li>
+            <li>Right-click the datacenter and then select New CloudByte Secure VM. The VM creation wizard page appears.</li>
+            <li>Select the location for the Virtual Machine and then click Next.</li>
+            <li>Select the datacenter/Node under which the new Virtual Machine has to be created and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-15.png" style="width: 536px;height: 378px;" />
+        </p>
+        <blockquote>
+            <p>A list of CloudByte datastores appears.</p>
+        </blockquote>
+        <ol MadCap:continue="true">
+            <li>Select the CloudByte datastore for creating VM and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-16.png" style="width: 562px; height: 383px;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Select the guest operating system and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-17.png" style="width: 599px; height: 404px;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Select the network configurations for the Virtual Machine and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-18.png" style="width: 607px; height: 414px;" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Select the virtual disk size and then click Next.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-19.png" style="width: 527px;height: 357px;" />
+        </p>
+        <blockquote>
+            <p>A summary of selections made while creating a new Virtual Machine appears.</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-20.png" style="width: 520px;height: 351px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click Finish to create a new Secure Virtual Machine. The secure VM appears under the datacenter it is created.</li>
+            <li>Verify the secure VM attributes such as IOPS, Latency, and Throughput.</li>
+        </ol>
+        <h3>Troubleshooting scenarios</h3>
+        <h4>I get an error message that says there is no free disk space. Why?</h4>
+        <p>This is because you have specified a virtual disk size higher than the available disk size.</p>
+        <h4>How will I edit secure Virtual Machine attributes from the plugin?</h4>
+        <ol>
+            <li>Right-click the secureVM to choose the Virtual Machine operations.</li>
+            <li>Select Edit QoS. The Edit QoS screen appears.</li>
+            <li>Change the QoS parameters as per your requirements.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Vcenter-21.png" style="width: 819px; height: 460px;" class="FitToText" />
+        </p>
+        <blockquote>
+            <p>After you change the QoS values, select Update to update the QoS values in ElastiCenter.</p>
+        </blockquote>
+        <h4>How will I unregister ElastiCenter plugin?</h4>
+        <ol>
+            <li>In the vCenter Homepage, go to CloudByte Administration &gt; Remove.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/Vcenter-22.png" style="width: 551px;height: 295px;border-left-style: solid;border-left-width: 1pt;border-left-color: #c0c0c0;border-right-style: solid;border-right-width: 1pt;border-right-color: #c0c0c0;border-top-style: solid;border-top-width: 1pt;border-top-color: #c0c0c0;border-bottom-style: solid;border-bottom-width: 1pt;border-bottom-color: #c0c0c0;" class="FitToText" />
+            </p>
+            <li>At prompt, click Yes.</li>
+        </ol>
+        <h3>Limitations</h3>
+        <p>The current release has the following limitations which will be addressed in future:</p>
+        <ul style="list-style-type: square;">
+            <li>No confirmation message to suggest successful installation on both vCenter server and client.</li>
+            <li>If you modify the QoS properties in CloudByte ElastiCenter, it does not reflect in the vCenter plugin console.</li>
+            <li>Allows deletion of file system from ElastiCenter even when a Virtual Machine is created on the datatsore.</li>
+            <li>You cannot uninstall the plug-in. Instead you can delete the bin folder from C:\Program Files (x86)\VMware\Infrastructure\Virtual Infrastructure Client\Plugins, the CloudByte Folder from C:\Users\user, and the shortcut created on desktop.</li>
+            <li>A VM created under default QoS group using the plugin cannot be deleted from the controller. But you can delete it from vCenter.</li>
+            <li>A VM created under a dedicated QoS group does not get completely deleted. This is because, the the deleted VM folders are still present in the datastore. However, you can manually delete the folders.</li>
+        </ul>
+    </body>
+</html>

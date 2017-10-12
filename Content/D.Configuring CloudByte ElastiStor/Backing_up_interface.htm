@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="1071" MadCap:lastWidth="835">
+    <head>
+    </head>
+    <body>
+        <h1 style="color: #013364;font-family: sans-serif;font-size: 19.8pt;" MadCap:autonum="CHAPTER 1 ">Backing up interface</h1>
+        <p style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Prerequsite</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">The NIC and the backup NIC should be on the same network.</p>
+        <p style="font-size: 14pt;font-family: sans-serif;color: #005db2;">Procedures</p>
+        <ul>
+            <li style="text-align: justify;">In the Nodes page (Elasticenter &gt; Navigation pane &gt; Node), click Network Interface Cards (Actions icon &gt; Network Interface Cards)</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Click Configure Backup Interface.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the dialog, select a NIC as the backup from the drop-down list. </li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click OK</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/backupinterface_2.png" style="width: 694px;height: 247px;" />
+        </p>
+        <p style="color: #005db2;font-family: sans-serif;font-size: 14pt;">Back up LAGG</p>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">For the LAGG that you have added (Add LAGG) you can set up a back up. The following sections explain the procedures. Backing up your lagg assures that the VSMs are always accessible.</p>
+        <p style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Assumptions</p>
+        <p style="font-family: sans-serif;font-size: 11pt;">All the NICs in the primary LAGG and backup LAGG should be on the same network.</p>
+        <p style="font-family: sans-serif;font-size: 14pt;color: #005db2;">Procedures</p>
+        <ul>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">In the HA Groups page (Elasticenter &gt; Navigation pane &gt; HA Group), click Manage LAGG interface (Actions Icon &gt; Manage LAGG interfaces).</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Actions icon, click Configure Backup Interface.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify the following details:<ul><li style="font-family: sans-serif;font-size: 11pt;">For LAGG interface 1, select the LAGG for which you want to configure back up.</li><li style="font-family: sans-serif;font-size: 11pt;">In the LAGG interface 2 field, select the LAGG for back up.</li></ul></li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click OK</li>
+        </ul>
+        <p>&#160;</p>
+        <p>&#160;</p>
+    </body>
+</html>

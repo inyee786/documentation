@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="1545" MadCap:lastWidth="835">
+    <head>
+    </head>
+    <body style="color: #008000;font-family: 'Times New Roman';font-size: 20pt;">
+        <p style="color: #013364;font-family: sans-serif;font-size: 18pt;">Configuring Grace</p>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">Grace is the provisioning of unused IOPS/throughput of Pools to Storage Volumes based on the performance requirements. You can configure Grace at Pool level and Storage Volume level. For example, assume that you have a Pool with the capacity of 100 IOPS and Grace enabled. Two TSMs named TSM A and TSM B, with a capacity of 30 IOPS and 60 IOPS respectively are created under the Pool.</p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Under VSM A (with 30 IOPS capacity), Storage Volumes named E and F are created, and assigned 10 IOPS and 15 IOPS respectively.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Under VSM B (with 60 IOPS capacity), Storage Volume G is created and assigned 35 IOPS.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">The grace available in this scenario is 40 IOPS.</li>
+        </ul>
+        <p style="color: #000000;font-family: Arial;font-size: 11pt;text-align: center;">
+            <img src="../Resources/Images/HowGraceFeatureWorks.png" style="width: 478px;height: 339px;" />
+        </p>
+        <p style="color: #005db2;font-family: sans-serif;font-size: 14pt;">Configuring Grace at the Pool Level</p>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">Grace is enabled by default at the Pool level. You can edit Grace after creating the Pool. To edit,</p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Go to the Pool page and then in the actions Icon, click Settings.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Edit and then choose to enable/disable Grace.</li>
+        </ul>
+        <p style="color: #000000;font-family: 'Times New Roman';font-size: 11pt;text-align: center;">
+            <img src="../Resources/Images/Grace_last.png" style="width: 593px;height: 279px;" />
+        </p>
+        <p style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Configuring Grace at the Storage Volume Level</p>
+        <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">To enable Grace at the Storage Volume level, ensure that Grace is enabled at the respective Pool level. To edit,</p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Go to the Storage Volume page and then in the actions Icon, click Settings.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Click Edit and then choose to enable/disable Grace</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Click Save</li>
+        </ul>
+        <p style="color: #000000;font-family: Arial;font-size: 11pt;text-align: center;">
+            <img src="../Resources/Images/Grace_enable_Volume_level.png" style="width: 621px;height: 288px;" />
+        </p>
+    </body>
+</html>

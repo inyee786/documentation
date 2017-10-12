@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Browsable;LUN;workflow;IQN;CIFS;Charset;CP;UTF;NAS4Free;SMB;NTP;ACL;IP" MadCap:lastBlockDepth="6" MadCap:lastHeight="3057" MadCap:lastWidth="1004">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Data access using CIFS</h2>
+        <p style="text-align: justify;font-family: sans-serif;font-size: 11pt;">The Common Internet File System (CIFS), is a network protocol whose most common use is sharing files on a Local Area Network(LAN).</p>
+        <p style="font-size: 11pt;font-family: sans-serif;">The following workflow explains how to configure CIFS options:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/configuringCIFSprotocolOptions1.png" class="FitToText" style="width: 584px;height: 250px;" />
+        </p>
+        <p style="font-family: sans-serif;font-size: 11pt;">Configure VSM CIFS options at the VSM level. File system CIFS options can be configured at the Storage Volume level (if you have enabled the protocol option).</p>
+        <h3 style="font-family: sans-serif;font-size: 14pt;color: #005db2;">VSM CIFS options</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;">By default, CloudByte ElastiStor creates a default VSM CIFS options group with industry standard options.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;"> After you create the VSM, Manage CIFS Configuration option can be used to manage CIFS options at VSM level. You can either select the default one or select options from the drop down menu.</p>
+        <table>
+            <col style="width: 125px;" />
+            <col style="width: 556px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Field</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;"> Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Authentication Model</td>
+                    <td style="background-color: #dcdcdc;"> By default the Authentication Model is user.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">NetBios Name</td>
+                    <td style="background-color: #dcdcdc;"> A unique name for the VSM CIFS options template.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Server Description</td>
+                    <td style="background-color: #dcdcdc;"> A meaningful description of the VSM CIFS options template.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Workgroup
+					</td>
+                    <td style="background-color: #dcdcdc;"> The workgroup that the server will appear to be in.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">DOS Charset</td>
+                    <td style="background-color: #dcdcdc;">  The character set that is used while communicating with the Windows clients. The default is CP437</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">UNIX Charset</td>
+                    <td style="background-color: #dcdcdc;"> The character set that is internally used. The default is UTF-8.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Log Level</td>
+                    <td style="background-color: #dcdcdc;"> Sets the amount of log/debug messages that are sent to the log file. Default is Minimum. Keep it this way for best performance unless more information is needed for troubleshooting.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Time Server</td>
+                    <td style="background-color: #dcdcdc;"> Determines whether or not ElastiStor advertises itself as a time server to Windows clients.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 style="font-family: sans-serif;color: #005db2;">File system CIFS options</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;"> By default, CloudByte ElastiStor creates a default file system CIFS options group with industry standard options. After you create the Storage Volume, Manage CIFS Configuration option can be used to manage CIFS options at Storage Volume level.</p>
+        <table>
+            <col style="width: 104px;" />
+            <col style="width: 894px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Option</td>
+                    <td style="text-align: center;color: #ffffff;background-color: #808080;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Status</td>
+                    <td style="background-color: #dcdcdc;"> If Enabled, CIFS Share can be accessed. If NFS is enabled on a Storage Volume, you can access CIFS share by setting Status to <code>enable</code>.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Name</td>
+                    <td style="background-color: #dcdcdc;"> A unique name for the file system CIFS options template.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Description</td>
+                    <td style="background-color: #dcdcdc;"> A meaningful description of the CIFS options template.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Read Only</td>
+                    <td style="background-color: #dcdcdc;"> If checked, prohibits write access to the share.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">
+                        <p>Browseable</p>
+                    </td>
+                    <td style="background-color: #dcdcdc;"> If selected, clients when they browse the shared directory using Windows Explorer can see the list of shares. If unselected, client has to explicitly specify the full server path in Windows Explorer.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Inherit Permissions</td>
+                    <td style="background-color: #dcdcdc;"> If selected, permissions on new files and directories are inherited from parent directory.This option is (particularly) helpful in scenarios where there are large systems with many users involved. Inheriting permissions let a single home share to be used flexibly by each user. Leave this unselected if Type of ACL is set to Windows in the Volume's permissions.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Recycle Bin</td>
+                    <td style="background-color: #dcdcdc;">If selected, instead of purging the files, they are moved to recycle bin of CIFS share on deletion.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Hide Dot Files</td>
+                    <td style="background-color: #dcdcdc;"> Dot files (unlike on UNIX) appear on Windows. Select the option to hide the Dot files.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Hosts Allow</td>
+                    <td style="background-color: #dcdcdc;"> Host-based protection feature.  Comma-separated or space separated list of IP addresses that are allowed to access the shares. If nothing is specified, the default value ALL applies.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Hosts Deny</td>
+                    <td style="background-color: #dcdcdc;"> Host-based protection feature. Comma-separated or space separated list of IP addresses that are denied access to the file system. If you specify ALL,  IP Addresses that are not listed in the Host Allow field are denied permission.
+</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 style="font-family: sans-serif;color: #005db2;">CIFS&#160;authentication workflow </h3>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">A CIFS Authentication Group is a grouping of multiple CIFS users. You can select the users who can access the CIFS share. </p>
+        <ol start="1">
+            <li style="font-family: sans-serif;font-size: 11pt;">In the ElastiCenter, select Accounts (Navigation pane &gt; Accounts).</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Accounts page, select the account for which you want to specify the protocol options.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select Manage CIFS Authentication Groups in the Actions Icon.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/33_Account_CIFS_options.jpg" class="FitToText" style="width: 701px;height: 255px;" />
+        </p>
+        <ul start="1">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Add Authentication Group in the following page:</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/34_add_cifs_authentication_grpups.jpg" class="FitToText" style="width: 674px;height: 265px;" />
+            </p>
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify the required details and then click OK.</li>
+            <table>
+                <col style="width: 178px;" />
+                <col style="width: 783px;" />
+                <tbody>
+                    <tr>
+                        <td style="color: #ffffff;background-color: #808080;">Field </td>
+                        <td style="color: #ffffff;background-color: #808080;">Description </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Name</td>
+                        <td style="background-color: #dcdcdc;"> A unique name for the authentication group.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Description </td>
+                        <td style="background-color: #dcdcdc;"> A meaningful description for the authentication group.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">User name </td>
+                        <td style="background-color: #dcdcdc;">Specify a name for the user.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Password </td>
+                        <td style="background-color: #dcdcdc;">Specify a password for the user.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Full name</td>
+                        <td style="background-color: #dcdcdc;">Specify the full name of the user.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the VSM page, select the VSM for which you want to assign the authentication group.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select Manage CIFS Configuration (Actions Icon &gt; Tasks).</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/35_manage_cifs_authentication_group.jpg" class="FitToText" style="width: 738px;height: 259px;" />
+            </p>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Edit, select a Discovery Authentication Group from the drop-down list and then click Save.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/36_assign_cifs_authentication_groups.jpg" class="FitToText" style="width: 680px;height: 283px;" />
+            </p>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the confirmation prompt, click Modify.</li>
+        </ul>
+    </body>
+</html>

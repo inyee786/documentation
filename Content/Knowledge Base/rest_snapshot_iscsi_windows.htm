@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="3909" MadCap:lastWidth="831">
+    <head>
+    </head>
+    <body>
+        <h3>Restore snapshots while mapping iSCSI LUNs (on Windows XP, Windows 7, Windows 8, Windows Server 2008, and Windows Server 2012)</h3>
+        <ol>
+            <li>In ElastiCenter, create an iSCSI Storage Volume.</li>
+            <li>
+				Mount the Storage Volume on the Windows Client.
+			</li>
+            <ol>
+                <li>
+					On Windows machine, launch iSCSI Initiator (Programs &gt; Administrative Tools &gt; ISCSI Initiator).
+				</li>
+                <li>
+				In the Target tab, specify the target (tenant IP address).</li>
+                <p>
+                    <img src="../Resources/Images/iscsi_windows_revsna-pshots_initiatorproperties.png" class="FitToText" /> </p>
+                <li>	Click Quick Connect. The Quick Connect screen appears, displaying the target name.</li>
+                <li>Select the Target name and then click on Connect.</li>
+                <li>Click OK.</li>
+            </ol>
+            <li>
+				Create Storage Drive to use the iSCSI target.
+			</li>
+            <ol>
+                <li>
+					Launch Server Manager and then select Disk Management in the left pane.
+				</li>
+                <li>
+					Right-click the unallocated space (New Simple Volume wizard appears).
+				</li>
+                <li>Select New Simple Volume. </li>
+            </ol>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_newsimplevolume.png" class="FitToText" /> </p>
+            <li>
+			Ensure that the new Storage Volume appears as shown in the following page. </li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_newVolume.png" class="FitToText" />
+            </p>
+            <li>Copy some data.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revvsnapshots_copydata.png" class="FitToText" />
+            </p>
+            <li>	Create a snapshot on the Storage Volume using the following procedures: </li>
+            <ol>
+                <li>In the Storage Volumes page, select the Storage Volume for which you want to create a local backup. </li>
+                <li>In the following page, select Create Snapshot in the Actions pane.</li>
+                <li>	Specify a name for the snapshot and then click OK.</li>
+            </ol>
+            <p>
+                <img src="../Resources/Images/Snapshot.jpg" class="FitToText" style="width: 685px;height: 341px;" />
+            </p>
+            <li>Delete the data on the mounted Storage Volume from the Windows Client.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_deletedata.png" class="FitToText" />
+            </p>
+            <li>In ElastiCenter, click Manage Snapshots (Actions Icon &gt; Local Backup) to view the list of previously captured snapshots.</li>
+            <li> Before restoring the snapshot, make the volume offline on the Windows Client (Disk Management &gt; Right-Click Disk).</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_Offline.png" class="FitToText" />
+            </p>
+            <li>From the list of snapshots, select the snapshot you want to restore and then click Restore icon to roll back the Storage Volume content to previous state.</li>
+            <li>From the Windows Client, make the Storage Volume online.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_windows_revsnapshots_Online.png" class="FitToText" />
+            </p>
+        </ol>
+    </body>
+</html>

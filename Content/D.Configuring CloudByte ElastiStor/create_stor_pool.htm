@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="IOPS;z1" MadCap:lastBlockDepth="6" MadCap:lastHeight="2114" MadCap:lastWidth="1023">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Creating a Pool</h2>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Go to the Node page (ElastiCenter &gt; Navigation Pane &gt; Nodes).</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">From the list of Nodes, select the one for which you create the storage Pool.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the actions Icon, go to the section Tasks and then click Add Pool.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/add_pool_1.png" class="FitToText" style="width: 622px;height: 269px;" />
+        </p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">The Add Pool page appears.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Create Storage pool_5.png" class="FitToText" style="width: 568px;height: 268px;" />
+        </p>
+        <ol MadCap:continue="true">
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Select the Site, HA&#160;Group, and CB&#160;Node to which the Pool belongs. </li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Specify a name for the Pool and then click Next.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the following screen, specify the RAID storage type and then choose one or more of the available disks. </li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">(Optional) Enable Sector Size.</li>
+        </ol>
+        <p class="note" style="color: #000000;font-family: sans-serif;"><b>Note:</b> For optimal performance, ensure that the disks in the same Pool belong to the same disk array.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/create_storage_pool_3.png" class="FitToText" style="width: 630px;height: 291px;" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Next. The QoS settings page appears.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/create_pool_qos_settings.png" class="FitToText" style="width: 614px;height: 377px;" />
+        </p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Specify the following details and then Click Add Pool</li>
+        </ul>
+        <table>
+            <col style="width: 92px;" />
+            <col style="width: 925px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Field</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;"> Total IOPS	</td>
+                    <td style="background-color: #dcdcdc;">The maximum per second I/O limit for a Pool.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Average Latency	</td>
+                    <td style="background-color: #dcdcdc;">The desired average latency in milliseconds per I/O. Latency is the round-trip time per I/O request-response as measured by the client.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="note" style="text-align: justify;color: #000000;font-family: sans-serif;"><b>Note:</b>The number of disks required to create a Pool depends on the RAID type and protection/performance you look for. For example, for a high performance application, you can create RAID 10 Pool. Similarly, for a high capacity application, you can set up RAID z1 with 8 disks.</p>
+        <h2 style="font-size: 14pt;color: #005db2;font-family: sans-serif;"><a name="Configuring_Spare"></a>Configuring Spare</h2>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Go to the Pools page (Navigation pane &gt; Pools).</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Actions Icon, click Manage RAID&#160;Configuration. The Disk Group page appears.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Actions Icon, select Add Spare.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Add Spare page, select a disk from the drop-down list.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Add.</li>
+        </ol>
+        <h2 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Migrating a Pool</h2>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">You cannot migrate a pool. Only a VSM can be migrated.</p>
+    </body>
+</html>

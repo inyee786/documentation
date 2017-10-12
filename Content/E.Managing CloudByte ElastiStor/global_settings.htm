@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="8" MadCap:lastHeight="2533" MadCap:lastWidth="811" MadCap:ignoredWords="API;smtp;SMTP;hostname;localhost;useAuth;username;Username;autoSupport;config;autosupport;httpnotify;apikey;ipaddress;IP;infastructure;READs;devman;cbdir;buildversion;qos;hagroup;sb;algo;tsm;VSM;VSMs;upto">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Global Settings</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;">Global settings let the administrator configure various options used to control CloudByte ElastiStor. For example, email configuration. To configure global settings,</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Global Settings.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select a target category. A list of settings is provided by default.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Edit the relevant settings.</li>
+        </ol>
+        <p class="note" style="font-family: sans-serif;"><b>Note:</b> You cannot add new settings.</p>
+        <p>This section lists the global settings options available on the ElastiCenter.</p>
+        <table style="">
+            <col style="width: 259px;" />
+            <col style="width: 300px;" />
+            <col style="width: 240px;" />
+            <col style="width: 9px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Option</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Default Value</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecode"><code>alert.email.addresses</code> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;">Comma separated list of email addresses used for sending alerts.</td>
+                    <td style="background-color: #dcdcdc;">
+                        Email ID you specified in the <code>Update Profile</code> section in ElastiCenter.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">alert.email.enable</td>
+                    <td style="background-color: #dcdcdc;">If true, emails are sent to the specified email addresses.</td>
+                    <td style="background-color: #dcdcdc;">TRUE </td>
+                </tr>
+                <tr>
+                    <td class="tablecode"> alert.email.sender</td>
+                    <td style="background-color: #dcdcdc;">Sender of the alert email.</td>
+                    <td style="background-color: #dcdcdc;">  <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td class="tablecode">alert.email.severity</td>
+                    <td style="background-color: #dcdcdc;">
+                        Set the email severity level to one of the following:
+                        <ul><li class="table"> 1 - ERROR</li><li class="table"> 2 - CRITICAL</li><li class="table"> 3 - WARNING</li><li class="table"> 4 - INFO</li></ul></td>
+                    <td style="background-color: #dcdcdc;">4
+                                          </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">
+						alert.smtp.host </td>
+                    <td style="background-color: #dcdcdc;">SMTP hostname to send alert emails.</td>
+                    <td style="background-color: #dcdcdc;">
+                    localhost</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">alert.smtp.password </td>
+                    <td style="background-color: #dcdcdc;">Password for SMTP authentication (applies only if <code>alert.smtp.useAuth</code> is true).</td>
+                    <td style="background-color: #dcdcdc;">  <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">alert.smtp.port</td>
+                    <td style="background-color: #dcdcdc;">The port of the SMTP server.</td>
+                    <td style="background-color: #dcdcdc;">
+                        <p>587</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">alert.smtp.useAuth</td>
+                    <td style="background-color: #dcdcdc;">If true, SMTP authentication is enabled to send emails. </td>
+                    <td style="background-color: #dcdcdc;">
+                       False
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">
+                        alert.smtp.username
+                    </td>
+                    <td style="background-color: #dcdcdc;">Username for SMTP authentication (applies only if <code>alert.smtp.useAuth</code> is true).</td>
+                    <td style="background-color: #dcdcdc;">  <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autoSupport.config.details</td>
+                    <td style="background-color: #dcdcdc;">Send configuration details to CloudByte as part of an auto support email.</td>
+                    <td style="background-color: #dcdcdc;">Yes</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autosupport.httpnotify.apikey </td>
+                    <td style="background-color: #dcdcdc;">API key of CloudByte auto support server.</td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autosupport.httpnotify.enable</td>
+                    <td style="background-color: #dcdcdc;">Send HTTP post request to CloudByte auto support server.</td>
+                    <td style="background-color: #dcdcdc;">
+                        <p>False</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autosupport.httpnotify.ipaddress</td>
+                    <td style="background-color: #dcdcdc;">The IP address of CloudByte auto support server.
+                    </td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autoSupport.infastructure.statistics</td>
+                    <td style="background-color: #dcdcdc;">Send infrastructure statistics to CloudByte as part of an auto support email.</td>
+                    <td style="background-color: #dcdcdc;">Yes
+                                   </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autoSupport.product.alerts</td>
+                    <td style="background-color: #dcdcdc;">Send product related alerts to CloudByte as part of an auto support email.</td>
+                    <td style="background-color: #dcdcdc;">Yes</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autoSupport.reg.details</td>
+                    <td style="background-color: #dcdcdc;">Send registration details to CloudByte as part of an auto support email.</td>
+                    <td style="background-color: #dcdcdc;">
+                        <p class="table">Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">autoSupport.tenant.statistics</td>
+                    <td style="background-color: #dcdcdc;">Send tenant statistics to CloudByte as part of an auto support email.</td>
+                    <td style="background-color: #dcdcdc;">Yes</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">bad.disk.threshold</td>
+                    <td style="background-color: #dcdcdc;">The number of defects grown on disk that will declare it as a bad disk</td>
+                    <td style="background-color: #dcdcdc;">512</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">cache.multiplication.factor</td>
+                    <td style="background-color: #dcdcdc;">The number of Cache READs which equal a disk READ. The default value is 3 which means 1 disk READ equals 3 cache READs. Only a value between 2 and 6 is supported.</td>
+                    <td style="background-color: #dcdcdc;">3</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">devman.backup.files.retain</td>
+                    <td style="background-color: #dcdcdc;">The number of backup files to be retained.</td>
+                    <td style="background-color: #dcdcdc;">5</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">devman.backup.path</td>
+                    <td style="background-color: #dcdcdc;">The path of ElastiCenter backup directory.</td>
+                    <td style="background-color: #dcdcdc;"><code>/var/devman/backups</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">devman.backup.scheduling.interval</td>
+                    <td style="background-color: #dcdcdc;">The interval time for ElastiCenter backup.</td>
+                    <td style="background-color: #dcdcdc;">1</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">devman.build.number</td>
+                    <td style="background-color: #dcdcdc;">The build version of ElastiStor.</td>
+                    <td style="background-color: #dcdcdc;">Available in <code>/cbdir/buildversion</code></td>
+                </tr>
+                <tr>
+                    <td class="tablecode">monitor.purge.retain.days</td>
+                    <td style="background-color: #dcdcdc;">The number of days that the data has to be retained for.</td>
+                    <td style="background-color: #dcdcdc;">60</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">monitor.qos.stats.interval</td>
+                    <td style="background-color: #dcdcdc;">The time interval (in seconds) taken for QoS statistics to be retrieved from Nodes.</td>
+                    <td style="background-color: #dcdcdc;">300</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">monitor.refresh.interval</td>
+                    <td style="background-color: #dcdcdc;">The time interval (in seconds) required to refresh the Storage Volumes page.</td>
+                    <td style="background-color: #dcdcdc;">300</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">monitor.storage.stats.interval</td>
+                    <td style="background-color: #dcdcdc;">The time interval (in seconds) taken for storage statistics to be retrieved from Nodes.</td>
+                    <td style="background-color: #dcdcdc;">300</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">monitor.system.purge.retain.days</td>
+                    <td style="background-color: #dcdcdc;">The number of days that the data has to be retained for.
+</td>
+                    <td style="background-color: #dcdcdc;">7</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">no.of.nodes.per.hagroup</td>
+                    <td style="background-color: #dcdcdc;">Limiting number of Nodes in an HA Group.</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">project.invite.required		</td>
+                    <td style="background-color: #dcdcdc;">Specify if invitation confirmation is required when add account to project.</td>
+                    <td style="background-color: #dcdcdc;">False</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">provisioning.sb.algo</td>
+                    <td style="background-color: #dcdcdc;">Algorithm used for auto-provisioning Storage Volume.</td>
+                    <td style="background-color: #dcdcdc;">Best Fit</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">provisioning.sb.auto</td>
+                    <td style="background-color: #dcdcdc;">Enable/Disable auto-provisioning of Storage Volumes.</td>
+                    <td style="background-color: #dcdcdc;">No</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">provisioning.tsm.algo</td>
+                    <td style="background-color: #dcdcdc;">Algorithm used for auto-provisioning VSM.</td>
+                    <td style="background-color: #dcdcdc;">Best Fit</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">provisioning.tsm.auto</td>
+                    <td style="background-color: #dcdcdc;">Enable/Disable auto-provisioning of VSMs. </td>
+                    <td style="background-color: #dcdcdc;">No</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">qos.penalty.allowed.delta		</td>
+                    <td style="background-color: #dcdcdc;">Percentage (as a value between 1 and 100) up to which penalty will be not be considered</td>
+                    <td style="background-color: #dcdcdc;">10</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">qos.penality.blocksize</td>
+                    <td style="background-color: #dcdcdc;">Standard blocksize (in KB) per IOPS, used in provisioning and penality enforcement.</td>
+                    <td style="background-color: #dcdcdc;">4</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">
+qos.penalty.blocksize.factor	</td>
+                    <td style="background-color: #dcdcdc;">Considers block size for penalty calculations. 	 Specify yes to Enable and No to Disable.</td>
+                    <td style="background-color: #dcdcdc;">No</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">		
+qos.penalty.cachehit.factor</td>
+                    <td style="background-color: #dcdcdc;">	Considers cache hit for penalty caclulations. Specify yes to Enable and No to Disable.</td>
+                    <td style="background-color: #dcdcdc;">No</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">qos.penalty.enforcement.timeinterval</td>
+                    <td style="background-color: #dcdcdc;">The time interval (in seconds) for which penalty has to be applied on QoS values.</td>
+                    <td style="background-color: #dcdcdc;">300</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">qos.penalty.readwrite.factor	</td>
+                    <td style="background-color: #dcdcdc;">Considers READs vs WRITEs for penalty caclulations. Specify yes to Enable and No to Disable.	</td>
+                    <td style="background-color: #dcdcdc;">No	</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">read.multiplication.factor</td>
+                    <td style="background-color: #dcdcdc;">
+	Specify how many READs equal a WRITE. The default value is 4 which means 1 WRITE equals 4 READs. Only a value between 3 and 6 is supported.</td>
+                    <td style="background-color: #dcdcdc;">4</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">report.email.sender</td>
+                    <td style="background-color: #dcdcdc;">Sender of report email.</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">report.smtp.host</td>
+                    <td style="background-color: #dcdcdc;">SMTP hostname used for sending out report emails.</td>
+                    <td style="background-color: #dcdcdc;">localhost</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">report.smtp.password</td>
+                    <td style="background-color: #dcdcdc;">Password for SMTP authentication (applies only if <code>report.smtp.useAuth</code> is true).</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">report.smtp.port</td>
+                    <td style="background-color: #dcdcdc;">The port of the SMTP server.</td>
+                    <td style="background-color: #dcdcdc;">587</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">report.smtp.useAuth</td>
+                    <td style="background-color: #dcdcdc;">If true, SMTP authentication is enabled to send emails. </td>
+                    <td style="background-color: #dcdcdc;">False</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">report.smtp.username</td>
+                    <td style="background-color: #dcdcdc;">Username for SMTP authentication (applies only if <code>report.smtp.useAuth</code> is true).</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">ui.protocol.enablefc</td>
+                    <td style="background-color: #dcdcdc;">Enable/Disable all FC protocol related options from ElastiCenter.</td>
+                    <td style="background-color: #dcdcdc;">True</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">ui.protocol.enablehaadmincreation</td>
+                    <td style="background-color: #dcdcdc;">Enable/Disable haAdmin creation options from ElastiCenter.</td>
+                    <td style="background-color: #dcdcdc;">
+                        False
+                       
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">ui.protocol.enablezilmirroring			</td>
+                    <td style="background-color: #dcdcdc;">Enable/Disable ZIL mirroring creation options from ElastiCenter.</td>
+                    <td style="background-color: #dcdcdc;">False</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">provisioning.uncontrolled.iops</td>
+                    <td style="background-color: #dcdcdc;">Enable/Disable provisioning with uncontrolled (zero) IOPS. Specify TRUE to enable. </td>
+                    <td style="background-color: #dcdcdc;">False</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">alert.qos.throttling.percentage</td>
+                    <td style="background-color: #dcdcdc;">Sends an alert if the throttled IOPS percentage exceeds the specified value and if<code> alert.qos.throttle.count</code> is encountered for the specified number of times. </td>
+                    <td style="background-color: #dcdcdc;">20</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">alert.qos.throttle.count</td>
+                    <td style="background-color: #dcdcdc;">Sends an alert if the number of consistent throttling exceeds the specified value and<code> alert.qos.throttling.percentage</code> exceeds the specified value.
+					</td>
+                    <td style="background-color: #dcdcdc;">10</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">devman.enable.ipspaces</td>
+                    <td style="background-color: #dcdcdc;">Enable/Disable the <code>Assigning real IP spaces</code> feature.</td>
+                    <td style="background-color: #dcdcdc;">False</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="623" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>Configuring Disk Array enclosure</h2>
+        <p>After you add Node, you are redirected to the Node page.</p>
+        <p>When there is no Disk Array attached to the Node, the following page appears. Ensure that you attach a Disk Array to the Node and then click Refresh Hardware. </p>
+        <p class="note"><b>Note:</b> When you attach a new Disk Array to a Node, click Refresh Storage/Refresh Hardware to make the Disk Array visible on the ElastiCenter. </p>
+        <p>
+            <img src="../Resources/Images/Disk_Array_Enclosure.png" class="FitToText" />
+        </p>
+        <p>To configure a newly attached Disk Array enclosure, follow the procedures:</p>
+        <ol>
+            <li>In the Node page, click the image in the section Shared Storage.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/config_disk_array_enclosure_1.png" class="FitToText" />
+            </p>
+        </ol>
+        <blockquote>
+            <p>The following screen appears:</p>
+        </blockquote>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/config_disk_array_enclosure_2.png" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click Configure A New Disk Array. The Disk Array Configuration page appears:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/config_disk_array_enclosure_3.png" class="FitToText" />
+        </p>
+        <ol MadCap:continue="true">
+            <li>Specify the Name, Bay Alignment, Number of columns and Number of Rows. For details, see the <MadCap:xref href="#Configuration">"Configuration details" on page 1</MadCap:xref>.</li>
+            <li>Click Next and then do the following: <ul><li>Click the option under the column Blink. For details, see  <MadCap:xref href="#SCSI">"SCSI Enclosure Service&#160;"</MadCap:xref>.</li><li>Specify the bay location for the disks from the drop down list under the column Bay.</li></ul></li>
+            <p>
+                <img src="../Resources/Images/config_disk_array_enclosure_4.png" class="FitToText" />
+            </p>
+        </ol>
+        <ol MadCap:continue="true">
+            <li>Click Apply. On successful configuration, the Node page appears with a representation of the shared storage:
+			</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/disk_array_enclosure_configuring.png" class="FitToText" />
+        </p>
+        <p class="note"><b>Note:</b>You can also partially configure a Disk Array Enclosure. Suppose you have 12 disks, you can initially configure around 8 disks and other 4 disks can be configured as per the requirement.</p>
+        <h3><a name="Configuration"></a>Configuration details</h3>
+        <h5>Horizontal and vertical alignments</h5>
+        <p>The Disk Arrays can be idealized either in terms of horizontal or vertical alignments. </p>
+        <p>The following figure represents a vertical alignment:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/JBod-VerticalAlignment.png" />
+        </p>
+        <p>The following figure represents a horizontal alignment:</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/JBod-Horizontal.png" />
+        </p>
+        <h5>Slots per row</h5>
+        <p>Slots per row  is the number of disks each row can accommodate. For example, three slots per row implies that a single row can accommodate three disks.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/JBod-SingleRow.png" style="width: 272px;height: 112px;" />
+        </p>
+        <h3><a name="SCSI"></a>SCSI Enclosure Service&#160;</h3>
+        <p>SCSI Enclosure Service (SES) helps monitor the status of each device in a disk array enclosure such as disk slots, fans, heat sinks, or power supplies. </p>
+        <p>The service helps you</p>
+        <ul>
+            <li>Identify a disk or verify the slot in which the disk is located.</li>
+            <li>Locate and disable a faulty disk. </li>
+            <li>With specific and general alerts on enclosure components.</li>
+        </ul>
+        <h4>Blink identification</h4>
+        <p>Blink identification LED on the disk slot of a disk array.
+When you click Blink, at the physical location of the disks, the identification LED in the specified disk slot blinks. If the disk is not in the SCSI enclosure, the LED blink does not occur.</p>
+        <p>If the disk is in the SCSI enclosure and still if the blink does not occur, verify the health of the disk.</p>
+        <h4>Enclosure component alerts</h4>
+        <p>CloudByte ElastiStor provides common and specific alerts for the enclosure components such as disk slots, power supplies, voltage sensors, current sensors, temperature sensors, fans, and audible alarm.</p>
+        <p>The common alerts which apply to all components include the ones related to</p>
+        <ul>
+            <li>Removal and installation of the component </li>
+            <li>State in which the component is, such as critical, non-critical, OK, or unrecoverable</li>
+        </ul>
+        <p>Specific alerts are generated for the following enclosure components: power supply, voltage sensor, current sensor, and temperature sensor.</p>
+        <p>By default, CloudByte sends alerts over mail to the email you specified when you updated your profile the first time you logged in to CloudByte ElastiCenter. To expand the mailing list, add the IDs separated by comma in the Global settings (Information Pane &gt; Admin &gt; Global Settings &gt; alert.email.addresses).</p>
+        <p>To view alerts in CloudByte ElastiCenter, click Alerts in the information pane.</p>
+        <h3>Deleting a Disk Array</h3>
+        <ol>
+            <li>Delete all Pools in the Disk Array.</li>
+            <li>	In the HA Groups page, select the HA group from which Disk Array has to be deleted.</li>
+            <li>For the Disk Array to be deleted, click Manage Disk Array and then click the delete icon.</li>
+        </ol>
+    </body>
+</html>

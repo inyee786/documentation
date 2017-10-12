@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2542" MadCap:lastWidth="842">
+    <head>
+    </head>
+    <body>
+        <h2>Restore snapshots while mapping CIFS share </h2>
+        <h4>On Windows</h4>
+        <ol>
+            <li>	In ElastiCenter, create a Storage Volume and name it, say, testvol1. <br />When you create the first CIFS Storage Volume, the Create User page appears.</li>
+            <li>Create user credentials to map CIFS share on Windows Client as follows: </li>
+            <ol>
+                <li>In the Accounts page, select the Account associated with the Storage Volume. </li>
+                <li>	Select Manage CIFS&#160;Authentication Groups in the Actions pane.</li>
+                <li>Select Add Authentication Group in the Actions Icon Tasks section.</li>
+                <p style="text-align: center;">
+                    <img src="../Resources/Images/add_cifs_authentication_grpups.jpg" class="FitToText" style="width: 597px;height: 276px;" />
+                </p>
+                <li>In the following page, provide the relevant credentials and then click OK.</li>
+            </ol>
+            <li>Mount the Storage Volume on Windows Client as follows: </li>
+            <ol>
+                <li>	Open your Windows Client and then select Computer &gt; Map Network Drive. </li>
+                <p style="text-align: center;">
+                    <img src="../Resources/Images/CIFS_windows_revsnapshots_MapNetworkDrive.png" class="FitToText" style="width: 614px;height: 127px;" />
+                </p>
+                <li>Write some data.</li>
+            </ol>
+            <li>Ensure that you have enabled CIFS as follows:</li>
+            <ol>
+                <li>	On Windows Client, launch Map Network Drive dialog box (Computer &gt; Map Network Drive).</li>
+                <li>	Specify the drive and the tenant IP address (with CIFS share name) in a format as shown in the following screen: </li>
+                <p style="text-align: center;">
+                    <img src="../Resources/Images/CIFS_windows_revsnapshots_TenantIPAddress1.png" class="FitToText" style="width: 563px;height: 176px;" />
+                </p>
+                <li>	 Provide the CIFS share access path and then click Finish.</li>
+                <li>Ensure that the option Connect using different credentials is checked.</li>
+            </ol>
+            <li>Provide the CIFS username and password and then click OK.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/CIFS_windows_revsnapshots_Username.png" class="FitToText" style="width: 655px;height: 206px;" />
+            </p>
+            <li>	Ensure that CIFS share is connected (highlighted), as shown in the following page:</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/CIFS_windows_revsnapshots_EnsureCIFS.png" class="FitToText" />
+            </p>
+            <li>	Copy some data.</li>
+            <li>	Create a snapshot on the Storage Volume using the following procedures: </li>
+            <ol>
+                <li>In the Storage Volumes page, select the Storage Volume for which you want to create a local backup. </li>
+                <li>In the following page, select Create Snapshot in the Actions pane.</li>
+                <li>	Specify a name for the snapshot to be created and then click OK.</li>
+            </ol>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/Snapshot.jpg" class="FitToText" style="width: 658px;height: 327px;" />
+            </p>
+            <li>Go to Windows Client and then delete the data from the mounted Storage Volume.<img src="../Resources/Images/CIFS_windows_revsnapshots_Deletedata.png" class="FitToText" /></li>
+            <li>In ElastiCenter, click Manage Snapshots (Actions pane &gt; Local Backup) to view the list of previously captured snapshots.</li>
+            <li>For the snapshot you want to restore, click Restore icon to roll back the Storage Volume content to previous state.</li>
+            <p>
+                <img src="../Resources/Images/restore.jpg" class="FitToText" style="width: 631px;height: 229px;" />
+            </p>
+            <li>On Windows Client, refresh the Storage Volume and then check the data.</li>
+        </ol>
+    </body>
+</html>

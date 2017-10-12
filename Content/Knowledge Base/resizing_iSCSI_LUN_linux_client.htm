@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="2295" MadCap:lastWidth="850">
+    <head>
+    </head>
+    <body>
+        <h2>Resizing iSCSI LUNs on Linux Client</h2>
+        <p>
+		The following procedures explain how to expand your iSCSI Storage Volume on CentOS:</p>
+        <ul>
+            <li>
+                <MadCap:xref href="#Discovering">"Discovering iSCSI targets"</MadCap:xref>
+            </li>
+            <li> <MadCap:xref href="#Creating">"Creating File System "</MadCap:xref></li>
+            <li>"Unmounting the file system and logging out the iSCSI targets"</li>
+            <li>
+                <MadCap:xref href="#Editing_Quota_Size_(in_ElastiCenter)">"Editing Quota Size (in ElastiCenter)"</MadCap:xref>
+            </li>
+            <li>
+                <MadCap:xref href="#Expanding">"Expanding the LUN and resizing the file system"</MadCap:xref>
+            </li>
+        </ul>
+        <h3><a name="Discovering"></a>Discovering iSCSI targets</h3>
+        <p>Perform the following procedures to discover the iSCSI targets and log in to them:</p>
+        <table style="">
+            <col style="width: 55px;" />
+            <col style="width: 156px;" />
+            <col style="width: 205px;" />
+            <col style="width: 189px;" />
+            <col style="width: 151px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Step</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Task</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Command</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Example</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Details</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecode">1	</td>
+                    <td style="background-color: #dcdcdc;">Discover the iSCSI targets.		</td>
+                    <td class="tablecode"><code>iscsiadm -m discovery -t st -p <i>target IP_address</i></code>
+                    </td>
+                    <td class="tablecode"><code>iscsiadm -m discovery -t st -p 11.11.11.11</code>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Outputs the complete target name.</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">2  </td>
+                    <td style="background-color: #dcdcdc;">Log in to the iSCSI target.</td>
+                    <td class="tablecode">iscsiadm -m node -T <i>complete_Target_name</i> -l</td>
+                    <td style="background-color: #dcdcdc;"> <code>iscsiadm -m node -T  iqn.2014-02.FCAcc.Test:FCAcciscsivol1 -l</code></td>
+                    <td style="background-color: #dcdcdc;">  <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td class="tablecode">3	</td>
+                    <td style="background-color: #dcdcdc;">Display the current partitions on the hard disk</td>
+                    <td style="background-color: #dcdcdc;"><code>fdisk –l</code> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;">  <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;">The partition is displayed in the output.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3><a name="Creating"></a>Creating File System </h3>
+        <table style="">
+            <col style="width: 55px;" />
+            <col style="width: 156px;" />
+            <col style="width: 205px;" />
+            <col style="width: 211px;" />
+            <col style="width: 211px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Step</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Task</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Command</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Example</td>
+                    <th style="color: #000000;">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecode">1	</td>
+                    <td style="background-color: #dcdcdc;">Create a file system on the hard disk drive.</td>
+                    <td class="tablecode">
+                        <p>For ext3:
+mkfs.ext3 &lt;Partition name&gt;
+</p>
+                        <p>
+For XFS:
+mkfs.xfs &lt;Partition name&gt;</p>
+                    </td>
+                    <td class="tablecode">
+                        <p>mkfs.ext3 /dev/sdc</p>
+                        <p> 
+
+
+
+
+
+mkfs.xfs /dev/sdc</p>
+                    </td>
+                    <td>At prompt, confirm by typing y as shown in the following example: /dev/sdc is entire device, not just one partition! Proceed anyway? (y,n) y</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">2</td>
+                    <td style="background-color: #dcdcdc;">	Create a directory		</td>
+                    <td class="tablecode">mkdir <i>Directory_name</i></td>
+                    <td class="tablecode">	mkdir /mnt/cbdata</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">3			
+					</td>
+                    <td style="background-color: #dcdcdc;">Mount the partition into your directory</td>
+                    <td class="tablecode">mount <i>Partition_name Directory_name</i></td>
+                    <td class="tablecode"> mount /dev/vg/lv /mnt/cbdata </td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">4
+                    </td>
+                    <td style="background-color: #dcdcdc;">(Optional) Retrieve the current size of the mounted LUN.</td>
+                    <td class="tablecode">df –kh</td>
+                    <td style="background-color: #dcdcdc;">  <![CDATA[ ]]></td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">5</td>
+                    <td style="background-color: #dcdcdc;">(Optional) Copy some data to the directory /mnt/cbdata.</td>
+                    <td class="tablecode">cp</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                    <td>&#160;</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3><a name="Unmounting"></a>Unmounting the file system and logging out the iSCSI targets</h3>
+        <table style="">
+            <col style="width: 55px;" />
+            <col style="width: 156px;" />
+            <col style="width: 205px;" />
+            <col style="width: 211px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Step</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Task</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Command</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Example</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">1			
+					</td>
+                    <td style="background-color: #dcdcdc;">Unmount directory from the disk	</td>
+                    <td class="tablecode">umount &lt;Directory name&gt;</td>
+                    <td class="tablecode">umount /mnt/cbdata</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">2 </td>
+                    <td style="background-color: #dcdcdc;">	Log out of iSCSI target	
+					</td>
+                    <td class="tablecode">iscsiadm -m node -u -T &lt;Complete target name&gt; -p &lt;Target IP Address&gt;</td>
+                    <td class="tablecode"> 	iscsiadm -m node -u -T iqn.2014-02.Acc1.TSM3:TSM3TSM3ISCSI11 -p 11.11.11.11</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Editing Quota Size (in ElastiCenter)</h3>
+        <ol>
+            <li>In ElastiCenter, select Storage Volumes.</li>
+            <li>In the Storage Volumes page, click Settings &gt; Edit.</li>
+            <li>Increase the Quota size of the LUN and then click Save.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/resizing iscsi linux client.jpg" style="width: 628px;height: 469px;" />
+        </p>
+        <h3><a name="Expanding"></a>Expanding the LUN and resizing the file system </h3>
+        <p> Ensure that you have performed all the steps in the section <MadCap:xref href="#Unmounting">"Unmounting the file system and logging out the iSCSI targets"</MadCap:xref> before proceeding further. In the CentOS console, run the commands provided in the table in sequence to expand the LUN and resize the LVM and the file system: </p>
+        <table style="">
+            <col style="width: 56px;" />
+            <col style="width: 181px;" />
+            <col style="width: 201px;" />
+            <col style="width: 203px;" />
+            <col style="width: 107px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Step</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Task</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Command</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Example</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Details</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecode">1	</td>
+                    <td style="background-color: #dcdcdc;">Log in to iSCSI target
+					</td>
+                    <td style="background-color: #dcdcdc;"><code>iscsiadm -m node -T &lt;Complete target name&gt; -p &lt;Target IP Address&gt; –l</code>
+                    </td>
+                    <td style="background-color: #dcdcdc;"><code>iscsiadm -m node -T iqn.2014-02.Acc1.TSM3:TSM3TSM3ISCSI11 -p 16.10.10.3 –l	</code>
+                    </td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">2</td>
+                    <td style="background-color: #dcdcdc;">Display current partitions on the hard disk.</td>
+                    <td class="tablecode">fdisk –l</td>
+                    <td class="tablecode">&#160;</td>
+                    <td style="background-color: #dcdcdc;">Check the output to see if the disk size has increased.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">3</td>
+                    <td style="background-color: #dcdcdc;">Mount the partition into the directory.</td>
+                    <td class="tablecode">mount partition name &lt;Directory name&gt; -o sync</td>
+                    <td class="tablecode">mount /dev/sdb /mnt/cbdata/ -o sync</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">4</td>
+                    <td style="background-color: #dcdcdc;">Resize the expanded volume.</td>
+                    <td class="tablecode">
+                        <p>For ext3: 
+resize2fs /dev/sdb/ total space of volume </p>
+                        <p>
+
+For XFS:
+
+xfs_growfs mount_point 
+</p>
+                        <p>or</p>
+                        <p>
+
+xfs_growfs mount_point -D new_block_size
+
+ </p>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <p>resize2fs /dev/sdb/ 5G 
+
+
+
+
+
+</p>
+                        <p>xfs_growfs /mnt/cbdata
+</p>
+                        <p>or
+</p>
+                        <p>xfs_growfs /mnt/cbdata -D 23593680</p>
+                    </td>
+                    <td style="background-color: #dcdcdc;">
+                        <p>In this example, 5G is the total space on the resized Volume.
+
+
+
+</p>
+                        <p>XFS file system expands to the maximum available space on the iSCSI LUN.
+
+</p>
+                        <p>Using this command, you can specify the total space on the resized volume.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">5</td>
+                    <td style="background-color: #dcdcdc;">Retrieve the current size of the resized LUN.</td>
+                    <td class="tablecode">df –kh</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

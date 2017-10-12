@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="7" MadCap:lastHeight="1284" MadCap:lastWidth="822">
+    <head>
+    </head>
+    <body>
+        <h3 style="font-size: 18pt;color: #013364;font-family: sans-serif;">VLAN interface</h3>
+        <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">VLAN interface can be created on a NIC whenever there is a need for the interface to subscribe to a separate broadcast domain (usually needed for high traffic data networks). Additionally, multiple VLAN interfaces can be created on a single physical NIC, thereby allowing access to multiple networks at the same time. The VLANs act as virtual individual NICs, each belonging to a separate broadcast domain.</p>
+        <h4 style="font-size: 14pt;font-family: sans-serif;color: #005db2;">Adding VLAN interface</h4>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the HA Groups page (ElastiCenter &gt; Navigation Pane &gt; HA Groups), go to the actions Icon and then click Tasks &gt; Manage VLAN&#160;Interfaces.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">In the VLAN&#160;Interfaces page, go to the actions Icon and then click Tasks &gt; Add VLAN&#160;Interface.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">In the Add VLAN&#160;Interface dialog box, specify the VLAN&#160;tag (which must be a numeric value) and then select the parent NIC.</li>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Click OK.</li>
+        </ol>
+        <h4 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Defining the VLAN&#160;Interface for the VSM</h4>
+        <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">When you provision a VSM, in the networking details section of the Provision VSM&#160;Wizard, specify the VLAN&#160;interface you created (in the Interface field).</p>
+        <p style="text-align: center;"> <img src="../Resources/Images/provision_vsm_select_interface.png" class="FitToText" style="width: 549px;height: 268px;" /></p>
+        <h3 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">LAGG interface</h3>
+        <p style="text-align: justify;font-size: 11pt;color: #000000;font-family: sans-serif;">LAGG interface allows aggregation of multiple network interfaces into a single virtual LAGG interface, providing fault-tolerance and high-speed multi-link throughput. The aggregation protocols supported by LAGG determines which ports are used for outgoing traffic and whether a specific port accepts incoming traffic. </p>
+        <h4 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Adding LAGG interface</h4>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the HA Groups page (ElastiCenter &gt; HA Groups), go to the actions Icon and then click Tasks &gt; Manage LAGG Interfaces.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the LAGG&#160;Interfaces page, go to the actions Icon and then click Tasks &gt; Add LAGG Interface.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the Add LAGG&#160;Interface dialog box, specify the following details:<ul style="color: #000000;font-family: sans-serif;font-size: 1em;"><li style="color: #000000;font-family: sans-serif;font-size: 11pt;"><b>LAGG&#160;ID:</b>&#160;Unique id (numeric value) for the LAGG&#160;interface.</li><li style="color: #000000;font-family: sans-serif;font-size: 11pt;"><b style="font-family: sans-serif;font-size: 11pt;">Protocol Type</b></li>Select Failover to send traffic only through the active port. If the master port becomes unavailable, the next active port is used. The first interface added is the master port. Any interfaces added after that are used as failover devices. By default, received traffic is only accepted when received through the active port.</ul><p style="text-align: center;"><img src="../Resources/Images/add_lagg_interface.png" class="FitToText" style="width: 501px;height: 203px;" /></p></li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Next.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">From the list of available NICs, drag and drop the ones you want to assign to a LAGG.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Add.</li>
+        </ol>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="8" MadCap:lastHeight="891" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>Upgrading to CloudByte ElastiStor Patch</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+            <li>        Download  the patch.</li>
+            <li>Copy the patch to the Nodes at the location <code>/cbdir/patch</code>.</li>
+            <li>Ensure no new Storage Volumes are provisioned.</li>
+            <li> Do not create Snapshots during the upgrade activity.</li>
+            <li>Back up ElastiCenter and Node configurations.. For details, see <a href="http://www.docs.cloudbyte.com/cloudbyte-elastistor-product-faqs/promoting-secondary-elasticenter-and-backing-up-configurations/">Backup Node configurations</a>.</li>
+            <li>        Install the following configuration utilities on all the Nodes:<ul><li> <code>cp configobj-4.4.0-py2.5.egg /usr/local/lib/python2.7/site-packages</code></li><li><code>cd /usr/local/lib/python2.7/site-packages</code></li><li> <code>python easy_install.py configobj-4.4.0-py2.5.egg</code></li></ul></li>
+        </ul>
+        <h3>Procedures</h3>
+        <p>The following sections explain the patch upgrade scenarios.</p>
+        <h4>Scenario 1: Installed ElastiStor in EC-HA mode</h4>
+        <ol>
+            <li>(On secondary Node) Run the following commands to stop the ElastiCenter sync:<ol><li><code>service cbc_ec_secondary onestop</code></li><li><code>ps -auxww | grep masterha | grep -v grep</code></li></ol></li>
+            <li>Move the primary Node to Maintenance state. </li>
+            <li>SSH to the primary Node. </li>
+            <li>Go to the location <code>/cbdir/patch/</code>.</li>
+            <li>Run the following command to untar the patch: <code>tar -xzvf patch.tar.gz</code></li>
+            <li> Do the following to upgrade Node:<ul><li>Run the  command <code>python apply_patch.py</code> <![CDATA[ ]]></li><li>Select option 2.</li></ul></li>
+            <li>Do the following to upgrade the Kernel:</li>
+            <ul>
+                <li>Run the  command <code>python apply_patch.py</code> <![CDATA[ ]]></li>
+                <li>Select option 3.</li>
+            </ul>
+            <li>Do the following to upgrade ElastiCenter:</li>
+            <ul>
+                <li>Run the  command <code>python apply_patch.py</code> <![CDATA[ ]]></li>
+                <li>Select option 1.</li>
+            </ul>
+            <li>Run the following command to reboot the primary Node: <code>reboot</code>.</li>
+            <li>After the Node is online, move it to Available state.</li>
+            <li>Bring down the secondary Node.</li>
+            <li>SSH to the secondary Node. </li>
+            <li>Repeat step 4 to step 9 on the secondary Node.</li>
+        </ol>
+        <h4>Scenario 2: ElastiCenter and Node installed together</h4>
+        <ol>
+            <li>Move the Node to Maintenance state. </li>
+            <li>SSH to Node.</li>
+            <li>Go to the location <code>/cbdir/patch/</code>.</li>
+            <li>Run the following command to untar the patch: <code>tar -xzvf patch.tar.gz</code></li>
+            <li> Do the following to upgrade ElastiCenter:</li>
+            <ul>
+                <li>Run the  command <code>python apply_patch.py</code> <![CDATA[ ]]></li>
+                <li>Select option 1.</li>
+            </ul>
+            <li>  Do the following to upgrade the Node:</li>
+            <ul>
+                <li>Run the  command <code>python apply_patch.py</code> <![CDATA[ ]]></li>
+                <li>Select option 2.</li>
+            </ul>
+            <li>  Do the following to upgrade the Kernel:</li>
+            <ul>
+                <li>Run the  command <code>python apply_patch.py</code> <![CDATA[ ]]></li>
+                <li>Select option 3.</li>
+            </ul>
+            <li>Run the following command to reboot ElastiCenter: <code>reboot</code>.</li>
+        </ol>
+        <h4>Scenario 3: ElastiCenter and Node on the different machines</h4>
+        <ol>
+            <li>SSH to ElastiCenter.</li>
+            <li>Go to the location <code>/cbdir/patch/</code>.</li>
+            <li>Run the following command to untar the patch: <code>tar -xzvf patch.tar.gz</code></li>
+            <li>Do the following to upgrade ElastiCenter:<ul><li>Run the  command <code>python apply_patch.py</code> <![CDATA[ ]]></li><li>Select option 1.</li></ul></li>
+            <li>Run the following command to reboot ElastiCenter: <code>reboot</code>.</li>
+            <li>After ElastiCenter is online, move the Node to maintenance mode.</li>
+            <li>Go to the location <code>/cbdir/patch/</code>.</li>
+            <li>Run the following command to untar the patch: <code>tar -xzvf patch.tar.gz</code></li>
+            <li>Do the following to upgrade the Node:<ul><li>Run the  command <code>python apply_patch.py</code></li><li>Select option 2.</li></ul></li>
+            <li>Do the following to upgrade the Kernel:</li>
+            <ul>
+                <li>Run the  command <code>python apply_patch.py</code></li>
+                <li>Select option 3.</li>
+            </ul>
+            <li>Run the following command to reboot the Node: <code>reboot</code>.</li>
+            <li>Repeat step 6 to step 11 for all the Nodes.</li>
+        </ol>
+    </body>
+</html>

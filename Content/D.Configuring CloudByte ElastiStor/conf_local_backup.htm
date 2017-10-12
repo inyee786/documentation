@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="2878" MadCap:lastWidth="835" MadCap:ignoredWords="TSMs">
+    <head>
+    </head>
+    <body>
+        <h2 style="color: #013364;font-family: sans-serif;font-size: 18pt;">Configuring local backup</h2>
+        <p style="font-family: sans-serif;font-size: 11pt;">Backup refers to copying and archiving of data. In the event of data loss, you can use the backup to restore the original data.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;"> You can create a</p>
+        <ul style="list-style-type: square;">
+            <li style="font-family: sans-serif;font-size: 11pt;">Snapshot, which is a read-only virtual copy of your Storage Volume and VSM.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Clone, which is a  real copy of your Storage Volume</li>
+        </ul>
+        <p style="font-family: sans-serif;font-size: 11pt;">In CloudByte ElastiStor, backup operates as follows:</p>
+        <ul style="list-style-type: square;">
+            <li style="font-family: sans-serif;font-size: 11pt;">The first backup is a full backup.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">The first backup is followed by incremental backups based on snapshot technology.</li>
+        </ul>
+        <p style="font-family: sans-serif;font-size: 11pt;">ElastiStor supports continuous production during snapshot recovery of a Storage Volume.</p>
+        <h3 style="color: #005db2;font-family: sans-serif;font-size: 14pt;font-weight: bold;">Backing up VSM</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Virtual Storage Machines in the navigation pane.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list, select the VSM to create local backup.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, go to the Local Backup section of the Actions Icon and then select either of the following options:</li>
+        </ol>
+        <ul style="list-style-type: square;">
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>Schedule:</b> Schedule your backup by choosing a frequency.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;"><b>Snapshot:</b> Manually create a snapshot on demand.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/51_backing_up_VSM.jpg" class="FitToText" style="width: 728px;height: 294px;" />
+        </p>
+        <h4 style="font-family: sans-serif;font-size: 12pt;color: #005db2;font-weight: bold;">Add snapshot</h4>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Local Backup section, click Create Snapshot.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Create Snapshot dialog box, specify a unique name.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click OK.</li>
+        </ol>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 12pt;font-weight: bold;">Add schedule</h4>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Local Backup section, click Add Snapshot Schedule. The Add Snapshot Schedule page appears.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify the following details and then click Add. </li>
+            <table style="padding-left:60px">
+                <col style="width: 151px;" />
+                <col style="width: 383px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Field</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Name</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">A unique name for the backup schedule.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Retention Copies</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Specify the number of backup copies that you want to create.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;background-color: #dcdcdc;">Schedule</td>
+                        <td style="text-align: left;background-color: #dcdcdc;">Select the frequency.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ol>
+        <h5 style="color: #005db2;font-family: sans-serif;font-size: 11.8pt;font-weight: bold;">Backup best practice</h5>
+        <p style="font-family: sans-serif;font-size: 11pt;">As a best practice, CloudByte recommends a multiple backup schedule.</p>
+        <li style="font-family: sans-serif;font-size: 11pt;">For example, you can configure a multiple backup schedule comprising</li>
+        <table style="padding-left:150px">
+            <col style="width: 132px;" />
+            <col style="width: 184px;" />
+            <tbody>
+                <tr>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Frequency</td>
+                    <td style="text-align: center;background-color: #808080;color: #ffffff;">Retention&#160;copies</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Every 15 minutes</td>
+                    <td style="background-color: #dcdcdc;text-align: center;">4</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Every hour</td>
+                    <td style="background-color: #dcdcdc;text-align: center;">24</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;background-color: #dcdcdc;">Every day</td>
+                    <td style="text-align: center;background-color: #dcdcdc;text-align: center;">30</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 style="font-family: sans-serif;font-size: 12pt;color: #005db2;font-weight: bold;">Manage snapshots and schedules</h4>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">To view the snapshots and schedules that you have created, click Manage Snapshots/Manage Snapshot Schedules in the local backup section. You have options to rollback and disable the schedules/snapshots.</p>
+        <h3 style="font-family: sans-serif;font-size: 12pt;font-weight: bold;">Backing up Storage Volume</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Storage Volume in the Navigation pane.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list, select the Storage Volume to create snapshot.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, go to the Local Backup section of the actions icon and then click Create Snapshot.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Create Snapshot dialog box, specify a unique name for the snapshot and then click OK.</li>
+        </ol>
+        <h3 style="font-family: sans-serif;color: #005db2;font-size: 12pt;font-weight: bold;">Restoring Snapshots</h3>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Storage Volumes in the Navigation pane.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list, select the Storage Volume to restore data.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, go to the Local Backup section of the actions icon and then click Manage Snapshots.</li>
+        </ol>
+        <ol MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list of snapshots, select the one that you want to restore, click the restore icon, and then confirm at prompt.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/54_Rollback_Screenshot.jpg" class="FitToText" style="width: 694px;height: 255px;" />
+        </p>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 12pt;font-weight: bold;">Add schedule</h4>
+        <ol>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 12pt;">In the Actions Icon's Local Backup section, click Add Snapshot Schedule. The Add Snapshot Schedule page appears.</li>
+            <li style="text-align: justify;font-family: sans-serif;font-size: 11pt;">Specify the following details and then click Add. </li>
+            <table style="padding-left:100px">
+                <col style="width: 151px;" />
+                <col style="width: 383px;" />
+                <tbody>
+                    <tr>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Field</td>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Name</td>
+                        <td style="background-color: #dcdcdc;text-align: left;">A unique name for the backup schedule.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Retention Copies</td>
+                        <td style="background-color: #dcdcdc;text-align: left;">Specify the number of backup copies that you want to create.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: left;">Schedule</td>
+                        <td style="background-color: #dcdcdc;text-align: left;">Select the frequency.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ol>
+        <h4 style="color: #005db2;font-family: sans-serif;font-size: 12pt;font-weight: bold;">Manage snapshots and schedules</h4>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">To view the snapshots and schedules that you have created, click Manage Snapshots/Manage Snapshot Schedules in the local backup section. You have options to rollback and disable the schedules/snapshots.</p>
+        <h3 style="font-family: sans-serif;font-size: 12pt;color: #005db2;font-weight: bold;">Cloning the Storage Volume</h3>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">You can create a READ/WRITE copy of your Storage Volume using the clone option. Unlike Snapshot which is a read-only virtual copy, clone is a real copy of your Storage Volume. It consumes the same disk space as the parent Storage Volume.</p>
+        <p style="font-family: sans-serif;font-size: 11pt;text-align: justify;">ElastiStor uses snapshot as the point of reference for your clone. The workflow is as follows:</p>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">Create a Storage Volume.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">Create a snapshot.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;text-align: justify;">
+                Create a Clone of the Storage Volume using Snapshot as the point of reference.
+         </li>
+        </ol>
+        <h4 style="font-family: sans-serif;font-size: 12pt;font-weight: bold;">Creating a clone</h4>
+        <ol>
+            <li style="font-family: sans-serif;font-size: 11pt;">In ElastiCenter, select Storage Volume in the navigation pane.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list, select the Storage Volume to create a clone.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the following page, go to the actions icon and then select Local Backup &gt; Create Snapshot.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">In the Create Snapshot dialog box, specify a name and then click OK.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Manage Snapshot (actions icon &gt; Local Backup).</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">From the list of snapshots, go to the one which you want to use as reference for creating the snapshot and then click the Clone icon (highlighted in the circle).</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/55_Clone_Storage_VOlume.jpg" class="FitToText" style="width: 638px;height: 232px;" />
+            </p>
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify a unique clone name, where to mount the clone, and then click OK.</li>
+        </ol>
+    </body>
+</html>

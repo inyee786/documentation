@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="913" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>Mapping iSCSI LUN</h2>
+        <p class="note"><b>Note:</b> Do not present the same LUN to multiple clients/initiators until an OS Clustering (for example, Red Hat Cluster Suite (RHCS) or Microsoft Cluster Server (MSCS)) uses the shared LUN.</p>
+        <h3>On Linux</h3>
+        <p>The following procedures might work on most of the Linux setups. However the certified versions are</p>
+        <ul>
+            <li>OpenSUSE-11.4-x86 -64 bit and 12.1 version</li>
+            <li>Red Hat Enterprise Linux Server release 6.0</li>
+            <li>CentOS-6.4-x86</li>
+        </ul>
+        <h4><a name="WithoutCHAP"></a>Without CHAP authentication</h4>
+        <ol>
+            <li>At command prompt, run the following command, to discover the iSCSI target: <code>iscsiadm -m discovery -t st -p &lt;VSM_IP_address:port&gt;.</code></li>
+            <p>The iSCSI target (iqn) is displayed as shown in the following example: <code>10.10.8.201:3260,1 iqn.2012-09.CertStorage:isci-on-iscsiSet</code></p>
+            <li>
+                Connect to the target in either of the following ways:<ul><li>To connect to all targets, run the following command: <code>iscsiadm –m node –l</code></li><li>To connect to an individual target, run the command as shown in the sample command: <code>iscsiadm –m node –T &lt;target_name_displayed_when_you_run_discover_command&gt; –p &lt;VSM_IP_address:port&gt; –l</code></li></ul></li>
+        </ol>
+        <ol>
+            <p> A success message is displayed.
+            </p>
+            <li>
+                To create multiple partitions from the LUN, run the following command: <code>fdisk -l</code>.</li>
+            <p> All available disks and partitions are listed.
+            </p>
+            <li>
+                Use the following command to create the partition: <code>fdisk &lt;disk(Discovered LUN)&gt;</code></li>
+            <li>
+                (Optional) Enter the command <code>m </code>to list the commandline help.
+            </li>
+            <li>
+                Create a partition using the command <code>n </code>(primary or extended).
+            </li>
+            <li>
+                Specify the cylinder size and value.
+            </li>
+            <li>
+                Specify the size of the partitions and enter <code>w </code>for WRITE changes.
+            </li>
+            <li>
+                Create a file system on the created partitions using the following command: <code>mkfs.&lt;ext2,ext3,ext4,ntfs,vfat&gt; &lt;partition&gt;</code></li>
+            <li>
+                Create an empty directory using the following command: <code>mkdir &lt;directoryname&gt;</code></li>
+            <li>
+                Mount the partitions to the empty directory using the following command: <code>mount &lt;partition name&gt; &lt;directoryname&gt;</code></li>
+            <li>
+                Perform READ and WRITE operations on mount point.
+            </li>
+        </ol>
+        <h5>Sample CLI snapshot</h5><pre xml:space="preserve">&lt;codedoc code&gt;[root@qaprod ~]# iscsiadm -m discovery -t sendtargets -p 10.10.8.201
+</pre><pre xml:space="preserve">10.10.8.201:3260,1 iqn.2012-09.CertStorage:isci-on-iscsiSet</pre><pre xml:space="preserve">
+[root@qaprod ~]# iscsiadm -m node -T 
+</pre><pre xml:space="preserve">iqn.2012-09.CertStorage:isci- </pre><pre xml:space="preserve">                                  
+on-iscsiSet --portal 10.10.8.201:3260 --login</pre><pre xml:space="preserve">
+Logging in to [iface: default, target: iqn.2012-09.CertStorage:isci-</pre><pre xml:space="preserve">
+on-iscsiSet,</pre><pre xml:space="preserve">                                                                                                                     
+portal: 10.10.8.201,3260]</pre><pre xml:space="preserve">
+Login to [iface: default, target: iqn.2012-09.CertStorage:isci-on-iscsiSet, </pre><pre xml:space="preserve">
+portal: 10.10.8.201,3260] successful.</pre><pre xml:space="preserve">
+[root@qaprod ~]# fdisk -l</pre><pre xml:space="preserve">
+Disk /dev/sda: 500.1 GB, 500107862016 bytes</pre><pre xml:space="preserve">
+255 heads, 63 sectors/track, 60801 cylinders
+</pre><pre xml:space="preserve">Units = cylinders of 16065 * 512 = 8225280 bytes</pre><pre xml:space="preserve">
+Sector size (logical/physical): 512 bytes / 512 bytes</pre><pre xml:space="preserve">
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+</pre><pre xml:space="preserve">Disk identifier: 0x00018542</pre><pre xml:space="preserve">Device Boot      Start         End      Blocks   Id  System</pre><pre xml:space="preserve">/dev/sda1   *           1          64      512000   83  Linux</pre><pre xml:space="preserve">Partition 1 does not end on cylinder boundary.</pre><pre xml:space="preserve">/dev/sda2              64       60802   487873536   8e  Linux LVM</pre><pre xml:space="preserve">Disk /dev/dm-0: 53.7 GB, 53687091200 bytes</pre><pre xml:space="preserve">255 heads, 63 sectors/track, 6527 cylinders</pre><pre xml:space="preserve">Units = cylinders of 16065 * 512 = 8225280 bytes</pre><pre xml:space="preserve">Sector size (logical/physical): 512 bytes / 512 bytes</pre><pre xml:space="preserve">I/O size (minimum/optimal): 512 bytes / 512 bytes</pre><pre xml:space="preserve">Disk identifier: 0x00000000</pre><pre xml:space="preserve">Disk /dev/dm-0 doesn't contain a valid partition table</pre><pre xml:space="preserve">Disk /dev/dm-1: 10.3 GB, 10284433408 bytes</pre><pre xml:space="preserve">255 heads, 63 sectors/track, 1250 cylinders</pre><pre xml:space="preserve">Units = cylinders of 16065 * 512 = 8225280 bytes</pre><pre xml:space="preserve">Sector size (logical/physical): 512 bytes / 512 bytes</pre><pre xml:space="preserve">I/O size (minimum/optimal): 512 bytes / 512 bytes</pre><pre xml:space="preserve">Disk identifier: 0x00000000</pre><pre xml:space="preserve">Disk /dev/dm-1 doesn't contain a valid partition table</pre><pre xml:space="preserve">Disk /dev/dm-2: 435.6 GB, 435607830528 bytes</pre><pre xml:space="preserve">255 heads, 63 sectors/track, 52959 cylinders</pre><pre xml:space="preserve">Units = cylinders of 16065 * 512 = 8225280 bytes</pre><pre xml:space="preserve">Sector size (logical/physical): 512 bytes / 512 bytes</pre><pre xml:space="preserve">I/O size (minimum/optimal): 512 bytes / 512 bytes</pre><pre xml:space="preserve">Disk identifier: 0x00000000</pre><pre xml:space="preserve">Disk /dev/dm-2 doesn't contain a valid partition table</pre><pre xml:space="preserve">Disk /dev/sdb: 1073 MB, 1073741824 bytes</pre><pre xml:space="preserve">255 heads, 63 sectors/track, 130 cylinders</pre><pre xml:space="preserve">Units = cylinders of 16065 * 512 = 8225280 bytes</pre><pre xml:space="preserve">Sector size (logical/physical): 512 bytes / 512 bytes</pre><pre xml:space="preserve">I/O size (minimum/optimal): 4096 bytes / 1048576 bytes</pre><pre xml:space="preserve">Disk identifier: 0x4408a443</pre><pre xml:space="preserve">Device Boot      Start         End      Blocks   Id  System</pre><pre xml:space="preserve">/dev/sdb1               1         131     1045504    7  HPFS/NTFS</pre><pre xml:space="preserve">Partition 1 has different physical/logical endings:</pre><pre xml:space="preserve">phys=(129, 254, 63) logical=(130, 42, 40)</pre><pre xml:space="preserve">[root@qaprod ~]# fdisk /dev/sdb1</pre><pre xml:space="preserve">WARNING: DOS-compatible mode is deprecated. It's strongly recommended to</pre><pre xml:space="preserve">switch off the mode (command 'c') and change display units to</pre><pre xml:space="preserve">sectors (command 'u').</pre><pre xml:space="preserve">Command (m for help): m</pre><pre xml:space="preserve">Command action</pre><pre xml:space="preserve">a   toggle a bootable flag</pre><pre xml:space="preserve">b   edit bsd disklabel</pre><pre xml:space="preserve">c   toggle the dos compatibility flag</pre><pre xml:space="preserve">d   delete a partition</pre><pre xml:space="preserve">l   list known partition types</pre><pre xml:space="preserve">m   print this menu</pre><pre xml:space="preserve">n   add a new partition</pre><pre xml:space="preserve">o   create a new empty DOS partition table</pre><pre xml:space="preserve">p   print the partition table</pre><pre xml:space="preserve">q   quit without saving changes</pre><pre xml:space="preserve">s   create a new empty Sun disklabel</pre><pre xml:space="preserve">t   change a partition's system id</pre><pre xml:space="preserve">u   change display/entry units</pre><pre xml:space="preserve">v   verify the partition table</pre><pre xml:space="preserve">w   write table to disk and exit</pre><pre xml:space="preserve">x   extra functionality (experts only)</pre><pre xml:space="preserve">Command (m for help): n</pre><pre xml:space="preserve">Command action</pre><pre xml:space="preserve">e   extended</pre><pre xml:space="preserve">p   primary partition (1-4)</pre><pre xml:space="preserve">p</pre><pre xml:space="preserve">Selected partition 1</pre><pre xml:space="preserve">First cylinder (1-1008, default 1):</pre><pre xml:space="preserve">Using default value 1</pre><pre xml:space="preserve">Last cylinder, +cylinders or +size{K,M,G} (1-1008, default 1008):</pre><pre xml:space="preserve">Using default value 1008</pre><pre xml:space="preserve">Command (m for help): w</pre><pre xml:space="preserve">The partition table has been altered!</pre><pre xml:space="preserve">Calling ioctl() to re-read partition table.</pre><pre xml:space="preserve">&lt;/codedoc&gt;</pre>
+        <h4>With CHAP authentication</h4>
+        <h5>For all targets</h5>
+        <ol>
+            <li>Open /etc/iscsi/iscsid.conf using an editor and then specify the details for the following section:</li>
+        </ol><pre xml:space="preserve">	&lt;codedoc code node.session.auth.authmethod = CHAP
+
+			node.session.auth.username = &lt;CHAP username&gt;
+			node.session.auth.password = &lt;CHAP secret&gt;
+
+			node.session.auth.username_in= &lt;Mutual CHAP username&gt; (give only when you are doing mutual CHAP)
+            
+			node.session.auth.password_in = &lt;Mutual CHAP secret&gt;   (give only when you are doing mutual CHAP)
+            
+			discovery.sendtargets.auth.authmethod = CHAP
+            
+			discovery.sendtargets.auth.username = &lt;CHAP username&gt;
+            
+			discovery.sendtargets.auth.password = &lt;CHAP secret&gt;
+
+			discovery.sendtargets.auth.username = &lt;Mutual CHAP username&gt;  (give only when you are doing mutual CHAP)
+
+			discovery.sendtargets.auth.password_in = &lt;Mutual CHAP secret&gt;  (give only when you are doing mutual CHAP)
+
+			&lt;/codedoc&gt;
+		</pre>
+        <ol MadCap:continue="true">
+            <li>Restart the iSCSI daemon using the following command: <code>/etc/init.d/iscsi restart</code>.</li>
+            <li>Follow the procedures in the section <MadCap:xref href="#WithoutCHAP">"Without CHAP authentication" on page 1</MadCap:xref>.</li>
+        </ol>
+        <h5>For as specific target</h5>
+        <p>Specify the details as follows at command prompt:</p><pre xml:space="preserve">iscsiadm -m node -T "&lt;Target_Name&gt;" -p &lt;VSM_IP_address&gt;:&lt;port&gt; --</pre><pre xml:space="preserve">op=update --name node.session.auth.authmethod --value=CHAP</pre><pre xml:space="preserve">&#160;</pre><pre xml:space="preserve">iscsiadm -m node -T "&lt; Target_Name &gt;“ -p &lt; VSM_IP_address &gt;:&lt;port&gt; --</pre><pre xml:space="preserve">op=update --name node.session.auth.username --value=&lt;CHAP_username&gt;</pre><pre xml:space="preserve">&#160;</pre><pre xml:space="preserve">iscsiadm -m node -T "&lt; Target_Name &gt;“ -p &lt; VSM_IP_address &gt;:&lt;port&gt; --op=update</pre><pre xml:space="preserve">--name node.session.auth.password --value=&lt;password&gt;</pre><pre xml:space="preserve">&#160;</pre><pre xml:space="preserve">iscsiadm -m node –T "&lt;Target_ Name&gt;" -p &lt; VSM_IP_address &gt;:&lt;port&gt; -l</pre>
+        <h2> Resizing iSCSI LUN</h2>
+        <p>
+		The following sections explain how to expand your iSCSI storage volume on CentOS:</p>
+        <ul>
+            <li>
+                <MadCap:xref href="# Exporting_the_iSCSI_LUN_(On_CentOS_Console)">"	Exporting the iSCSI LUN (On CentOS Console)"</MadCap:xref>
+            </li>
+            <li> <MadCap:xref href="#Editing_Quota_Size_(in_ElastiCenter)">"Editing Quota Size (in ElastiCenter)"</MadCap:xref></li>
+            <li> <MadCap:xref href="#LUN_expansion_and_resizing_file_system_(on_CentOS_Console)">"LUN expansion and resizing file system (on CentOS Console)"</MadCap:xref></li>
+        </ul>
+        <h3><a name=" Exporting_the_iSCSI_LUN_(On_CentOS_Console)"></a>	Exporting the iSCSI LUN (On CentOS Console)</h3>
+        <p>	In the CentOS console, run the commands provided in the table in sequence to export the iSCSI LUN:</p>
+        <table style="">
+            <col style="width: 55px;" />
+            <col style="width: 156px;" />
+            <col style="width: 205px;" />
+            <col style="width: 211px;" />
+            <col style="width: 151px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Step</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Task</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Command</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Example</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Details</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecode">1	</td>
+                    <td style="background-color: #dcdcdc;">Discover the iSCSI targets.		</td>
+                    <td class="tablecode"><code>iscsiadm -m discovery -t st -p &lt;Target IP Address&gt; </code>
+                    </td>
+                    <td class="tablecode"><code>iscsiadm -m discovery -t st -p 11.11.11.11</code>
+                    </td>
+                    <td style="background-color: #dcdcdc;">Outputs the complete target name.</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">2  </td>
+                    <td style="background-color: #dcdcdc;">Log in to the iSCSI target.</td>
+                    <td class="tablecode">iscsiadm -m node -T &lt;Complete Target Name&gt; -l</td>
+                    <td style="background-color: #dcdcdc;"> <code>iscsiadm -m node -T  iqn.2014-02.FCAcc.Test:FCAcciscsivol1 -l</code></td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td class="tablecode">3	</td>
+                    <td style="background-color: #dcdcdc;">Display the current partitions on the hard disk.</td>
+                    <td style="background-color: #dcdcdc;"><code>fdisk –l</code> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;">	The partition is displayed in the output.</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">4	</td>
+                    <td style="background-color: #dcdcdc;">Create a file system on the hard disk drive.</td>
+                    <td class="tablecode">mkfs.ext3 &lt;Partition name&gt;</td>
+                    <td class="tablecode">mkfs.ext3 /dev/sdc </td>
+                    <td style="background-color: #dcdcdc;">At prompt, confirm by typing y as shown in the following example: <code>/dev/sdc</code> is entire device, not just one partition!
+					Proceed anyway? (y,n) y</td>
+                </tr>
+                <tr>
+                    <td class="tablecode">5</td>
+                    <td style="background-color: #dcdcdc;">	Create a directory.		</td>
+                    <td class="tablecode">mkdir &lt;Directory name&gt;</td>
+                    <td class="tablecode">	mkdir /mnt/cbdata</td>
+                    <td style="background-color: #dcdcdc;"> </td>
+                </tr>
+                <tr>
+                    <td class="tablecode">6			
+					</td>
+                    <td style="background-color: #dcdcdc;">Mount the partition into your directory.</td>
+                    <td class="tablecode">mount &lt;Partition name&gt; &lt;Directory name&gt;</td>
+                    <td class="tablecode"> mount /dev/sdc /mnt/cbdata -o sync</td>
+                    <td style="background-color: #dcdcdc;">&#160;</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">7		
+					</td>
+                    <td style="background-color: #dcdcdc;">	(Optional) Retrieve the current size of the mounted LUN.</td>
+                    <td class="tablecode">df –kh	</td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">8			
+					</td>
+                    <td style="background-color: #dcdcdc;">Copy some data to the directory /mnt/cbdata.	</td>
+                    <td class="tablecode">cp	</td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">9			
+					</td>
+                    <td style="background-color: #dcdcdc;">Unmount directory from the disk.	</td>
+                    <td class="tablecode">umount &lt;Directory name&gt;</td>
+                    <td class="tablecode">umount /mnt/cbdata</td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">10			
+					</td>
+                    <td style="background-color: #dcdcdc;">	Log out of iSCSI target.	
+					</td>
+                    <td class="tablecode">iscsiadm -m node -u -T &lt;Complete target name&gt; -p &lt;Target IP Address&gt;</td>
+                    <td class="tablecode"> 	iscsiadm -m node -u -T iqn.2014-02.Acc1.TSM3:TSM3TSM3ISCSI11 -p 11.11.11.11</td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3><a name="Editing_Quota_Size_(in_ElastiCenter)"></a>Editing Quota Size (in ElastiCenter)</h3>
+        <ol>
+            <li>In the ElastiCenter, select Storage Volumes.</li>
+            <li>In the Storage Volumes page, click Settings &gt; Edit.</li>
+            <li>Increase the Quota size of the LUN and then click Save.</li>
+            <p>
+                <img src="../Resources/Images/edit_quota_size.png" class="FitToText" />
+            </p>
+        </ol>
+        <h3><a name="LUN_expansion_and_resizing_file_system_(on_CentOS_Console)"></a>LUN expansion and resizing file system (on CentOS Console)</h3>
+        <p>In the CentOS console, run the commands provided in the table in sequence to expand the LUN and resize the file system: </p>
+        <table style="">
+            <col style="width: 56px;" />
+            <col style="width: 181px;" />
+            <col style="width: 189px;" />
+            <col style="width: 203px;" />
+            <col style="width: 107px;" />
+            <thead>
+                <tr>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Step</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Task</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Command</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Example</td>
+                    <td style="background-color: #808080;color: #ffffff;text-align: center;">Details</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tablecode">1	</td>
+                    <td style="background-color: #dcdcdc;">Log in to iSCSI target.	
+					</td>
+                    <td style="background-color: #dcdcdc;"><code>iscsiadm -m node -T &lt;Complete target name&gt; -p &lt;Target IP Address&gt; –l</code>
+                    </td>
+                    <td style="background-color: #dcdcdc;"><code>iscsiadm -m node -T iqn.2014-02.Acc1.TSM3:TSM3TSM3ISCSI11 -p 16.10.10.3 –l	</code>
+                    </td>
+                    <td style="background-color: #dcdcdc;"> </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">2			
+					</td>
+                    <td style="background-color: #dcdcdc;">Display current partitions on the hard disk.			</td>
+                    <td class="tablecode">fdisk –l</td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;">Check the output to see if the disk size has increased.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">3		
+					</td>
+                    <td style="background-color: #dcdcdc;">	Mount the partition into the directory.	
+					</td>
+                    <td class="tablecode">mount partition name &lt;Directory name&gt; -o sync	</td>
+                    <td class="tablecode">	mount /dev/sdb /mnt/cbdata/ -o sync	 </td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">4			
+					</td>
+                    <td style="background-color: #dcdcdc;">Resize the expanded volume.</td>
+                    <td class="tablecode">resize2fs /dev/sdb/ total space of volume	</td>
+                    <td class="tablecode">resize2fs /dev/sdb/ 5G </td>
+                    <td style="background-color: #dcdcdc;"> In this example, 5G is the total space on the resized Volume.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;" class="tablecode">5			
+					</td>
+                    <td style="background-color: #dcdcdc;">Retrieve the current size of the resized LUN.	</td>
+                    <td class="tablecode">	df –kh</td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                    <td style="background-color: #dcdcdc;"> <![CDATA[ ]]></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>On Windows Server 2008</h3>
+        <h4>Discovering the iSCSI target</h4>
+        <p class="note"><b>Note:</b> The mapping procedures are similar for other versions of Windows Server. However, there might be minor variations owing to the differences in UI strings and navigation.</p>
+        <ol>
+            <li>Ensure that you have enabled iSCSI. For details, see <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_iscsi.htm">"Data access using iSCSI" on page 1</MadCap:xref>.</li>
+            <li>On Windows Server 2008, launch iSCSI Initiator (Programs &gt; Administrative Tools &gt; ISCSI Initiator).</li>
+            <li>In the Target tab, specify the target (tenant IP address).</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying CIFS and iSCSI from CloudByte ElastiStor on Windows Server 2008-1.png" style="width: 653px; height: 664px;" class="FitToText">
+            </img>
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click Quick Connect. The Quick Connect screen appears, displaying the target name.</li>
+            <li>Click Done.</li>
+        </ol>
+        <h4>Create storage drive to use the iSCSI target</h4>
+        <ol>
+            <li>Launch Server Manager and then select Disk Management in the left pane.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying CIFS and iSCSI from CloudByte ElastiStor on Windows Server 2008-2.png" style="width: 693px; height: 633px;" class="FitToText">
+            </img>
+        </p>
+        <ol MadCap:continue="true">
+            <li>Right-click the unallocated space (the highlighted section) and then select Initialize Disk. The Initialize Disk dialog box appears.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying CIFS and iSCSI from CloudByte ElastiStor on Windows Server 2008-3.png">
+            </img>
+        </p>
+        <ol MadCap:continue="true">
+            <li>Click OK.</li>
+            <li>Right-click in the space and then select New Simple Volume as shown in the following screen:</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/Deploying CIFS and iSCSI from CloudByte ElastiStor on Windows Server 2008-4.png" style="width: 669px; height: 614px;" class="FitToText">
+            </img>
+        </p>
+        <blockquote>
+            <p>The New Simple Volume wizard appears.</p>
+        </blockquote>
+        <ol MadCap:continue="true">
+            <li>Follow the instructions to complete the wizard, to create the partition.</li>
+            <li>Ensure that the created disk is added to the Disk management console.</li>
+        </ol>
+        <h3>On Kernel-based Virtual Machine</h3>
+        <p class="note"><b>Note:</b>The following section provides procedures performed on RHEL 6.3. The procedures might be similar on other flavors of Linux.</p>
+        <ol>
+            <li>On your Linux desktop, select Applications &gt; System Tools &gt; Virtual Machine Manager.</li>
+            <li>Select a host machine.</li>
+            <li>Click Edit &gt; Connection Details.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_kvm_conf.png" class="FitToText" style="width: 645px;height: 189px;" /> </p>
+            <li>Click Storage tab.</li>
+            <li>Click the Add Storage Pool + icon at the bottom left side of the dialog box. The Add a New Storage Pool wizard appears. </li>
+            <p>
+                <img src="../Resources/Images/iscsi_kvm_conf_storage_tab.png" class="FitToText" style="width: 630px;height: 418px;" />
+            </p>
+            <li>Specify a name for the Pool, select iSCSI as the type, and then click Forward.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_kvm_conf_add_pool.png" class="FitToText" />
+            </p>
+            <li>In the following screen, specify the required details.</li>
+            <p>
+                <img src="../Resources/Images/iscsi_kvm_conf_add_pool_details.png" class="FitToText" /> </p>
+            <table>
+                <col style="width: 148px;" />
+                <col style="width: 531px;" />
+                <tbody>
+                    <tr>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Field</td>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">Target Path</td>
+                        <td style="background-color: #dcdcdc;">Path of the target directory (to use for the Storage Pool). </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">Host Name</td>
+                        <td style="background-color: #dcdcdc;">Host name or IP address of the iSCSI target. </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">Source Path</td>
+                        <td style="background-color: #dcdcdc;">iSCSI target IQN.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">IQN</td>
+                        <td style="background-color: #dcdcdc;">Select the check box and then enter the IQN for the initiator. </td>
+                    </tr>
+                </tbody>
+            </table>
+            <li>Click Finish.</li>
+        </ol>
+    </body>
+</html>

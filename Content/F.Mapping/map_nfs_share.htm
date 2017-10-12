@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="908" MadCap:lastWidth="766">
+    <head>
+    </head>
+    <body>
+        <h2>Mapping NFS share to clients</h2>
+        <h3>On Red Hat Enterprise Linux</h3>
+        <p class="note"><b>Note:</b>The mapping procedures are similar for other flavors of Linux. </p>
+        <ol>
+            <li>Ensure that you have enabled the NFS. For details, see <MadCap:xref href="../K.Setting up data access protocols/conf_data_access_nfs.htm">"Configuring NFS protocol options" on page 1</MadCap:xref>.</li>
+            <li>On your RedHat Enterprise Linux server, at command prompt, specify the following command to verify the NFS export: <code>showmount -e &lt;tenant IP address&gt;</code></li>
+            <p> If correctly exported, the path to the filesystem along with the authorized network is displayed.</p>
+            <li>Create a directory to mount the NFS using the following command: <code>mkdir &lt;directoryname&gt;</code></li>
+            <li>Mount the NFS on this directory using the following command: <code>mount -o mountproto=tcp &lt;tenant IP address:&gt;/&lt;exported path&gt;&lt;directoryname&gt; </code></li>
+            <li>Enter the following command: <code>mount </code></li>
+            <li>If successfully mounted, the following is displayed in the mount list: <code>&lt;tenant IP address&gt;:&lt;exportpath&gt; on &lt;directoryname&gt; type nfs (rw,addr=&lt;tenant IP address&gt;)</code></li>
+        </ol>
+        <p><b>Sample CLI snapshot</b>
+        </p><pre xml:space="preserve">
+[root@localhost ~]# showmount -e 20.10.26.199
+Export list for 20.10.26.199:
+/acctsample (everyone)</pre><pre xml:space="preserve">
+#Here everyone implies that the exported path is shared to all (as configured in NFS page).
+If you specify a specific client IP, that IP is displayed.
+  </pre><pre xml:space="preserve">
+[root@qaprod ~]# mkdir /mnt/nfslocal
+[root@qaprod ~]# mount -t nfs -o vers=3,proto=tcp,nolock,sync 20.10.26.199:/acctsample /mnt/nfslocal/
+[root@qaprod ~]# mount</pre><pre xml:space="preserve">
+/dev/mapper/VolGroup-lv_root on / type ext4 (rw)
+proc on /proc type proc (rw)
+sysfs on /sys type sysfs (rw)
+devpts on /dev/pts type devpts (rw,gid=5,mode=620)
+tmpfs on /dev/shm type tmpfs (rw,rootcontext="system_u:object_r:tmpfs_t:s0")
+/dev/sda1 on /boot type ext4 (rw)
+none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
+sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
+gvfs-fuse-daemon on /root/.gvfs type fuse.gvfs-fuse-daemon (rw,nosuid,nodev)
+20.10.26.199:/acctsample on /mnt/nfslocal type nfs 
+(rw,sync,vers=3,mountproto=tcp,addr=20.10.26.199,mountaddr=20.10.26.199)
+
+</pre>
+        <h3>On Kernel-based Virtual Machine</h3>
+        <p class="note"><b>Note:</b>The following section provides procedures performed on RHEL 6.3. The procedures might be similar on other flavors of Linux.</p>
+        <ol>
+            <li>On your Linux desktop, select Applications &gt; System Tools &gt; Virtual Machine Manager.</li>
+            <li>Select a host machine.</li>
+            <li>
+				Click Edit &gt; Connection Details.
+                
+			</li>
+            <p>
+                <img src="../Resources/Images/iscsi_kvm_conf.png" class="FitToText" /> </p>
+            <li>Click Storage tab.</li>
+            <li>Click the Add Storage Pool + icon at the bottom left side of the dialog box. The Add a New Storage Pool wizard appears.<img src="../Resources/Images/iscsi_kvm_conf_storage_tab.png" class="FitToText" style="width: 632px;height: 420px;" /></li>
+            <li>Specify a name for the Pool, select Network Exported Directory as the type, and then click Forward. <img src="../Resources/Images/nfs_kvm_conf_add_pool.png" /></li>
+            <li>In the following page, specify the required details.</li>
+            <p>
+                <img src="../Resources/Images/nfs_kvm_conf_add_pool_details.png" class="FitToText" />
+            </p>
+            <table>
+                <col style="width: 148px;" />
+                <col style="width: 531px;" />
+                <tbody>
+                    <tr>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Field</td>
+                        <td style="background-color: #808080;color: #ffffff;text-align: center;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">Target Path</td>
+                        <td style="background-color: #dcdcdc;">Path of the target directory (to use for the Storage Pool). </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">Format</td>
+                        <td style="background-color: #dcdcdc;">Set the Format option to NFS.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">Host Name </td>
+                        <td style="background-color: #dcdcdc;"> Host name or IP address of the NFS Server. </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;text-align: center;">Source Path</td>
+                        <td style="background-color: #dcdcdc;">Enter the NFS path (path on the Host that is being shared).</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li>Click Finish.</li>
+        </ol>
+    </body>
+</html>

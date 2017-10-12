@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head>
+        <link href="../../Stylesheets/styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <p>Here is some general text for a snippet  with some text in an <span class="Emphasis">emphasis span tag (bold)</span>. Replace this with your own content.</p>
+    </body>
+</html>

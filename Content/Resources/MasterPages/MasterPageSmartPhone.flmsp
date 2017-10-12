@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="247" MadCap:lastWidth="1063">
+    <head>
+        <link href="../Stylesheets/styles.css" rel="stylesheet" type="text/css" />
+        <link href="../TableStyles/SimpleGrayBackground.css" rel="stylesheet" MadCap:stylesheetType="table" />
+    </head>
+    <body>
+        <MadCap:breadcrumbsProxy class="Mobile" />
+        <MadCap:bodyProxy />
+        <table style="caption-side: top;width: 100%;margin-left: 0;margin-right: auto;mc-table-style: url('../TableStyles/SimpleGrayBackground.css');" cellspacing="0" class="TableStyle-SimpleGrayBackground">
+            <col class="Column-Column1" />
+            <col class="Column-Column1" />
+            <tbody>
+                <tr class="Body-Row1">
+                    <td class="BodyB-Column1-Row1">&#160;</td>
+                    <td class="BodyA-Column1-Row1">
+                        <p class="Footer"><MadCap:variable name="Other.CompanyName" /> </p>
+                        <p class="Footer"><MadCap:variable name="Other.StreetAddress" /> </p>
+                        <p class="Footer"><MadCap:variable name="Other.CityStateZip" /> </p>
+                        <p class="Footer"><MadCap:variable name="Other.Phone" /> </p>
+                        <p class="FooterSpaceAboveRight">For technical support:</p>
+                        <p class="Footer"><a href="http://madcapsoftware.com/support/" target="_blank" class="footermastermobile">http://madcapsoftware.com/support/</a>
+                        </p>
+                        <p class="FooterSpaceAboveRight">Copyright <MadCap:variable name="Other.Year" /> <MadCap:variable name="Other.CompanyName" /></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

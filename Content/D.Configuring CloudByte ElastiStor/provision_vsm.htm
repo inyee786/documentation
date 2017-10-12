@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="3654" MadCap:lastWidth="1060" MadCap:ignoredWords="JBODs;Z1;IOPS;LUN;FC;iSCSI;CIFS;NFS;TSMs;SLA;APIs;pluggable;VCenter;plugin;www;elastistor;ElastiStor’s;SAS;INPort;Kbps;IP;DNS;cb;Multipathing;multipathing;ISCSI;MCS;1’s;failover">
+    <head>
+    </head>
+    <body>
+        <h2 style="font-size: 18pt;color: #013364;font-family: sans-serif;">Provisioning a VSM</h2>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">VSM is a Virtual storage controller capable of hosting Storage Volumes and LUNs. VSMs are the fundamental units of ElastiStor and the logical containers for holding performance parameters and logical storage. For all practical purposes, VSMs are equivalent of self-contained hardware storage boxes.</p>
+        <p style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Use either the Create Account wizard or Virtual Storage Machines page (ElastiCenter &gt; Navigation Pane &gt; Virtual Storage Machines)</p>
+        <ul>
+            <li style="color: #000000;font-size: 11pt;text-align: justify;font-family: sans-serif;">Click Actions Icon and then select Provision VSM.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/42_provision_vsm.jpg" class="FitToText" style="width: 610px;height: 221px;" />
+        </p>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">The Provision VSM page appears.</p>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/provision_vsm_2.png" class="FitToText" style="width: 538px;height: 315px;" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify the following details:</li>
+        </ul>
+        <table>
+            <col style="width: 160px;" />
+            <col style="width: 894px;" />
+            <tbody>
+                <tr>
+                    <td style="color: #ffffff;background-color: #808080;text-align: center;">Field</td>
+                    <td style="color: #ffffff;background-color: #808080;text-align: center;">Description</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Account</td>
+                    <td style="background-color: #dcdcdc;">The Account for which you create the VSM.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Name</td>
+                    <td style="background-color: #dcdcdc;">A unique name for the VSM.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Capacity	</td>
+                    <td style="background-color: #dcdcdc;">The amount of disk space to be allotted for the VSM.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Total IOPS</td>
+                    <td style="background-color: #dcdcdc;">The maximum per second I/O limit for the VSM.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Total Throughput</td>
+                    <td style="background-color: #dcdcdc;">When you specify the Total IOPS, CloudByte calculates the Total Throughput and is automatically added. You cannot edit this field.</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul MadCap:continue="true">
+            <li style="color: #000000;font-family: sans-serif;font-size: 11pt;">Click Next and then specify the provisioning details by selecting a Pool from the list.</li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/provision_vsm_3.png" class="FitToText" style="width: 687px;height: 492px;" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Next.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Select the network interface details. For details, see <MadCap:xref href="conf_vlan_lagg.htm">"Configuring VLAN interfaces"</MadCap:xref>.</li>
+            <li style="font-family: sans-serif;font-size: 11pt;">Specify the tenant IP address and default gateway. </li>
+        </ul>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/provision_vsm_4.png" class="FitToText" style="width: 685px;height: 402px;" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="font-family: sans-serif;font-size: 11pt;">Click Provision.</li>
+        </ul>
+        <h3 style="font-size: 14pt;color: #005db2;font-family: sans-serif;">Multipathing</h3>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">Multipathing is the ability to configure a server with multiple paths to the storage for take over on  network failure. CloudByte ElastiStor supports multipathing for iSCSI. When network failure occurs, redundant network takes over and ensures that the iSCSI LUN is available.</p>
+        <p class="note" style="font-family: sans-serif;"><b>Note:</b> SATA disks or any disk with SATA interface is not supported for HA and multipathing configuration.</p>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">The details of the supported Maximum Multiple Connections (MCS) per LUN are as follows:</p>
+        <ul style="list-style-type: square;">
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">8 connections per LUN</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">16 sessions per LUN</li>
+        </ul>
+        <p style="color: #000000;font-size: 11pt;font-family: sans-serif;">To enable multipathing,</p>
+        <ol>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In ElastiCenter, select Virtual Storage Machine.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the VSM page, select the VSM for which you want to enable multipathing.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">In the action icon, select Advanced Settings.</li>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Click Edit.</li>
+        </ol>
+        <p style="text-align: center;">
+            <img src="../Resources/Images/provision_vsm_advanced_settings.png" class="FitToText" />
+        </p>
+        <ul MadCap:continue="true">
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">Specify the required details.</li>
+            <p style="text-align: center;">
+                <img src="../Resources/Images/provision_tsm_edit_settings.png" class="FitToText" />
+            </p>
+            <table style="margin-left: auto;margin-right: auto;">
+                <col style="width: 160px;" />
+                <col style="width: 391px;" />
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Field</td>
+                        <td style="text-align: center;background-color: #808080;color: #ffffff;">Description</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Secondary IP address</td>
+                        <td style="background-color: #dcdcdc;"> Provide secondary IP address to enable multipathing.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #dcdcdc;">Secondary Interface</td>
+                        <td style="background-color: #dcdcdc;"> Select an interface from the list.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <li style="color: #000000;font-size: 11pt;font-family: sans-serif;">If partial failover of Pool  is enabled (which is enabled by default), click yes at the prompt to disable it.</li>
+        </ul>
+        <p>&#160;</p>
+    </body>
+</html>

@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="3519" MadCap:lastWidth="1127" MadCap:ignoredWords="IP">
+    <head>
+    </head>
+    <body>
+        <h2>Moving your CloudByte ElastiStor setup to a new network environment </h2>
+        <p> Assume that you have to move your existing ElastiStor setup to a different location or network. For example, you have created a setup on staging environment and have performed all the tests. Now your setup is ready for production. </p>
+        <p>In this case, you can move your Storage setup to the production site using the procedures explained in this section.</p>
+        <p>
+            <img src="../Resources/Images/ip_address_change.jpg" />
+        </p>
+        <p>&#160;</p>
+        <h3><a name="Procedures"></a>Procedures</h3>
+        <ol>
+            <li>
+
+			Move all  Nodes to Maintenance mode. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_high_availability.htm">"Configuring High Availability".</MadCap:xref></li>
+            <li>On ElastiCenter server, change the network configurations of ElastiCenter. For details, see <MadCap:xref href="#Change_the_network_configurations_of_ElastiCenter_&#xA;">"Change the network configurations of ElastiCenter "</MadCap:xref><MadCap:xref href="#Change_the_IP_address_of_ElastiCenter_on__ElastiCenter">  <![CDATA[ ]]></MadCap:xref></li>
+            <li>Change the network configurations of Node. For details, see <MadCap:xref href="#Change_the_network_configuration_details_of_Node">"Change the network configuration details of Node"</MadCap:xref></li>
+            <li>In the ElastiCenter database, update the network configurations of Nodes. For details, see <MadCap:xref href="#Update_the_network_configurations_of_Node_in_the_associated_ElastiCenter&#xA;">"Update the network configurations of Node in the associated ElastiCenter"</MadCap:xref></li>
+            <li>In ElastiCenter, change the IP&#160;address of the HA&#160;group. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/create_ha_group.htm">"Creating an HA Group "</MadCap:xref>.</li>
+            <li>Restart the Nodes.</li>
+            <li>Bring all the Nodes back to Available mode. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/conf_high_availability.htm">"Configuring High Availability".</MadCap:xref></li>
+            <li>(Optional) Change the network configuration setup for VSM. For details, see <MadCap:xref href="../D.Configuring CloudByte ElastiStor/provision_vsm.htm">"Provisioning a VSM"</MadCap:xref>.</li>
+        </ol>
+        <h4><a name="Change_the_network_configurations_of_ElastiCenter_&#xA;"></a>Change the network configurations of ElastiCenter </h4>
+        <ol>
+            <li>Log in to ElastiCenter as root.</li>
+            <li>	 In the <code>/usr/local/cb/bin/</code>, run the following command: <code>python Change_network_config.py</code></li>
+            <li>Perform the steps as shown in the following sample command line :</li><pre xml:space="preserve"><span style="color: #4169e1;">Choose an option</span>
+1)Change the network configuration details of  ElastiCenter 
+2)Update the network configuration details of Node
+		
+ <b>1</b>
+	
+Here, you have to select 1 as highlighted</pre><pre xml:space="preserve">You are going to change some or all of the network configuration details that you specified at the time of installation.
+
+<span style="color: #4169e1;">Specify the New IP address for ElastiCenter</span>
+20.10.83.57
+<span style="color: #4169e1;">To change the Netmask, specify the details in the dotted decimal format. To bypass this step, specify No</span>
+255.0.0.0
+<span style="color: #4169e1;">To change the Gateway, specify the details. To bypass this step, specify No</span>
+20.10.83.1
+<span style="color: #4169e1;">To change the DNS, specify the details. To bypass this step, specify No</span>
+8.8.8.8
+<span style="color: #4169e1;">To change the Network Interface card, specify the details. To bypass this step, specify No</span>
+em0
+<span style="color: #4169e1;">To change the Domain name, specify the details. To bypass this step, specify No</span>
+cloudbyte.com
+
+The new network details of ElastiCenter are as follows:
+<span style="color: #4169e1;">IP address</span>: 20.10.60.50
+<span style="color: #4169e1;">Netmask </span>: 255.0.0.0
+<span style="color: #4169e1;">Gateway</span>: 20.10.1.1
+<span style="color: #4169e1;">DNS</span>: 8.8.8.8
+<span style="color: #4169e1;">Network Interface Card</span>: re0
+<span style="color: #4169e1;">Domain Name</span>:  cloudbyte.com
+
+Review the details and confirm by specifying Yes. Specify No to exit and cancel the changes. To change the details later, rerun the Change_network_config script.
+Yes
+Network details have been changed. Update the same in the associated Nodes.
+Reboot ElastiCenter
+</pre>
+            <li>
+
+				Reboot ElastiCenter using the following command:<code>
+
+			reboot</code></li>
+        </ol>
+        <p class="note"><b>Note:</b> Unless you update the ElastiCenter's new IP address on the Nodes, ElastiCenter  displays the Node status as offline (though the Node is up and accessible).</p>
+        <h4><a name="Change_the_network_configuration_details_of_Node"></a>Change the network configuration details of Node</h4>
+        <ol>
+            <li>Log in to Node as root.</li>
+            <li>In the <code>/usr/local/cb/bin/</code>, run the following command: <code>python Change_network_config.py</code></li>
+            <li>Perform the steps as shown in the following sample command line :</li><pre xml:space="preserve"> 
+You are going to change some or all of the network configuration details that you specified at the time of installation.
+
+<span style="color: #4169e1;">To change the IP address, specify the details. To bypass this step, specify No</span>
+20.10.83.57
+<span style="color: #4169e1;">To change the Netmask, specify the details in the dotted decimal format. To bypass this step, specify No</span>
+255.0.0.0
+<span style="color: #4169e1;">To change the Gateway, specify the details. To bypass this step, specify No</span>
+20.10.83.1
+<span style="color: #4169e1;">To change the DNS, specify the details. To bypass this step, specify No</span>
+8.8.8.8
+<span style="color: #4169e1;">To change the Network Interface card, specify the details. To bypass this step, specify No</span>
+em0
+<span style="color: #4169e1;">To change the Domain name, specify the details. To bypass this step, specify No</span>
+cloudbyte.com<span style="color: #4169e1;">
+To update the Elasticenter IP address, specify the details. To bypass this step, enter No</span>
+			</pre><pre xml:space="preserve">Here, you have to specify the new IP address of ElastiCenter if changed,else specify No.
+
+
+The new network details of ElastiCenter are as follows:
+<span style="color: #4169e1;">IP address</span>: 20.10.83.57
+<span style="color: #4169e1;">Netmask </span>: 255.0.0.0
+<span style="color: #4169e1;">Gateway</span>: 20.10.83.1
+<span style="color: #4169e1;">DNS</span>: 8.8.8.8
+<span style="color: #4169e1;">Network Interface Card</span>: em0
+<span style="color: #4169e1;">Domain Name</span>: cloudbyte.com
+
+Review the details and confirm by specifying Yes. Specify No to exit and cancel the changes. To change the details later, rerun the Change_network_config script. 
+
+Yes
+
+Network details have been changed.
+Reboot the Node</pre>
+            <li>
+
+				Reboot the Node using the following command:<code>
+
+			reboot</code></li>
+        </ol>
+        <h4><a name="Update_the_network_configurations_of_Node_in_the_associated_ElastiCenter&#xA;"></a>Update the network configurations of Node in the associated ElastiCenter</h4>
+        <ol>
+            <li>Log in to ElastiCenter as root.</li>
+            <li>	 In the <code>/usr/local/cb/bin/</code>, run the following command: <code>python Change_network_config.py</code></li>
+            <li>Perform the steps as shown in the following sample command line :</li><pre xml:space="preserve"> Choose an option
+1)Change the network configuration details of  ElastiCenter 
+2)Update the network configuration details of Node
+
+<b>2</b>
+                         
+Here, you have to select 2 as highlighted</pre><pre xml:space="preserve">You are going to update ElastiCenter with the network configuration details of one of the following Nodes:
+		               
+ +-------+--------------+
+ | Node | Old IP address|
+ +-------+--------------+
+ | Node1 | 20.10.83.60  |
+ +-------+--------------+
+ | Node2 | 20.10.83.6   |
+ +-------+--------------+
+</pre><pre xml:space="preserve">
+
+</pre><pre xml:space="preserve"><span style="color: #4169e1;"> Specify the old IP address of the Node</span>
+20.10.83.60
+<span style="color: #4169e1;">Specify the New IP address of the Node</span>
+20.10.83.57
+<span style="color: #4169e1;">To change the Netmask, specify the details in the dotted decimal format. To bypass this step, specify No</span>
+255.0.0.0
+<span style="color: #4169e1;">To change the Gateway, specify the details. To bypass this step, specify No</span>
+20.10.83.1
+<span style="color: #4169e1;">To change the DNS, specify the details. To bypass this step, specify No</span>
+8.8.8.8
+<span style="color: #4169e1;">To change the Network Interface card, specify the details. To bypass this step, specify No</span>
+em0
+<span style="color: #4169e1;">To change the Domain name, specify the details. To bypass this step, specify No</span>
+cloudbyte.com
+
+The new network details of ElastiCenter are as follows:
+<span style="color: #4169e1;">Old IP address</span>: 20.10.83.60
+<span style="color: #4169e1;">New IP address</span>: 20.10.60.57
+<span style="color: #4169e1;">Netmask </span>: 255.0.0.0
+<span style="color: #4169e1;">Gateway</span>: 20.10.1.1
+<span style="color: #4169e1;">DNS</span>: 8.8.8.8
+<span style="color: #4169e1;">Network Interface Card</span>: re0
+<span style="color: #4169e1;">Domain Name</span>:  cloudbyte.com
+
+
+Review the details and confirm by specifying Yes. Specify No to exit. To update the details later, rerun the Change_network_config script.
+
+
+Yes
+				
+Network details have been updated in ElastiCenter.
+Reboot ElastiCenter
+          	</pre>
+            <li>
+
+				Reboot ElastiCenter using the following command:<code>
+
+			reboot</code></li>
+        </ol>
+        <p>After completing the network configuration modifications, go back to the section <MadCap:xref href="#Procedures">"Procedures"</MadCap:xref> and complete the procedures.</p>
+        <h4>Tips</h4>
+        <p>Ensure the following:</p>
+        <ul>
+            <li>A physical connectivity between the Nodes and ElastiCenter exists using the command <code>ping.</code></li>
+            <li>The IP address and Subnet are configured correctly using the command <code>ifconfig -a</code> .</li>
+            <li>The Gateway is configured correctly using the command <code>netstat -rn</code>.</li>
+        </ul>
+    </body>
+</html>
